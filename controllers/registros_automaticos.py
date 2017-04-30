@@ -98,5 +98,5 @@ def agregar_abono():
     elif form.errors:
 		response.flash = 'El formulario tiene errores'
     else:
-		response.flash = 'Modifique el formulario por favor'
+		response.flash = 'Modifique el formulario !'
     return dict(f=form)
