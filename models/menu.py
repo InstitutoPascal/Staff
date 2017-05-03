@@ -20,7 +20,7 @@ DEVELOPMENT_MENU = True
 if "auth" in locals():
     auth.wikimenu()
 
-### INICIO MENU ADMINISTRADORES ###
+### INICIO MENU ADMINISTRADORES ####
 response.menu += [
            (T('Realizar altas'), False, '#',
            [(T('Nodos'), False, URL('altas', 'alta_nodos'),[]),
