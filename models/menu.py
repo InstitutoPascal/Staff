@@ -20,66 +20,53 @@ DEVELOPMENT_MENU = True
 if "auth" in locals():
     auth.wikimenu()
 
+### INICIO MENU ADMINISTRADORES ###
+response.menu += [
+           (T('Realizar altas'), False, '#',
+           [(T('Nodos'), False, URL('altas', 'alta_nodos'),[]),
+           (T('Paneles'), False, URL('altas', 'alta_paneles'),[]),
+           (T('Mantenimientos'), False, URL('altas', 'alta_mantenimiento'),[]),
+           (T('Costos de soporte'), False, URL('altas', 'alta_costos_soportes'),[]),
+           (T('Costos de instalacion'), False, URL('altas', 'alta_costos_instalaciones'),[]),])]
 
-### Menu Altas ###
-
-response.menu+=[(T('realizar altas'),False,'#',
-                     [(T('Internas'),False,'#',
-                       [(T('Gerentes'),False,URL(request.application,'altas','alta_gerentes'),[]),
-                        (T('Administradores'),False,URL(request.application,'altas','alta_administradores'),[]),
-                        (T('Tecnicos'),False,URL(request.application,'altas','alta_tecnicos'),[]),
-                        (T('Localidades'),False,URL(request.application,'altas','alta_localidad'),[])],),
-                       (T('Sistema'),False,'#',
-                       [(T('Nodos'),False,URL(request.application,'altas','alta_nodos'),[]),
-                        (T('Paneles'),False,URL(request.application,'altas','alta_paneles'),[]),
-                        (T('Mantenimientos'),False,URL(request.application,'altas','alta_mantenimiento'),[]),
-                        (T('Planes'),False,URL(request.application,'altas','alta_planes'),[]),
-                        (T('costos de soporte'),False,URL(request.application,'altas','alta_costos_soportes'),[]),
-                        (T('costos de instalacion'),False,URL(request.application,'altas','alta_costos_instalaciones'),[])],),
-                     ],
-                       )]
-
-####Consultas (con parametros)#####
-response.menu+=[(T('Consultas'),False,'#',
+response.menu+=[(T('consultas'),False,'#',
                      [(T('Clientes'),False,'#',
-                       [(T('Por nombre/apellido'),False,URL(request.application,'consultas','clientes_nombre_apellido'),[]),
-                        (T('Por dirección IP'),False,URL(request.application,'consultas','clientes_ip'),[]),
+                       [(T('Por DNI'),False,URL(request.application,'consultas','clientes_dni'),[]),
+                        (T('Por nombre/apellido'),False,URL(request.application,'consultas','clientes_nombre_apellido'),[]),
+                        (T('Por direccion IP'),False,URL(request.application,'consultas','clientes_ip'),[]),
                         (T('Por nodo'),False,URL(request.application,'consultas','clientes_nodos'),[]),
-                        (T('Por localidad'),False,URL(request.application,'consultas','clientes_localidad'),[]),],),
-                     ],
-                       )]
+                        (T('Por localidad'),False,URL(request.application,'consultas','clientes_localidad'),[]),
+                        (T('Todos'),False,URL(request.application,'consultas','listadoClientes'),[])],),
+                       (T('Tecnicos'),False,'#',
+                       [(T('Por DNI'),False,URL(request.application,'consultas','tecnicos_dni'),[])],),],)]
 
-
-####Registros Completos####
 response.menu += [
            (T('Registros Completos'), False, '#',
-           [(T('Gerentes'), False, URL('consultas', 'listadoGerentes'),[]),
-           (T('Administradores'), False, URL('consultas', 'listadoAdministradores'),[]),
-           (T('Tecnicos'), False, URL('consultas', 'listadoTecnicos'),[]),
-           (T('Localidades'), False, URL('consultas', 'listadoLocalidades'),[]),
+           [(T('Localidades'), False, URL('consultas', 'listadoLocalidades'),[]),
            (T('Planes'), False, URL('consultas', 'listadoPlanes'),[]),
            (T('Costos de instalaciones'), False, URL('consultas', 'listadoCostos_instalaciones'),[]),
-           (T('Costos de soportes tecnicos'), False, URL('consultas', 'listadoCostos_soportes'),[]),
+           (T('Costos de soportes'), False, URL('consultas', 'listadoCostos_soportes'),[]),
            (T('Nodos'), False, URL('consultas', 'listadoNodos'),[]),
            (T('Paneles'), False, URL('consultas', 'listadoPaneles'),[]),
-           (T('Mantenimientos'), False, URL('consultas', 'listadoMantenimientos'),[]),
-           (T('Instalaciones'), False, URL('consultas', 'listadoInstalaciones'),[]),
-           (T('Clientes'), False, URL('consultas', 'listadoClientes'),[]),
-           (T('Soportes Tecnicos'), False,URL('consultas', 'listadoSoportes'),[]),
-           (T('Historiales'), False, URL('consultas', 'listadoHistoriales'),[]),
-           (T('Pagos'), False, URL('consultas', 'listadoPagos'),[]),
-           (T('Abonos'), False, URL('consultas', 'listadoAbonos'),[])])]
-
+           (T('Mantenimientos'), False, URL('consultas', 'listadoMantenimientos'),[])])]
 
 response.menu += [
            (T('Instalaciones'), False, '#',
-           [(T('Nueva Instalacion'), False, URL('altas', 'alta_instalacion'),[]),
-           (T('Pendientes'), False, URL('consultas', 'listadoPendientes'),[])])]
+           [(T('Pendientes'), False, URL('consultas', 'instalacionesPendientes'),[]),
+           (T('Finalizadas'), False, URL('consultas', 'instalacionesFinalizadas'),[]),
+           (T('Todas'), False, URL('consultas', 'listadoInstalaciones'),[])])]
 
 response.menu += [
-           (T('Soportes y clientes'), False, '#',
-           [(T('Nuevo soporte | ver cliente'), False, URL('consultas', 'clientes_dni'),[]),
-           (T('Soportes Pendientes'), False, URL('consultas', 'listadoSoportesPendientes'),[])])]
+           (T('Soportes tecnicos'), False, '#',
+           [(T('Pendientes'), False, URL('consultas', 'soportesPendientes'),[]),
+           (T('Finalizados'), False, URL('consultas', 'soportesFinalizados'),[]),
+           (T('Todos'), False, URL('consultas', 'listadoSoportes'),[]),
+           (T('Historial'), False, URL('consultas', 'ListadoHistorial'),[])])]
 
-response.menu+=[(T('Agregar Pago'), False, URL('consultas', 'clientes_nro_tarjeta'), [])]
-response.menu+=[(T('Clientes morosos'), False, URL('consultas', 'listadoMorosos'), [])]
+response.menu += [
+           (T('Gestion de pago'), False, '#',
+           [(T('Ingresar nuevo pago'), False, URL('consultas', 'AgregarPago'),[]),
+           (T('Abonos definidos'), False, URL('consultas', 'listadoAbonos'),[]),
+           (T('Pagos realizados'), False, URL('consultas', 'ListadoPagos'),[])])]
+
+### FIN MENU ADMINISTRADORES ###

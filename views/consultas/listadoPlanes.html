@@ -1,9 +1,24 @@
 {{extend 'layout.html'}}
-<h3><center><u>Listado completo de proveedores</u></center></h3><br>
 
-{{if cantidad > 0:}}
-<center>{{=tabla}}</center>
-{{pass}}
-{{if cantidad == 0:}}
-No hay registros en la tabla "Proveedor"
-{{pass}}
+<div class="row">
+    <div class="col-md-6"><center>Titulo</center><br></div></br>
+
+</div>
+<center><div class="row">
+  <div class="col-md-2">FINAL POR MES<br></div>
+  <div class="col-md-2">TIPO DE INSTALACION</div>
+  <div class="col-md-2">MEGAS</div>
+    </div></center>
+
+<center><div class="row">
+  <div class="col-md-2">.col-md-6</div>
+  <div class="col-md-2">.col-md-6</div>
+  <div class="col-md-2">.col-md-6</div>
+    </div></center>
+
+
+<table class="table"> <caption>Optional table caption.</caption> 
+    <thead> <tr> <th>#</th> <th>First Name</th> <th>Last Name</th> <th>Username</th> </tr> </thead> 
+    <tbody> <tr> 
+        <th scope="row">1</th> <td>Mark</td> <td>Otto</td> <td>@mdo</td> </tr> <tr> 
+        <th scope="row">2</th> <td>Jacob</td> <td>Thornton</td> <td>@fat</td> </tr> <tr> <th scope="row">3</th> <td>Larry</td> <td>the Bird</td> <td>@twitter</td> </tr> </tbody> </table>
