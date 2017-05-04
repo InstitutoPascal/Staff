@@ -358,176 +358,46 @@ def listadoHistoriales():
     tablafinal = DIV(lista)
     return dict (tabla=tablafinal, cantidad=i)
 
-
-
-
-
 def listadoClientes():
-    datosclientes = db((db.clientes.localidad==db.localidades.id)&(db.clientes.panel==db.paneles.id)).select(db.clientes.ALL, db.localidades.localidad,       db.paneles.panel)
+    datosClientes = db((db.clientes.localidad==db.localidades.id)&(db.clientes.panel==db.paneles.id)).select(db.clientes.ALL, db.localidades.localidad,       db.paneles.panel)
     i=0
-    tablafinal=[]
-    for x in datosclientes:
+    for x in datosClientes:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-      (TH('Dni',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Ip',_style='width:200px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Panel',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Nombre',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Apellido',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Nº tarjeta',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Localidad',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Calle',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Nº calle',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Entre calle 1',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Entre calle 2',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Teléfono1',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Teléfono2',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Teléfono3',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Fecha de alta',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Fecha de baja',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Estado',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Clientes/s',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.clientes.dni,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.ip,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.paneles.panel,_style='width:200px; color:#000; background: #eef; border: 2px solid      #cdcdcd'),
-          TD(x.clientes.nombre,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.apellido,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),TD(x.clientes.numero_tarjeta,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.localidades.localidad,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.calle,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.numero_calle,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.entre_calle_1,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.entre_calle_2,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.telefono_1,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'), 
-          TD(x.clientes.telefono_2,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.telefono_3,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.fecha_alta,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.fecha_baja,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.estado,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datosclientes]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
-
-def listadoMorosos():
-    datos_morosos = db(db.clientes.id != db.abonos.cliente).select(db.clientes.ALL)
-    i=0
-    tablafinal=[]
-    for x in datos_morosos:
-         i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-      (TH('Nombre',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Apellido',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Dni',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('telefono',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Numero tarjeta',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:130px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Cliente/s',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.nombre,_style='width:20px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.apellido,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.dni,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.telefono_1,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.numero_tarjeta,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datos_morosos]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
+    return dict (datos=datosClientes, cantidad=i)
 
 def listadoLocalidades():
-    datoslocalidad = db().select(db.localidades.ALL)
+    datosLocalidades = db().select(db.localidades.ALL)
     i=0
-    tablafinal=[]
-    for x in datoslocalidad:
+    for x in datosLocalidades:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-      (TH('Localidad',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Codigo postal',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:130px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Localidad/es',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.localidad,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.codigo_postal,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datoslocalidad]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
+    return dict (datos=datosLocalidades, cantidad=i)
 
 def listadoMantenimientos():
-    datosmantenimiento = db((db.mantenimientos.nodo==db.nodos.id)&(db.mantenimientos.tecnico==db.tecnicos.id)).select(db.mantenimientos.ALL, db.nodos.nombre, db.nodos.id, db.tecnicos.nombre, db.tecnicos.apellido, db.tecnicos.id)
+    datosMantenimiento = db((db.mantenimientos.nodo == db.nodos.id)
+                            &(db.mantenimientos.tecnico_principal == db.tecnicos.id)
+                            &(db.tecnicos.id == db.mantenimientos.tecnico_secundario)).select(db.mantenimientos.ALL,db.nodos.ALL, db.tecnicos.ALL)
     i=0
-    tablafinal=[]
-    for x in datosmantenimiento:
+    for x in datosMantenimiento:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-      (TH('Tecnico',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Nodo',_style='width:200px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Fecha',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Descripcion',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:130px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Mantenimiento/s',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.tecnicos.nombre,' ',x.tecnicos.apellido,_style='width:20px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.nodos.nombre,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.mantenimientos.fecha,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.mantenimientos.descripcion,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datosmantenimiento]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
+    return dict (datos=datosMantenimiento, cantidad=i)
+
+def prueba():
+    datos=db((db.mantenimientos.nodo == db.nodos.id)&(db.mantenimientos.tecnico_principal == db.tecnicos.id)&(db.mantenimientos.tecnico_secundario == db.tecnicos.id)).select(db.mantenimientos.ALL)
+    return dict(d=datos)
 
 def listadoNodos():
-    datosnodos = db(db.nodos.localidad==db.localidades.id).select(db.nodos.ALL, db.localidades.localidad, db.localidades.id)
+    datosNodos = db(db.nodos.localidad==db.localidades.id).select(db.nodos.ALL, db.localidades.localidad, db.localidades.id)
     i=0
-    tablafinal=[]
-    for x in datosnodos:
+    for x in datosNodos:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-      (TH('Localidad',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Nombre',_style='width:200px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Subred',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:130px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Nodo/s',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.localidades.localidad,_style='width:20px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.nodos.nombre,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.nodos.subred,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datosnodos]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
+    return dict (datos=datosNodos, cantidad=i)
 
 def listadoPaneles():
-    datospaneles = db(db.paneles.nodo==db.nodos.id).select(db.paneles.ALL, db.nodos.ALL, db.nodos.id)
+    datosPaneles = db(db.paneles.nodo==db.nodos.id).select(db.paneles.ALL, db.nodos.ALL, db.nodos.id)
     i=0
-    tablafinal=[]
-    for x in datospaneles:
+    for x in datosPaneles:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-      (TH('Nodo',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Panel',_style='width:200px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Nombre',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Equipo',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Descripción de Ubicación',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('AP ST',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Orientación',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Frecuencia',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('RX TX',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('SSID',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Password',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:130px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' panel/es',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.nodos.nombre, _style='width:20px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.panel,_style='width:20px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.nombre,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.equipo,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.descripcion_ubicacion,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.ap_st,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.orientacion,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.frecuencia,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.rx_tx,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.ssid,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-     TD(x.paneles.password,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datospaneles]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
+    return dict (datos=datosPaneles, cantidad=i)
 
 
 def listadoPagos():
@@ -602,68 +472,11 @@ def listadoAdministradores():
     return dict (tabla=tablafinal, cantidad=i)
 
 def listadoTecnicos():
-    datosusuario = db().select(db.tecnicos.ALL)
+    datosTecnicos = db().select(db.tecnicos.ALL)
     i=0
-    tablafinal=[]
-    for x in datosusuario:
+    for x in datosTecnicos:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR(TH('Nombre',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                          TH('Apellido',_style='width:200px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                          TH('Dni',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                          TH('Email',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                          TH('Telefono',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                          TH('Password (encriptada)',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                          TFOOT(TR(TH('Total ',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                                   TH(i,' Tecnico/s',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.nombre,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.apellido,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.dni,_style='width:200px; color:#000; background: #eef; border: 2px solid      #cdcdcd'),
-          TD(x.email,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.telefono,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.password,_style='width:200px; color:#000; background: #eef; border: 2px solid      #cdcdcd'),)
-     for x in datosusuario]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
-
-
-def listadoPendientes():
-    datosclientes = db((db.localidades.id==db.instalacion.localidad)&(db.instalacion.estado == 'Pendiente' )&(db.instalacion.costo_de_instalacion==db.costos_instalaciones.id)).select(db.instalacion.ALL, db.localidades.ALL, db.costos_instalaciones.ALL)
-    i=0
-    tablafinal=[]
-    for x in datosclientes:
-         i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-       (TH('Dni',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Nombre',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Apellido',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Localidad',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Calle',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Numero de calle',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Entre calle 1',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Entre calle 2',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Telefono',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Costo',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Opcion',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Instalacion/es',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.instalacion.dni,_style='width:100px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.nombre,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.apellido,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.localidades.localidad,_style='width:200px; color:#000; background: #eef; border: 2px solid      #cdcdcd'),
-          TD(x.instalacion.calle,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.numero_calle,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.entre_calle_1,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.entre_calle_2,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.telefono,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD('$ ',x.costos_instalaciones.precio,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(A('Agregar cliente',_href=URL(c='registros_automaticos', f='agregar_cliente', args=(x.instalacion.id,))),_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datosclientes]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
-
-
+    return dict (datos=datosTecnicos, cantidad=i)
 
 def listadoSoportesPendientes():
     datosSoportesPendientes = db((db.tecnicos.id==db.soportes_tecnicos.tecnico)&(db.soportes_tecnicos.cliente == db.clientes.id)&(db.soportes_tecnicos.estado == 'Pendiente')).select(db.soportes_tecnicos.ALL, db.tecnicos.ALL, db.clientes.ALL)
@@ -690,49 +503,19 @@ def listadoSoportesPendientes():
     return dict (tabla=tablafinal, cantidad=i)
 
 
-
-
-
-
-
-
-
-
 def listadoCostos_instalaciones():
-    datoscostos_instalaciones = db().select(db.costos_instalaciones.ALL)
+    datosCostos_instalaciones = db().select(db.costos_instalaciones.ALL)
     i=0
-    tablafinal=[]
-    for x in datoscostos_instalaciones:
+    for x in datosCostos_instalaciones:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-       (TH('Descripcion',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Precio',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Costo/s',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.descripcion,_style='width:100px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD('$ ',x.precio,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datoscostos_instalaciones]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
+    return dict (datos=datosCostos_instalaciones, cantidad=i)
 
 def listadoCostos_soportes():
-    datoscostos_soportes = db().select(db.costos_soportes.ALL)
+    datosCostos_soportes = db().select(db.costos_soportes.ALL)
     i=0
-    tablafinal=[]
-    for x in datoscostos_soportes:
+    for x in datosCostos_soportes:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-       (TH('Descripcion',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Precio',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Costo/s',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.descripcion,_style='width:100px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD('$ ',x.precio,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datoscostos_soportes]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
+    return dict (datos=datosCostos_soportes, cantidad=i)
 
 def listadoInstalaciones():
     datosinstalaciones = db((db.instalacion.localidad == db.localidades.id)&(db.instalacion.costo_de_instalacion == db.costos_instalaciones.id)).select(db.instalacion.ALL, db.localidades.localidad, db.costos_instalaciones.precio)
@@ -740,77 +523,12 @@ def listadoInstalaciones():
     tablafinal=[]
     for x in datosinstalaciones:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-       (TH('Dni',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Nombre',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Apellido',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Localidad',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Calle',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Numero de calle',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Entre calle 1',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Entre calle 2',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Telefono',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Costo',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Estado',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Instalacion/es',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.instalacion.dni,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.nombre,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.apellido,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.localidades.localidad,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.calle,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.numero_calle,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.entre_calle_1,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.entre_calle_2,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.telefono,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD('$ ',x.costos_instalaciones.precio,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.instalacion.estado,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datosinstalaciones]),))
-    tablafinal = DIV(lista)
     return dict (tabla=tablafinal, cantidad=i)
 
 
 def listadoPlanes():
-    datosplanes = db().select(db.planes.ALL)
+    datosPlanes = db().select(db.planes.ALL)
     i=0
-    tablafinal=[]
-    for x in datosplanes:
+    for x in datosPlanes:
          i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-       (TH('velocidad',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('precio',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Plan/es',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.velocidad,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD('$ ',x.precio,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datosplanes]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
-
-
-def listadoAbonos():
-    datosAbonos = db((db.abonos.cliente == db.clientes.id)&(db.abonos.tipo_de_plan == db.planes.id)&(db.abonos.importe == db.pagos.id)).select(db.abonos.ALL, db.clientes.ALL, db.planes.ALL, db.pagos.ALL)
-    i=0
-    tablafinal=[]
-    for x in datosAbonos:
-         i=i+1
-    lista=[]
-    lista.append(TABLE(TR
-       (TH('Cliente',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Plan',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Mes',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Año',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TH('Importe',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-       TFOOT(TR(TH('Total ',_style='width:20px; color:#000; background: #99f; border: 2px solid #cdcdcd'),
-                TH(i,' Abono/s',_style='width:120px; color:#000; background: #99f; border: 2px solid #cdcdcd'))),
-     *[TR(TD(x.velocidad,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.clientes.nombre, ' ', x.clientes.apellido,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.planes.velocidad,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.abonos.mes,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.abonos.ano,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),
-          TD(x.pagos.abono,_style='width:200px; color:#000; background: #eef; border: 2px solid #cdcdcd'),)
-     for x in datosAbonos]),))
-    tablafinal = DIV(lista)
-    return dict (tabla=tablafinal, cantidad=i)
+    return dict (datos=datosPlanes, cantidad=i)

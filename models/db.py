@@ -261,7 +261,6 @@ db.define_table('clientes',
                  db.Field('telefono_3','string'),
                  db.Field('fecha_alta', 'date'),
                  db.Field('fecha_baja', 'date'),
-                 db.Field('estado', 'string'),
                  db.Field('instalacion_id', db.instalacion, readable=False, writable=False ))
 
 db.clientes.dni.requires=IS_NOT_IN_DB(db, db.clientes.dni, error_message = 'El DNI ingresado  ya se encuentra registrado') ,IS_NOT_EMPTY(error_message= 'Campo obligatorio') ,IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
@@ -277,7 +276,6 @@ db.clientes.entre_calle_2.requires=IS_NOT_EMPTY(error_message= 'Campo obligatori
 db.clientes.telefono_1.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
 db.clientes.fecha_alta.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
 #db.clientes.fecha_baja.requires=IS_DATE('%d/%M/%Y')
-db.clientes.estado.requires=IS_IN_SET(['Pendiente', 'Activo', 'Moroso', 'Baja'], zero=T('Seleccione estado cliente'))
 
 
 #Pagos ( resolver )
@@ -337,12 +335,16 @@ db.historiales.costo_de_soporte.requires=IS_IN_DB(db,db.costos_soportes.id,'%(pr
 
 #Mantenimientos
 db.define_table('mantenimientos',
-                 db.Field('tecnico',db.tecnicos),
+                 db.Field('tecnico_principal',db.tecnicos),
+                 db.Field('tecnico_secundario',db.tecnicos),
                  db.Field('nodo',db.nodos),
                  db.Field('fecha','date'),
                  db.Field('descripcion','string'))
 
-db.mantenimientos.tecnico.requires=IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico'), error_message= 'Campo obligatorio')
+db.mantenimientos.tecnico_principal.requires=IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico'), error_message= 'Campo obligatorio')
+
+db.mantenimientos.tecnico_secundario.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
+
 db.mantenimientos.nodo.requires=IS_IN_DB(db,db.nodos.id,'%(nombre)s',zero=T('Seleccione nodo'), error_message= 'Campo obligatorio')
 db.mantenimientos.fecha.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
 db.mantenimientos.descripcion.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')

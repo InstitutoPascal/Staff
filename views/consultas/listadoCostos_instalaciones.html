@@ -1,9 +1,14 @@
 {{extend 'layout.html'}}
-<h3><center><u>Listado completo de proveedores</u></center></h3><br>
+<h3><center><u>Costos de instalaciones</u></center></h3><br>
 
 {{if cantidad > 0:}}
-<center>{{=tabla}}</center>
+<table class="table table-bordered">
+    <thead><tr><th><center>Descripcion</center></th><th><center>Precio</center></th></tr></thead>
+        {{for x in datos: }}
+    <tbody><tr><td><center>{{=x.descripcion}}</center></td> <td><center>$ {{=x.precio}}</center></td></tr></tbody>{{pass}}</table>
+<a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
 {{pass}}
+
 {{if cantidad == 0:}}
-No hay registros en la tabla "Proveedor"
+<center><a href="#" class="btn btn-primary btn-lg disabled" role="button">Sin Registros</a></center>
 {{pass}}

@@ -1,9 +1,16 @@
 {{extend 'layout.html'}}
-<h3><center><u>Listado completo de proveedores</u></center></h3><br>
+
+<h3><center><u>Clientes</u></center></h3><br>
 
 {{if cantidad > 0:}}
-<center>{{=tabla}}</center>
+<table class="table table-bordered">
+    <thead><tr><th>Dni</th><th>Ip</th><th>Panel</th><th>Nombre</th><th>Apellido</th><th>Numero de tarjeta</th><th>Localidad</th><th>Calle</th><th>Numero de calle</th><th>Entre calle 1</th><th>Entre calle 2</th><th>Telefono</th><th>Telefono 2</th><th>Telefono 3</th><th>Fecha de alta</th><th>Fecha de baja</th></tr></thead>
+        {{for x in datos: }}
+    <tbody><tr><td>{{=x.clientes.dni}}</td> <td>{{=x.clientes.ip}}</td><td>{{=x.paneles.panel}}</td><td>{{=x.clientes.nombre}}</td><td>{{=x.clientes.apellido}}</td><td>{{=x.clientes.numero_tarjeta}}</td><td>{{=x.localidades.localidad}}</td><td>{{=x.clientes.calle}}</td><td>{{=x.clientes.numero_calle}}</td><td>{{=x.clientes.entre_calle_1}}</td><td>{{=x.clientes.entre_calle_2}}</td><td>{{=x.clientes.telefono_1}}</td><td>{{=x.clientes.telefono_2}}</td><td>{{=x.clientes.telefono_3}}</td><td>{{=x.clientes.fecha_alta}}</td><td>{{=x.clientes.fecha_baja}}</td></tr></tbody>{{pass}}</table>
+
+<a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
 {{pass}}
+
 {{if cantidad == 0:}}
-No hay registros en la tabla "Proveedor"
+<center><a href="#" class="btn btn-primary btn-lg disabled" role="button">Sin Registros</a></center>
 {{pass}}

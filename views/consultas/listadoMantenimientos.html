@@ -1,9 +1,26 @@
 {{extend 'layout.html'}}
-<h3><center><u>Listado completo de proveedores</u></center></h3><br>
+<h3><center><u>Mantenimientos</u></center></h3><br>
 
 {{if cantidad > 0:}}
-<center>{{=tabla}}</center>
+<table class="table table-bordered">
+    <thead><tr><th>Tecnico principal</th><th>Tecnico secundario</th><th>Nodo</th><th>Fecha</th><th>Descripcion</th></tr></thead>
+        {{for x in datos: }}
+    <tbody><tr>
+        <td>{{=x.tecnicos.nombre + ' ' + x.tecnicos.apellido}}</td>
+
+        {{if x.mantenimientos.tecnico_secundario==None:}}
+        <td>Nadie</td>
+        {{pass}}
+
+        {{if x.mantenimientos.tecnico_secundario!= None:}}
+        <td>{{=x.tecnicos.nombre + ' ' + x.tecnicos.apellido}}</td>
+        {{pass}}
+
+        </td><td>{{=x.nodos.nombre}}</td><td>{{=x.mantenimientos.fecha}}</td><td>{{=x.mantenimientos.descripcion}}</td></tr></tbody>{{pass}}</table>
+
+<a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
 {{pass}}
+
 {{if cantidad == 0:}}
-No hay registros en la tabla "Proveedor"
+<center><a href="#" class="btn btn-primary btn-lg disabled" role="button">Sin Registros</a></center>
 {{pass}}
