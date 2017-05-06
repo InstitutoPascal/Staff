@@ -38,7 +38,8 @@ response.menu+=[(T('consultas'),False,'#',
                         (T('Por localidad'),False,URL(request.application,'consultas','clientes_localidad'),[]),
                         (T('Todos'),False,URL(request.application,'consultas','listadoClientes'),[])],),
                        (T('Tecnicos'),False,'#',
-                       [(T('Por DNI'),False,URL(request.application,'consultas','tecnicos_dni'),[])],),],)]
+                       [(T('Por DNI'),False,URL(request.application,'consultas','tecnicos_dni'),[]),
+                       (T('todos'), False, URL(request.application, 'consultas', 'listadoTecnicos'),[])],),],)]
 
 response.menu += [
            (T('Registros Completos'), False, '#',
@@ -65,8 +66,8 @@ response.menu += [
 
 response.menu += [
            (T('Gestion de pago'), False, '#',
-           [(T('Ingresar nuevo pago'), False, URL('consultas', 'AgregarPago'),[]),
-           (T('Abonos definidos'), False, URL('consultas', 'listadoAbonos'),[]),
-           (T('Pagos realizados'), False, URL('consultas', 'ListadoPagos'),[])])]
+           [(T('Registrar nuevo pago'), False, URL('consultas', 'RegistrarPago'),[]),
+           (T('Registrar descuento'), False, URL('consultas', 'RegistrarDescuento'),[]),
+           (T('Registrar recargo'), False, URL('consultas', 'ListadoPagos'),[])])]
 
 ### FIN MENU ADMINISTRADORES ###
