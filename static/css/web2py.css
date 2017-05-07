@@ -301,6 +301,9 @@ li.w2p_grid_breadcrumb_elem {
    min-height: 400px;
 }
 
+
+
+
 /* fix some IE problems */
 
 .ie-lte7 .topbar .container {z-index:2}

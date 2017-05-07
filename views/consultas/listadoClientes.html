@@ -3,6 +3,45 @@
 <h3><center><u>Clientes</u></center></h3><br>
 
 {{if cantidad > 0:}}
+
+<html>
+<head>
+ <script type="text/javascript">
+  function Block(esto,id)
+   {
+    if(esto.checked==true)
+     {
+		id=document.getElementById(id);
+		id.disabled=false;		
+	 }	
+	else
+	 {
+		id=document.getElementById(id);
+		id.disabled=true;				
+	 }
+   }
+ </script>
+</head>
+<body onload="Block(document.getElementById('txek'),'Aukera')">
+Localidad <input type="checkbox" id="txek" onclick="Block(this,'Aukera')"/>
+<select id="Aukera">
+ <option value="1">Isidro Casnova</option>
+ <option value="2">Laferrere</option>
+ <option value="3">Gonzalez Catán</option>
+</select>
+</body>
+</html> 
+
+
+<form>
+<input type="checkbox" onclick="codigo.disabled = !this.checked" />
+<input name="codigo" type="text" id="codigo" disabled />
+</form>
+
+
+
+
+
 <table class="table table-bordered">
     <thead><tr><th>Dni</th><th>Ip</th><th>Panel</th><th>Nombre</th><th>Apellido</th><th>Numero de tarjeta</th><th>Localidad</th><th>Calle</th><th>Numero de calle</th><th>Entre calle 1</th><th>Entre calle 2</th><th>Telefono</th><th>Telefono 2</th><th>Telefono 3</th><th>Fecha de alta</th><th>Fecha de baja</th></tr></thead>
         {{for x in datos: }}
