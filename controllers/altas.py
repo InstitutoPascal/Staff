@@ -12,6 +12,16 @@ def alta_gerentes():
         response.flash = 'Complete el formulario'
     return dict(f=form)
 
+def alta_soportes():
+    form = SQLFORM(db.soportes_tecnicos)
+    if form.accepts(request.vars, session):
+        response.flash = 'Formulario aceptado'
+    elif form.errors:
+        response.flash = 'El formulario tiene errores'
+    else:
+        response.flash = 'Complete el formulario'
+    return dict(f=form)
+
 def alta_administradores():
     form = SQLFORM(db.administradores)
     if form.accepts(request.vars, session):
@@ -63,7 +73,7 @@ def alta_paneles():
     return dict(f=form)
 
 def alta_instalacion():
-    form = SQLFORM(db.instalacion)
+    form = SQLFORM(db.instalaciones)
     if form.accepts(request.vars, session):
         response.flash = 'Formulario aceptado'
     elif form.errors:

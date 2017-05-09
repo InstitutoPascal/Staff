@@ -53,12 +53,14 @@ response.menu += [
 
 response.menu += [
            (T('Instalaciones'), False, '#',
-           [(T('Busqueda por DNI'), False, URL('consultas', 'instalaciones_dni'),[]),
+           [(T('Registrar nueva Instalacion'), False, URL('altas', 'alta_instalacion'),[]),
+           (T('Busqueda por DNI'), False, URL('consultas', 'instalaciones_dni'),[]),
            (T('Listado completo'), False, URL('consultas', 'listadoInstalaciones'),[])])]
 
 response.menu += [
            (T('Soportes tecnicos'), False, '#',
            [(T('Busqueda por DNI'), False, URL('consultas', 'soportes_dni'),[]),
+           (T('Registrar nuevo soporte'), False, URL('altas', 'alta_soportes'),[]),
            (T('Listado completo'), False, URL('consultas', 'listadoSoportes'),[]),
            (T('Historial'), False, URL('consultas', 'ListadoHistorial'),[])])]
 
