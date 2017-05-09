@@ -211,29 +211,39 @@ db.planes.precio.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LE
 
 
 #Instalacion
-db.define_table('instalacion',
+db.define_table('instalaciones',
                  db.Field('dni','integer'),
-                 db.Field('nombre', 'string'),
+                 db.Field('nombre','string'),
                  db.Field('apellido','string'),
-                 db.Field('localidad', db.localidades),
+                 db.Field('localidad',db.localidades),
                  db.Field('calle','string'),
                  db.Field('numero_calle','integer'),
-                 db.Field('entre_calle_1', 'string'),
-                 db.Field('entre_calle_2', 'string'),
-                 db.Field('telefono','string'),
+                 db.Field('entre_calle_1','string'),
+                 db.Field('entre_calle_2','string'),
+                 db.Field('telefono_1', 'string'),
+                 db.Field('telefono_2','string'),
+                 db.Field('telefono_3','string'),
+                 db.Field('email','string'),
+                 db.Field('tipo_de_plan',db.planes),
                  db.Field('costo_de_instalacion',db.costos_instalaciones),
-                 db.Field('estado', 'string', readable=False, writable=False))
-db.instalacion.dni.requires=IS_NOT_IN_DB(db, db.instalacion.dni, error_message = 'El DNI ingresado  ya se encuentra registrado') ,IS_NOT_EMPTY(error_message= 'Campo obligatorio') ,IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
-db.instalacion.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
-db.instalacion.apellido.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
-db.instalacion.localidad.requires=IS_IN_DB(db,db.localidades.id,'%(localidad)s',zero=T('Seleccione localidad'), error_message= 'Campo obligatorio')
-db.instalacion.costo_de_instalacion.requires=IS_IN_DB(db,db.costos_instalaciones.id, '$ ' + '%(precio)s' + ' (' + '%(descripcion)s' + ')',zero=T('Seleccione costo'), error_message= 'Campo obligatorio')
-db.instalacion.estado.default='Pendiente'
-db.instalacion.calle.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(20, error_message='Solo hasta 20 caracteres')
-db.instalacion.entre_calle_1.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(20, error_message='Solo hasta 20 caracteres')
-db.instalacion.entre_calle_2.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(20, error_message='Solo hasta 20 caracteres')
-db.instalacion.numero_calle.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(4, error_message='Solo hasta 4 caracteres')
-db.instalacion.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
+                 db.Field('tecnico_asignado', db.tecnicos),
+                 db.Field('fecha_estimada', 'date'),
+                 db.Field('estado', 'string'))
+db.instalaciones.dni.requires=IS_NOT_IN_DB(db, db.instalaciones.dni, error_message = 'El DNI ingresado  ya se encuentra registrado') ,IS_NOT_EMPTY(error_message= 'Campo obligatorio') ,IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
+db.instalaciones.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
+db.instalaciones.apellido.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
+db.instalaciones.localidad.requires=IS_IN_DB(db,db.localidades.id,'%(localidad)s',zero=T('Seleccione localidad'), error_message= 'Campo obligatorio')
+db.instalaciones.calle.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(20, error_message='Solo hasta 20 caracteres')
+db.instalaciones.numero_calle.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(4, error_message='Solo hasta 4 caracteres')
+db.instalaciones.entre_calle_1.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(20, error_message='Solo hasta 20 caracteres')
+db.instalaciones.entre_calle_2.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(20, error_message='Solo hasta 20 caracteres')
+db.instalaciones.telefono_1.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
+db.instalaciones.email.requires=IS_EMAIL(error_message='El correo electronico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres'),IS_NOT_EMPTY(error_message= 'Campo obligatorio')
+db.instalaciones.tipo_de_plan.requires=IS_IN_DB(db,db.planes.id,'%(velocidad)s',zero=T('Seleccione localidad'), error_message= 'Campo obligatorio')
+db.instalaciones.costo_de_instalacion.requires=IS_IN_DB(db,db.costos_instalaciones.id,'$ ' + '%(precio)s' + ' (' + '%(descripcion)s' + ')',zero=T('Seleccione costo'), error_message= 'Campo obligatorio')
+db.instalaciones.tecnico_asignado.requires=IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico'),error_message= 'Campo obligatorio')
+db.instalaciones.fecha_estimada.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
+
 
 
 #Costo de soporte
@@ -246,11 +256,8 @@ db.costos_soportes.precio.requires=IS_NOT_EMPTY(error_message= 'Campo obligatori
 #Clientes#  #Revisar
 db.define_table('clientes',
                  db.Field('dni', 'integer'),
-                 db.Field('ip', 'string'),
-                 db.Field('panel', db.paneles),
                  db.Field('nombre', 'string'),
                  db.Field('apellido','string'),
-                 db.Field('numero_tarjeta','integer'),
                  db.Field('localidad', db.localidades),
                  db.Field('calle','string'),
                  db.Field('numero_calle','integer'),
@@ -259,11 +266,14 @@ db.define_table('clientes',
                  db.Field('telefono_1','string'),
                  db.Field('telefono_2','string'),
                  db.Field('telefono_3','string'),
+                 db.Field('tipo_de_plan', db.planes),
+                 db.Field('panel', db.paneles),
+                 db.Field('direccion_ip', 'string'),
+                 db.Field('numero_tarjeta','integer'),
                  db.Field('fecha_alta', 'date'),
-                 db.Field('fecha_baja', 'date'),
-                 db.Field('instalacion_id', db.instalacion, readable=False, writable=False ))
-
+                 db.Field('fecha_baja', 'date'))
 db.clientes.dni.requires=IS_NOT_IN_DB(db, db.clientes.dni, error_message = 'El DNI ingresado  ya se encuentra registrado') ,IS_NOT_EMPTY(error_message= 'Campo obligatorio') ,IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
+db.clientes.tipo_de_plan.requires=IS_IN_DB(db,db.planes.id,'%(velocidad)s',zero=T('Seleccione plan'),error_message= 'Campo obligatorio')
 db.clientes.panel.requires=IS_IN_DB(db,db.paneles.id,'%(nombre)s',zero=T('Seleccione panel'),error_message= 'Campo obligatorio')
 db.clientes.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
 db.clientes.apellido.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
@@ -306,19 +316,17 @@ db.abonos.importe.requires=IS_IN_DB(db,db.pagos.id,'%(abono)s',zero=T('Seleccion
 
 
 db.define_table('soportes_tecnicos',
-                 db.Field('tecnico',db.tecnicos),
                  db.Field('cliente', db.clientes),
-                 db.Field('fecha','date'),
                  db.Field('problematica', 'string'),
+                 db.Field('tecnico_asignado', db.tecnicos),
+                 db.Field('fecha_estimada','date'),
                  db.Field('estado', 'string', readable=False, writable=False))
 
 
-db.soportes_tecnicos.tecnico.requires=IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico'),error_message= 'Campo obligatorio')
 db.soportes_tecnicos.cliente.requires=IS_IN_DB(db,db.clientes.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione cliente'), error_message= 'Campo obligatorio')
-db.soportes_tecnicos.fecha.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
 db.soportes_tecnicos.problematica.requires=IS_NOT_EMPTY(error_message='Campo obligatorio')
-db.soportes_tecnicos.estado.default='Pendiente'
-
+db.soportes_tecnicos.tecnico_asignado.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
+db.soportes_tecnicos.fecha_estimada.requires=IS_EMPTY_OR(IS_DATE('%d/%M/%Y'))
 
 
 #Historiales ( resolver )
@@ -342,9 +350,7 @@ db.define_table('mantenimientos',
                  db.Field('descripcion','string'))
 
 db.mantenimientos.tecnico_principal.requires=IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico'), error_message= 'Campo obligatorio')
-
 db.mantenimientos.tecnico_secundario.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
-
 db.mantenimientos.nodo.requires=IS_IN_DB(db,db.nodos.id,'%(nombre)s',zero=T('Seleccione nodo'), error_message= 'Campo obligatorio')
 db.mantenimientos.fecha.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
 db.mantenimientos.descripcion.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')

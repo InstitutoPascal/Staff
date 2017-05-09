@@ -4,48 +4,37 @@
 
 {{if cantidad > 0:}}
 
-<html>
-<head>
- <script type="text/javascript">
-  function Block(esto,id)
-   {
-    if(esto.checked==true)
-     {
-		id=document.getElementById(id);
-		id.disabled=false;		
-	 }	
-	else
-	 {
-		id=document.getElementById(id);
-		id.disabled=true;				
-	 }
-   }
- </script>
-</head>
-<body onload="Block(document.getElementById('txek'),'Aukera')">
-Localidad <input type="checkbox" id="txek" onclick="Block(this,'Aukera')"/>
-<select id="Aukera">
- <option value="1">Isidro Casnova</option>
- <option value="2">Laferrere</option>
- <option value="3">Gonzalez Catán</option>
+<select name="OS">
+   <option selected value="0"> Filtrar </option>
+       <optgroup label="Localidad"> 
+           <option value="1">localidad1</option> 
+           <option value="2">localidad2</option> 
+           <option value="3">localidad3</option> 
+   </optgroup> 
+    <optgroup label="Plan"> 
+       <option value="10">Plan1</option> 
+       <option value="11">Plan2</option> 
+       <option value="12">Plan3</option> 
+   </optgroup> 
+   <optgroup label="Nodo"> 
+       <option value="10">nodo1</option> 
+       <option value="11">nodo2</option> 
+       <option value="12">nodo3</option> 
+   </optgroup> 
+   <optgroup label="Panel"> 
+       <option value="10">panel1</option> 
+       <option value="11">panel2</option> 
+       <option value="12">panel3</option> 
+   </optgroup> 
 </select>
-</body>
-</html> 
+
+<br></br>
 
 
-<form>
-<input type="checkbox" onclick="codigo.disabled = !this.checked" />
-<input name="codigo" type="text" id="codigo" disabled />
-</form>
-
-
-
-
-
-<table class="table table-bordered">
-    <thead><tr><th>Dni</th><th>Ip</th><th>Panel</th><th>Nombre</th><th>Apellido</th><th>Numero de tarjeta</th><th>Localidad</th><th>Calle</th><th>Numero de calle</th><th>Entre calle 1</th><th>Entre calle 2</th><th>Telefono</th><th>Telefono 2</th><th>Telefono 3</th><th>Fecha de alta</th><th>Fecha de baja</th></tr></thead>
+<table class="table table-hover" border="3px" >
+    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Dni</center></th><th><center>Nombre</center></th><th><center>Apellido</center></th><th><center>Localidad</center></th><th><center>Calle</center></th><th><center>Numero de calle</center></th><th><center>Entre calle 1</center></th><th><center>Entre calle 2</center></th><th><center>Telefono 1</center></th><th><center>Telefono 2</center></th><th><center>Telefono 3</center></th><th><center>Tipo de plan</center></th><th><center>Panel</center></th><th><center>Direccion ip</center></th><th><center>Numero de tarjeta</center></th><th><center>Fecha de alta</center></th><th><center>Fecha de baja</center></th></tr></thead>
         {{for x in datos: }}
-    <tbody><tr><td>{{=x.clientes.dni}}</td> <td>{{=x.clientes.ip}}</td><td>{{=x.paneles.panel}}</td><td>{{=x.clientes.nombre}}</td><td>{{=x.clientes.apellido}}</td><td>{{=x.clientes.numero_tarjeta}}</td><td>{{=x.localidades.localidad}}</td><td>{{=x.clientes.calle}}</td><td>{{=x.clientes.numero_calle}}</td><td>{{=x.clientes.entre_calle_1}}</td><td>{{=x.clientes.entre_calle_2}}</td><td>{{=x.clientes.telefono_1}}</td><td>{{=x.clientes.telefono_2}}</td><td>{{=x.clientes.telefono_3}}</td><td>{{=x.clientes.fecha_alta}}</td><td>{{=x.clientes.fecha_baja}}</td></tr></tbody>{{pass}}</table>
+    <tbody><tr><td><center>{{=x.clientes.dni}}</center></td> <td><center>{{=x.clientes.nombre}}</center></td><td><center>{{=x.clientes.apellido}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.clientes.calle}}</center></td><td><center>{{=x.clientes.numero_calle}}</center></td><td><center>{{=x.clientes.entre_calle_1}}</center></td><td><center>{{=x.clientes.entre_calle_2}}</center></td><td><center>{{=x.clientes.telefono_1}}</center></td><td><center>{{=x.clientes.telefono_2}}</center></td><td><center>{{=x.clientes.telefono_3}}</center></td><td><center>{{=x.planes.velocidad}}</center></td><td><center>{{=x.paneles.panel}}</center></td><td><center>{{=x.clientes.direccion_ip}}</center></td><td><center>{{=x.clientes.numero_tarjeta}}</center></td><td><center>{{=x.clientes.fecha_alta}}</center></td><td><center>{{=x.clientes.fecha_baja}}</center></td></tr></tbody>{{pass}}</table>
 
 <a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
 {{pass}}

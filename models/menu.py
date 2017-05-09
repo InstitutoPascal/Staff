@@ -34,12 +34,11 @@ response.menu+=[(T('consultas'),False,'#',
                        [(T('Por DNI'),False,URL(request.application,'consultas','clientes_dni'),[]),
                         (T('Por nombre/apellido'),False,URL(request.application,'consultas','clientes_nombre_apellido'),[]),
                         (T('Por direccion IP'),False,URL(request.application,'consultas','clientes_ip'),[]),
-                        (T('Por nodo'),False,URL(request.application,'consultas','clientes_nodos'),[]),
-                        (T('Por localidad'),False,URL(request.application,'consultas','clientes_localidad'),[]),
-                        (T('Todos'),False,URL(request.application,'consultas','listadoClientes'),[])],),
+                        (T('Listado completo'),False,URL(request.application,'consultas','listadoClientes'),[])],),
                        (T('Tecnicos'),False,'#',
                        [(T('Por DNI'),False,URL(request.application,'consultas','tecnicos_dni'),[]),
-                       (T('todos'), False, URL(request.application, 'consultas', 'listadoTecnicos'),[])],),],)]
+                        (T('Por nombre/apellido'),False,URL(request.application,'consultas','tecnicos_nombre_apellido'),[]),
+                       (T('Listado completo'), False, URL(request.application, 'consultas', 'listadoTecnicos'),[])],),],)]
 
 response.menu += [
            (T('Registros Completos'), False, '#',
@@ -51,23 +50,22 @@ response.menu += [
            (T('Paneles'), False, URL('consultas', 'listadoPaneles'),[]),
            (T('Mantenimientos'), False, URL('consultas', 'listadoMantenimientos'),[])])]
 
+
 response.menu += [
            (T('Instalaciones'), False, '#',
-           [(T('Pendientes'), False, URL('consultas', 'instalacionesPendientes'),[]),
-           (T('Finalizadas'), False, URL('consultas', 'instalacionesFinalizadas'),[]),
-           (T('Todas'), False, URL('consultas', 'listadoInstalaciones'),[])])]
+           [(T('Busqueda por DNI'), False, URL('consultas', 'instalaciones_dni'),[]),
+           (T('Listado completo'), False, URL('consultas', 'listadoInstalaciones'),[])])]
 
 response.menu += [
            (T('Soportes tecnicos'), False, '#',
-           [(T('Pendientes'), False, URL('consultas', 'soportesPendientes'),[]),
-           (T('Finalizados'), False, URL('consultas', 'soportesFinalizados'),[]),
-           (T('Todos'), False, URL('consultas', 'listadoSoportes'),[]),
+           [(T('Busqueda por DNI'), False, URL('consultas', 'soportes_dni'),[]),
+           (T('Listado completo'), False, URL('consultas', 'listadoSoportes'),[]),
            (T('Historial'), False, URL('consultas', 'ListadoHistorial'),[])])]
 
 response.menu += [
            (T('Gestion de pago'), False, '#',
-           [(T('Registrar nuevo pago'), False, URL('consultas', 'RegistrarPago'),[]),
-           (T('Registrar descuento'), False, URL('consultas', 'RegistrarDescuento'),[]),
-           (T('Registrar recargo'), False, URL('consultas', 'ListadoPagos'),[])])]
+           [(T('Registrar nuevo pago'), False, URL('consultas', 'registrarPago'),[]),
+           (T('Registrar descuento'), False, URL('consultas', 'registrarDescuento'),[]),
+           (T('Registrar recargo'), False, URL('consultas', 'registrarRecargo'),[])])]
 
 ### FIN MENU ADMINISTRADORES ###

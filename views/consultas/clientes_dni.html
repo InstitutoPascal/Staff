@@ -1,9 +1,10 @@
 {{extend 'layout.html'}}
-<h1>Ingrese DNI de cliente</h1><br>
-{{=subtitulo}}
-{{=form}}
-{{if cant > 0:}}
-Los clientes son:
-{{=tabla}}
-{{pass}}
-{{=form2}}
+<h3><center><u>Buscar cliente mediante DNI</u></center></h3><br>
+
+<center>
+<form action="/action_page.php">
+    <label>DNI: </label>
+   <input type="integer" name="dni_buscar">
+    <button type="button" class="btn btn-primary btn-sm">Buscar</button>
+</form>
+</center>
