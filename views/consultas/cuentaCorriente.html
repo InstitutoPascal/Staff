@@ -1,0 +1,48 @@
+{{extend 'layout.html'}}
+<h3><u>Cuenta corriente:</u></h3>
+
+<br>
+<br>
+
+<form action="/action_page.php">
+    <label>DNI: </label>
+   <input type="integer" name="dni_buscar">
+     <a href="{{=URL(c="altas",f="alta_cliente")}}" class="btn btn-primary btn-sm" role="button">Buscar</a>
+</form>
+
+
+
+<br>
+
+
+<table class="table table-hover" border="3px" >
+    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Cliente</center></th><th><center>Abono</center></th><th><center>Vencimiento</center></th><th><center>Pago</center></th><th><center>Fecha de pago</center><th><center>Descuento</center></th><th><center>Saldo</center></th></tr></thead>
+    <tbody>
+        <tr><td><center>Emanuel Carabajal</center></td> <td><center>$ 400</center></td><td><center>10/01/2017</center></td><td><center>$ 400</center></td><td><center>05/01/2017</center></td><td><center></center></td><td><center>$ 0</center></td></tr>
+        <tr><td><center>Emanuel Carabajal</center></td> <td><center>$ 400</center></td><td><center>10/02/2017</center></td><td><center>$ 300</center></td><td><center>02/02/2017</center></td><td><center></center></td><td><center>$ 100</center></td></tr>
+        <tr><td><center>Emanuel Carabajal</center></td> <td><center>$ 400</center></td><td><center>10/03/2017</center></td><td><center>$ 350</center></td><td><center>10/10/2017</center></td><td><center>$ 50</center></td><td><center>$ 0</center></td></tr>
+        <tr><td><center>Emanuel Carabajal</center></td> <td><center>$ 400</center></td><td><center>10/04/2017</center></td><td><center>$ 0</center></td><td><center>Nulo</center></td><td><center></center></td><td><center>$ 400</center></td></tr>
+        <tr><td><center>Emanuel Carabajal</center></td> <td><center>$ 400</center></td><td><center>10/05/2017</center></td><td><center>$ 0</center></td><td><center>Nulo</center></td><td><center></center></td><td><center>$ 400</center></td></tr>
+        <tr><td><center>Emanuel Carabajal</center></td> <td><center>$ 400</center></td><td><center>10/05/2017</center></td><td><center>$ 0</center></td><td><center>Nulo</center></td><td><center></center></td><td><center>$ 400</center></td></tr></tbody></table>
+
+
+
+<input class="btn btn-primary btn-sm" type='button' onclick='window.print();' value='Imprimir' /></form> 
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo Pop-up</title>
+</head>
+<body>
+  <button class="btn btn-primary btn-sm" onclick="firstExample()">Calcular saldo</button>
+  <script>
+    // Esta función abre una ventana con tu propio contenido
+    function firstExample() {
+      var newWindow = window.open('', '', 'width=250, height=120');
+      newWindow.document.write('<center>Saldo total: $ 1300</center>');
+    }
+  </script>
+</body>

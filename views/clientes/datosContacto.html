@@ -1,0 +1,14 @@
+{{extend 'layout.html'}}
+<h1>Contacto</h1>
+
+
+<br>
+
+
+<body> <form class="contact_form" action="#" id="contact_form" runat="server"> 
+        <div> <ul> <li> <h2>Contacto</h2> <span class="required_notification">* Datos requeridos</span> </li> 
+                   <li> <label for="name">Telefono:</label><input type="integer" name="dni"/></li> 
+                   <li> <label for="email">Telefono 2:</label> <input type="text" name="email"/> (opcional) </li> 
+                   <li> <label for="website">Telefono 3:</label> <input type="integer" name="website"/> (opcional) </li> 
+                  <li><label for="email">Email:</label> <input type="email" name="email" placeholder="elvagodeltruco@gmail.com" required /> <span class="form_hint">Formato correcto: "name@something.com"</span></li>
+            <li><a href="{{=URL(c="clientes",f="datosContacto")}}" class="btn btn-primary btn-sm" role="button">Siguiente</a></li> </ul></div> </form> </body> </html>

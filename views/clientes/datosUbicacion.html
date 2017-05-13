@@ -1,0 +1,19 @@
+{{extend 'layout.html'}}
+<h1>Ubicacion</h1>
+
+
+<br>
+
+
+<body> <form class="contact_form" action="#" id="contact_form" runat="server"> 
+        <div> <ul> <li> <h2>Ubicación</h2> <span class="required_notification">* Datos requeridos</span> </li> 
+                   <li> <label for="name">Localidad:</label> <select name="OS">
+   <option value="1">seleccionar</option> 
+   <option value="2">Isidro Casanova</option> 
+   <option value="3">Ciudad Evita</option>
+   <option value="10">Gregorio de Laferrère</option> 
+   <option value="11">González Catán</option> </select> </li> 
+                   <li> <label for="email">Calle:</label> <input type="text" name="email"/></li> 
+                   <li> <label for="website">Número de calle:</label> <input type="integer" name="website"/></li> 
+            <li> <label for="message">Entre calles:</label> <input type="text" name="calle1"/> Y <input type="text" name="calle1"/></li>
+            <li><a href="{{=URL(c="clientes",f="datosPersonales")}}" class="btn btn-primary btn-sm" role="button">Siguiente</a></li> </ul></div> </form> </body> </html>
