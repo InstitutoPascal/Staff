@@ -2,6 +2,29 @@
 # intente algo como
 def index(): return dict(message="hello from consultas.py")
 
+def geolocalizacionNodos():
+    d = 4
+    return dict(datos=d)
+
+def cuentaCorriente():
+     #Se debe recibir el dni, desde la vista y devolver el registro.
+    i=0
+    cliente =db().select(db.clientes.ALL)
+    for x in cliente:
+        i= i+1
+    return dict(datos=cliente, cantidad=i)
+
+
+def agregar_cliente():
+    #Se debe recibir el dni, desde la vista y devolver el registro.
+    i=0
+    cliente =db().select(db.clientes.ALL)
+    for x in cliente:
+        i= i+1
+    return dict(datos=cliente, cantidad=i)
+
+        
+
 def clientes_dni():
     #Se debe recibir el dni, desde la vista y devolver el registro.
     i=0

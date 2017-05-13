@@ -1,27 +1,10 @@
 {{extend 'layout.html'}}
-<h3><center><u>Buscar instalacion mediante DNI del solicitante</u></center></h3><br>
+<h3><u>Buscar cliente mediante DNI: </u></h3><br>
 
+<br>
 
 <form action="/action_page.php">
     <label>DNI: </label>
    <input type="integer" name="dni_buscar">
-    <button type="button" class="btn btn-primary btn-sm">Buscar</button>
+     <a href="{{=URL(c="altas",f="alta_soportes")}}" class="btn btn-primary btn-sm" role="button">Buscar</a>
 </form>
-
-
-
-<br></br>
-
-<table class="table table-hover" border="3px" >
-    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Cliente</center></th><th><center>Problematica</center></th><th><center>Tecnico asignado</center></th><th><center>Fecha estimada</center></th><th><center>Estado</center></tr></thead>
-    <tbody>
-        <tr><td><center>Agustin Marichal</center></td> <td><center>No tiene conexion</center></td><td><center>sin asignar</center></td><td><center>sin asignar</center></td><td><center>Pendiente</center></td></tr>
-    
-    
-    </tbody></table>
-
-<br></br>
-<a href="#" class="btn btn-primary btn-lg active" role="button">Modificar Tecnico</a>
-<a href="#" class="btn btn-primary btn-lg active" role="button">Modificar fecha de soporte</a>
-<a href="#" class="btn btn-primary btn-lg active" role="button">Registrar en historial</a>
-<button type="button" class="btn btn-lg btn-primary" disabled="disabled">Registrar el historial</button>

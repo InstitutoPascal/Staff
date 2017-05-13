@@ -121,3 +121,13 @@ def alta_planes():
     else:
         response.flash = 'Complete el formulario'
     return dict(f=form)
+
+def alta_cliente():
+    form = SQLFORM(db.clientes)
+    if form.accepts(request.vars, session):
+        response.flash = 'Formulario aceptado'
+    elif form.errors:
+        response.flash = 'El formulario tiene errores'
+    else:
+        response.flash = 'Complete el formulario'
+    return dict(f=form)
