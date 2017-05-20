@@ -21,7 +21,7 @@ if "auth" in locals():
     auth.wikimenu()
 
 
-"""
+
 ### INICIO MENU ADMINISTRADORES ####
 response.menu += [
            (T('Realizar altas'), False, '#',
@@ -79,27 +79,6 @@ response.menu += [
            (T('Geolocalizacion de clientes'), False, URL('consultas', 'registrarRecargo'),[])])]
 
 ### FIN MENU ADMINISTRADORES ###
-"""
-
-
-
-### MENU TECNICOS ###
-
-response.menu = [(T('Inicio'), False, URL('clientes', 'inicio'), [])]
-response.menu += [(T('Instalaciones'), False, '#',
-           [(T('Dia actual'), False, URL('consultas', 'registrarPago'),[]),
-           (T('Todas'), False, URL('consultas', 'registrarRecargo'),[])])]
-response.menu += [(T('soportes tecnicos'), False, '#',
-           [(T('Dia actual'), False, URL('consultas', 'registrarPago'),[]),
-           (T('Todas'), False, URL('consultas', 'registrarRecargo'),[])])]
-response.menu += [(T('Mantenimientos'), False, '#',
-           [(T('Realizar informe'), False, URL('consultas', 'registrarPago'),[]),
-           (T('Realizados'), False, URL('consultas', 'registrarRecargo'),[])])]
-
-
-### FIN MENU TECNICOS ###
-
-
 
 
 
