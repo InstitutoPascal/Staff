@@ -35,3 +35,7 @@ def mantenimientosRealizarInforme():
 def mantenimientosRealizados():
     d = 4
     return dict(datos=d)
+
+def imprimirSoporte():
+    d=4
+    return dict(datos=d)
