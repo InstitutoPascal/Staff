@@ -39,3 +39,7 @@ def mantenimientosRealizados():
 def imprimirSoporte():
     d=4
     return dict(datos=d)
+
+def imprimirInstalacion():
+    d=4
+    return dict(datos=d)
