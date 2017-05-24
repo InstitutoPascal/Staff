@@ -1,48 +1,106 @@
-<center><img src="{{=URL('static','images/logo.png')}}" width="300" height="150"</img></center>
+{{extend 'layout.html'}}
 
-<h4>
-    <br><U>DATOS PERSONALES</U><BR><BR>
-            DNI: 40512534<br>
-            Nombre: Emanuel<br>
-            Apellido: Carabajal<br><BR>
+<body>
+        <form  class="contact_form" >
 
-    <U>UBICACION</U><BR><BR>
-        Localidad: Isidro Casanova<br>
-        Calle: Juan Sebastián Bach<br>
-        Numero de calle: 5469<br>
-        Entre calle 1: La Zarza<br>
-        Entre calle 2: Ushuaia<br><br>
-    <u>CONTACTO</u><BR><BR>
-        Teléfono: 46945419<br>
-        Teléfono 2: 1165453579<br>
-        Email: elvagodeltruco@gmail.com<br><BR>
-    <U>INFORMACION SOBRE LA INSTALACION</U><BR><BR>
-        Plan elegido: 6 Mb<br>
-        Costo de instalacion: $ 100.0 (Con router)<br>
-        Tecnico: Hernan Ramirez<br>
-        Fecha de instalacion: 24-06-2017<br>
-IP: _________<br>
-Panel: ____________<br>
-Número de tarjeta: _____________<br>
-Descripción: _____________<br>
-</h1>
+                <ul>
+                 <li>
+                 <h2>Técnico</h2>
+             </li>
 
-
-<!DOCTYPE html> 
-
-<html> 
-
-<head> 
-
-<title></title> 
-
-</head> 
-
-<body> 
-
-<input type="button" value="Imprime esta 
-pagina" onclick="window.print()"> 
-
-</body> 
-
-</html>
+            <li>
+                <label>Nombre:</label>
+                <input type='text' placeholder="Marcelo">
+            </li>
+            <li>
+                 <label>Apellido:</label>
+                <input type='text' placeholder="Tinelli">
+                </li>
+             <li>
+                 <h2>Cliente</h2>
+             </li>
+              <li>
+                <label>DNI:</label>
+                <input type='text' placeholder="40512534">
+            </li>
+           
+            <li>
+                <label>Nombre:</label>
+                <input type='text' placeholder="Emanuel">
+            </li>
+            <li>
+                 <label>Apellido:</label>
+                <input type='text' placeholder="Carabajal">
+                </li>
+            <li>
+                 <h2>Ubicación</h2>
+             </li>
+              <li>
+                <label>Localidad:</label>
+                <input type='text' placeholder="Isidro Casanova" >
+            </li>
+              <li>
+                <label>Calle:</label>
+                <input type='text' placeholder="Juan Sebastián Bach" >
+            </li>
+             <li>
+                <label>Numero de calle:</label>
+                <input type='text' placeholder="5469" >
+            </li>
+              <li>
+                <label>Entre calle 1:</label>
+                <input type='text' placeholder="La Zarza" >
+            </li>
+                <li>
+                <label>Entre calle 2:</label>
+                <input type='text' placeholder="Ushuaia" >
+            </li>
+              <li>
+                 <h2>Contacto</h2>
+             </li>
+              <li>
+                <label>Télefono:</label>
+                <input type='text' placeholder="46945419" >
+            </li>
+              <li>
+                <label>Télefono 2:</label>
+                <input type='text' placeholder="1165453579" >
+            </li>
+               <li>
+                <label>Email:</label>
+                <input type='text' placeholder="elvagodeltruco@gmail.com" >
+            </li>
+              <li>
+                 <h2>Información sobre la Instalación</h2>
+             </li>
+              <li>
+                <label>Plan Elegido:</label>
+                <input type='text' placeholder="6 mb" >
+            </li>
+              <li>
+                <label>Costo de Instalación:</label>
+                <input type='text' placeholder="$ 100.0 (Con router)" >
+            </li>
+               <li>
+                <label>Fecha de Instalación:</label>
+                <input type='text' placeholder="24-06-2017" >
+            </li>
+              <li>
+                <label> Dirección IP:</label>
+                <input type='text' placeholder="" >
+            </li>
+             <li>
+                <label>Panel:</label>
+                <input type='text' placeholder="" >
+            </li>
+              <li>
+                <label>Número de Tarjeta:</label>
+                <input type='text' placeholder="" >
+            </li>
+              <li>
+                <label>Descripción:</label>
+                <input type='text' placeholder="" >
+            </li>
+            </ul>
+        </form>
+    </body>
