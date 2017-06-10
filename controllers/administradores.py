@@ -10,6 +10,10 @@ def gestionPago():
     d = 4
     return dict(datos=d)
 
+def dni_descuento():
+    d = 4
+    return dict(datos=d)
+
 def geolocalizacionNodos():
     d = 4
     return dict(datos=d)
