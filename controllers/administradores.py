@@ -110,14 +110,6 @@ def registrarDescuento():
         i= i+1
     return dict(datos=cliente, cantidad=i)
 
-def registrarRecargo():
-    i=0
-    cliente =db().select(db.clientes.ALL)
-    for x in cliente:
-        i= i+1
-    return dict(datos=cliente, cantidad=i)
-
-
 ################################################### < LISTADOS > ########################################################################
 
 def listadoSoportes():
