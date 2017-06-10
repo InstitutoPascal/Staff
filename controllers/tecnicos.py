@@ -5,6 +5,9 @@ def inicio():
     d = 4
     return dict(datos=d)
 
+def nuevoCliente():
+    d = 4
+    return dict(datos=d)
 
 def instalacionesDiaActual():
     d = 4
@@ -41,5 +44,10 @@ def imprimirSoporte():
     return dict(datos=d)
 
 def imprimirInstalacion():
+    d=4
+    return dict(datos=d)
+
+
+def imprimirMantenimiento():
     d=4
     return dict(datos=d)
