@@ -1,0 +1,47 @@
+{{extend 'layout.html'}}
+<div class="container">
+    <div class="row">
+        <div class="board">
+            <div class="board-inner">
+                <ul class="nav nav-tabs" id="myTab">
+                    <div class="liner"></div>
+                    <li class="active"><a href="#info" data-toggle="tab" title="Información"><span class="round-tabs one"><i class="glyphicon glyphicon-info-sign"></i></span></a></li>
+                    <li><a href="#pago" data-toggle="tab" title="Registrar pago"><span class="round-tabs two"><i class="glyphicon glyphicon-usd"></i></span></a></li>
+                    <li><a href="#descuento" data-toggle="tab" title="Registrar descuento"><span class="round-tabs three"><i class="glyphicon glyphicon-minus"></i></span></a></li>
+                    <li><a href="#recargo" data-toggle="tab" title="Registrar recargo"><span class="round-tabs four"><i class="glyphicon glyphicon-plus"></i></span></a></li>
+                    <li><a href="#cuenta" data-toggle="tab" title="Cuenta corriente"><span class="round-tabs five"><i class="glyphicon glyphicon-list-alt"></i></span></a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="info">
+                    <h3 class="head text-center" style="color:#FFFFFF";>Gestion de pagos</h3>
+                    <p class="narrow text-center" style="color:#FFFFFF";>Bienvenido al area de pagos, utilice las opciones superiores para poder realizar algunas de las siguientes operaciones:<br><br><br><span>> Registrar nuevos pagos <</span><br><span>> Registrar nuevos descuentos <</span><br><span>> Registrar nuevos recargos <</span><br><span>> Consultar cuenta corriente <</span></p>
+                </div>
+                <div class="tab-pane fade" id="pago">
+                    <h3 class="head text-center" style="color:#FFFFFF";>Registrar pago</h3>
+                    <p class="narrow text-center" style="color:#FFFFFF";>Registrar los nuevos pagos realizados por los clientes.</p>
+                    <p class="text-center">
+                        <a href="{{=URL(c="administradores",f="clientes_nro_tarjeta")}}" target="_blank" class="btn btn-success btn-outline-rounded green">Nuevo pago<span style="margin-left:10px;" class="glyphicon glyphicon-new-window"></span></a></p>
+                </div>
+                <div class="tab-pane fade" id="descuento">
+                     <h3 class="head text-center" style="color:#FFFFFF";>Registrar descuento</h3>
+                     <p class="narrow text-center" style="color:#FFFFFF";>Registrar descuento sobre el pago de un cliente.</p>
+                     <p class="text-center">
+                         <a href="{{=URL(c="administradores",f="registrarDescuento")}}" target="_blank" class="btn btn-success btn-outline-rounded green">Nuevo descuento<span style="margin-left:10px;" class="glyphicon glyphicon-new-window"></span></a></p>
+                </div>
+                <div class="tab-pane fade" id="recargo">
+                    <h3 class="head text-center" style="color:#FFFFFF";>Registrar recargo</h3>
+                        <p class="narrow text-center" style="color:#FFFFFF";>Registrar recargo sobre el pago de un cliente.</p>
+                        <p class="text-center">
+                            <a href="{{=URL(c="administradores",f="registrarRecargo")}}" target="_blank" class="btn btn-success btn-outline-rounded green">Nuevo recargo<span style="margin-left:10px;" class="glyphicon glyphicon-new-window"></span></a></p>
+                </div>
+                <div class="tab-pane fade" id="cuenta">
+                    <h3 class="head text-center" style="color:#FFFFFF";>Cuenta corriente</h3>
+                    <p class="narrow text-center" style="color:#FFFFFF";>Consultar sobre la cuenta corriente de un cliente.</p>
+                    <p class="text-center">
+                        <a href="{{=URL(c="administradores",f="clientesCuenta")}}" target="_blank" class="btn btn-success btn-outline-rounded green">Cuenta corriente<span style="margin-left:10px;" class="glyphicon glyphicon-new-window"></span></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

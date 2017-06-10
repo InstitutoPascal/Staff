@@ -1,0 +1,50 @@
+{{extend 'layout.html'}}
+<div class="container">
+
+    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"> 
+        <br> <center><img src="{{=URL('static','images/logo.png')}}" width="300" height="150"</img></center></br>
+
+        <div class="panel panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title text-center">Nuevo Pago</div>
+            </div>
+
+            <div class="panel-body" >
+
+                <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  type="text" class="form-control"  value="Emanuel Carabajal" >
+
+                    </div>
+                    <br>
+                    </br>
+                
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input type="date" class="form-control" id="date" name="date">
+                    </div>
+                    <br>
+                    </br>
+            
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                        <input  type="text" class="form-control"  value="" placeholder="Ingrese el monto" >
+                    </div>
+                         <br>
+                        </br>
+
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-md-6,5 ">
+                           <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-paste"></i> Ingresar</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
