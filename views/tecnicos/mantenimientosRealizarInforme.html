@@ -1,1 +1,73 @@
-{{extend 'layout.html'}}
+{{extend 'layout_tecnicos.html'}}
+
+
+<div class="container">
+
+    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"> 
+
+
+        <div class="panel panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title text-center">Informe de Mantenimiento</div>
+            </div>
+
+            <div class="panel-body" >
+
+                <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <select class="form-control">
+                          <option value="" disabled selected>Técnico Principal</option>
+                          <option>Martin Herrera</option>
+                          <option>Germán Delfino</option>
+                          <option>Silvio Truco</option>
+                        </select>
+                    </div>
+                    <br>
+                    </br>
+
+                   <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <select class="form-control">
+                           <option value="" disabled selected>Técnico Secundario (opcional)</option>
+                           <option>Martin Herrera</option>
+                           <option>Germán Delfino</option>
+                           <option>Silvio Truco</option>
+                         </select>
+
+                    </div>
+                    <br>
+                    </br>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-signal"></i></span>
+                        <select class="form-control">
+                           <option value="" disabled selected>Nodo</option>
+                           <option>nodo1</option>
+                           <option>nodo2</option>
+                         </select>
+                    </div>
+                         <br>
+                        </br>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input type="date" class="form-control" id="date" name="date">
+                    </div>
+                    <br>
+                    </br>
+
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-md-6,5 ">
+                           <a href="{{=URL(c="tecnicos",f="imprimirMantenimiento")}}" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-paste"></i> Realizar</a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
