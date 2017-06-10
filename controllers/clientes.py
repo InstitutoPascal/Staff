@@ -7,6 +7,7 @@ def inicio():
     return dict(datos=d)
 
 
+
 def listadoPlanes():
     datosPlanes = db().select(db.planes.ALL)
     i=0
@@ -29,4 +30,7 @@ def datosPersonales():
 
 def datosContacto():
     d = 4
+    return dict(datos=d)
+def consulta():
+    d=4
     return dict(datos=d)
