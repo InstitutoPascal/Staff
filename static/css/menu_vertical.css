@@ -1,0 +1,112 @@
+body {
+}
+
+/* Profile container */
+.profile {
+  margin: 30px 21;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 20px 0 5px 0;
+  background: #CDD2FF;			/* color de caja general */
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 155px;
+  height: 140px;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-usertitle-name {
+  color: #000638;		/* color de nombre de usuario*/
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-userbuttons .btn {		/*boton cerrar sesion */
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 15px;
+  margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0px;
+}
+    
+.profile-usermenu {
+  margin-top: 50px;
+}
+
+.profile-usermenu ul li {
+  border-bottom: 1px solid #959595;
+}
+
+.profile-usermenu ul li:last-child {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li a {
+  color: #6B2525;		/* color de letras de menu */
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-usermenu ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.profile-usermenu ul li a:hover {
+  background-color: #FFFFFF;		/* color de boton al pasar cursor */
+  border-left: 5px solid #5b9bd1;	/* color del borde izquierdo al pasar cursor*/
+  margin-left: -5px;
+  border-right: 5px solid #5b9bd1;
+ margin-right: -5px;
+  color: #6B2525;			/* color de texo al pasar cursor */
+}
+
+.profile-usermenu ul li.active {
+  border-bottom: ;
+}
+
+.profile-usermenu ul li.active a {
+  color: #4A4A4A;			/* color de texto (activo)*/
+  background-color: #DADADA;		/* color de fondo (activo)*/
+  border-left: 3px solid #5b9bd1;	/* color del borde izquierdo*/
+  margin-left: 0px;
+  border-right: 3px solid #5b9bd1;	/* color del borde derecho */
+  margin-right: 0px;
+}
+
+/* Profile Content */
+.profile-content {
+  padding: 20px;
+  background: #fff;
+  min-height: 5px;
+}
