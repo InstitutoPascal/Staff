@@ -1,0 +1,134 @@
+/* Limitamos el máximo ancho del contenerdor y lo mantenemos centrado
+*/
+
+.tablas {
+    max-width: 1140px;
+    margin: 0px auto;
+    clear:both;
+    font-family: Arial, Georgia, Serif;
+}
+
+.tabla {
+  margin: 1em .5em 1.625em;
+  padding: .25em 0 2em;
+  background: #C3C3C3; /* Color de fondo remplace por su favorito */
+  color: #f9f9f9;
+  text-align: center;
+  border:none;
+}
+
+@media (min-width: 40em) {
+  .tabla {
+    width:30%;
+    float:left;
+    -webkit-transition: all .25s;
+       -moz-transition: all .25s;
+        -ms-transition: all .25s;
+         -o-transition: all .25s;
+            transition: all .25s;
+  }
+
+  .scale {
+    z-index:400;
+  -webkit-transform: scale(1.07);
+       -moz-transform: scale(1.07);
+        -ms-transform: scale(1.07);
+         -o-transform: scale(1.07);
+            transform: scale(1.07);
+    }
+
+}
+
+/* Efecto de zoom al pasar el mouse puede modificar la scala */
+.tabla:hover{
+  -webkit-transform: scale(1.2);
+       -moz-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+         -o-transform: scale(1.2);
+            transform: scale(1.2);
+  background:#EAEAEA;
+}
+
+
+div.precio {
+  width:100px;
+  height:100px;
+  margin:0px auto;
+  background:#FFF;
+  border-radius: 50%;
+  border: 2px solid #000000;		/* Circulo de precio */
+  color:#000;
+  margin-top:20px;
+  font-size: 24px;
+  line-height:20px;
+  font-family: "Oswald", "Arial", sans-serif;
+  color: #000000;
+  font-weight: bold;
+}
+
+div.precio p {
+  margin:30px 0px 0px 0px;
+  padding:0px;
+}
+
+div.precio sup {
+  font-size:50%;
+}
+
+div.precio span {
+  font-size: 12px;
+  color: #060006;
+  margin:0px;
+  padding:0px;
+}
+
+
+.titulo {
+        margin: .5em 0;
+        padding: .25em 0;
+        background: #7B8DF4;
+        border: 2px solid #000000;
+        font-size: 250%;
+        color: #000;
+}
+
+.scale .titulo {
+   background: #7B8DF4;
+}
+
+.caracteristica {
+        margin: 0px auto;
+        padding: 0;
+        list-style-type: none;
+        color: #fefefe;
+        width:95%;
+    }
+
+.caracteristica li {
+  padding: 10px 0px;
+  border-bottom: 1px dotted #ccc;
+}
+
+.caracteristica .comprar {
+   border:none !important;
+} 
+
+.tabla .comprar {
+  margin: 30px 0px 0px;
+}
+
+.tabla .comprar a {
+  padding: 1em 3.25em;
+  border: none;
+  border-radius: 40px;
+  background: #292b2e;
+  color: #f9f9f9;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.tabla .comprar a:hover {
+  background: #000;
+  color:white;
+}
+
