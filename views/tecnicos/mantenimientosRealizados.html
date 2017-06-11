@@ -1,2 +1,36 @@
-{{extend 'layout.html'}}
-<h1>Está es la plantilla tecnicos/mantenimientosRealizados.html</h1>
+{{extend 'layout_tecnicos.html'}}
+<head>
+    <title>Mantenimientos</title>
+</head>
+
+
+<table class="table table-hover" border="3px" >
+    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Tecnico Principal</center></th><th><center>Tecnico secundario</center></th><th><center>Nodo</center></th><th><center>Fecha</center></th><th><center>Detalles</center></tr></thead>
+    <tbody style="background-color:#FFFFFF;">
+        <tr><td><center>Emanuel Carabajal</center></td>
+            <td><center>Hernan Robles</center></td>
+            <td><center>nodo2</center></td>
+            <td><center>24/06/2017</center></td>
+            <td><center><a href="{{=URL(c="tecnicos",f="mantenimientosDetalles")}}" target="_blank"><i class="glyphicon glyphicon-list"></i></a></center></td></tr>
+        <tr><td><center>Emanuel Carabajal</center></td>
+            <td><center>Hernan Robles</center></td>
+            <td><center>nodo4</center></td>
+            <td><center>24/06/2017</center></td>
+            <td><center><a href="{{=URL(c="tecnicos",f="mantenimientosDetalles")}}" target="_blank"><i class="glyphicon glyphicon-list"></i></a></center></td></tr>
+        <tr><td><center>Emanuel Carabajal</center></td>
+            <td><center>-</center></td>
+            <td><center>nodo1</center></td>
+            <td><center>24/06/2017</center></td>
+            <td><center><a href="{{=URL(c="tecnicos",f="mantenimientosDetalles")}}" target="_blank"><i class="glyphicon glyphicon-list"></i></a></center></td></tr>
+        <tr><td><center>Emanuel Carabajal</center></td>
+            <td><center>Hernan Ramirez</center></td>
+            <td><center>nodo1</center></td>
+            <td><center>24/06/2017</center></td>
+            <td><center><a href="{{=URL(c="tecnicos",f="mantenimientosDetalles")}}" target="_blank"><i class="glyphicon glyphicon-list"></i></a></center></td></tr>
+        <tr><td><center>Emanuel Carabajal</center></td>
+            <td><center>-</center></td>
+            <td><center>nodo5</center></td>
+            <td><center>24/06/2017</center></td>
+            <td><center><a href="{{=URL(c="tecnicos",f="mantenimientosDetalles")}}" target="_blank"><i class="glyphicon glyphicon-list"></i></a></center></td></tr>
+     </tbody></table>
+      </div>
