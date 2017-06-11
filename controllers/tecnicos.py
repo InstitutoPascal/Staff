@@ -30,7 +30,7 @@ def soportesTodas():
 
 
 
-def mantenimientosRealizarInforme():
+def mantenimientosNuevo():
     d = 4
     return dict(datos=d)
 
@@ -48,6 +48,6 @@ def imprimirInstalacion():
     return dict(datos=d)
 
 
-def imprimirMantenimiento():
+def mantenimientosDetalles():
     d=4
     return dict(datos=d)
