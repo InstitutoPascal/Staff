@@ -1,10 +1,11 @@
 {{extend 'layout_tecnicos.html'}}
+<head>
+    <title>Instalaciones</title>
+</head>
 
-
-<div class="col-md-9 col-sm-10">
 <table class="table table-hover" border="3px" >
     <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Solicitante</center></th><th><center>Localidad</center></th><th><center>Telefono</center><th><center>Plan</center><th><center>Costo de instalacion</center></th><th><center>Fecha estimada</center></th><th><center>Imprimir</center></th></tr></thead>
-    <tbody>
+    <tbody style="background-color:#FFFFFF;">
         <tr><td><center>Emanuel Carabajal</center></td>
             <td><center>Isidro Casanova</center></td>
             <td><center>46945419</center></td>
@@ -97,4 +98,5 @@
             <td><center>30/06/2017</center></td>
             <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
      </tbody></table>
+</div>
       </div>
