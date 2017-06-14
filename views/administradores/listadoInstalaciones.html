@@ -1,4 +1,4 @@
-{{extend 'layout.html'}}
+{{extend 'layout_admin.html'}}
 
 <h3><u>Instalaciones solicitadas:</u></h3><br>
 
@@ -38,7 +38,7 @@
 <table class="table table-hover" border="3px" >
     <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Dni</center></th><th><center>Solicitante</center></th><th><center>Localidad</center></th><th><center>Tipo de plan</center></th><th><center>Costo de instalacion</center></th><th><center>Tecnico asignado</center></th><th><center>Fecha estimada</center></th><th><center>Estado</center></th><th><center>Editar</center></th><th><center>Borrar</center></th></tr></thead>
         {{for x in datos: }}
-    <tbody><tr><td><center>{{=x.instalaciones.dni}}</center></td><td><center>{{=x.instalaciones.nombre}} {{=x.instalaciones.apellido}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.planes.velocidad}}</center></td><td><center>$ {{=x.costos_instalaciones.precio}} - ({{=x.costos_instalaciones.descripcion}})</center></td><td><center>{{=x.tecnicos.nombre}} {{=x.tecnicos.apellido}}</center></td><td><center>{{=x.instalaciones.fecha_estimada}}</center></td><td><center>{{=x.instalaciones.estado}}</center></td><td><center><span class="glyphicon glyphicon-pencil"></span></center></td><td><center><span class="glyphicon glyphicon-trash"></span></center></td></tr></tbody>{{pass}}</table>
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.instalaciones.dni}}</center></td><td><center>{{=x.instalaciones.nombre}} {{=x.instalaciones.apellido}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.planes.velocidad}}</center></td><td><center>$ {{=x.costos_instalaciones.precio}} - ({{=x.costos_instalaciones.descripcion}})</center></td><td><center>{{=x.tecnicos.nombre}} {{=x.tecnicos.apellido}}</center></td><td><center>{{=x.instalaciones.fecha_estimada}}</center></td><td><center>{{=x.instalaciones.estado}}</center></td><td><center><span class="glyphicon glyphicon-pencil"></span></center></td><td><center><span class="glyphicon glyphicon-trash"></span></center></td></tr></tbody>{{pass}}</table>
 
 <a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
 {{pass}}
