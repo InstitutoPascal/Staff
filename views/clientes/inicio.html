@@ -7,7 +7,6 @@ body {
 	color: #000;
 	background-image: url(http://127.0.0.1:8000/mod/static/_2.14.6/images/fon.jpg);
 }
-
 /* ~~ Selectores de elemento/etiqueta ~~ */
 ul, ol, dl { /* Debido a las diferencias existentes entre los navegadores, es recomendable no añadir relleno ni márgenes en las listas. Para lograr coherencia, puede especificar las cantidades deseadas aquí o en los elementos de lista (LI, DT, DD) que contienen. Recuerde que lo que haga aquí se aplicará en cascada en la lista .nav, a no ser que escriba un selector más específico. */
 	padding: 0;
@@ -24,26 +23,18 @@ a img { /* este selector elimina el borde azul predeterminado que se muestra en 
 
 /* ~~ La aplicación de estilo a los vínculos del sitio debe permanecer en este orden (incluido el grupo de selectores que crea el efecto hover -paso por encima-). ~~ */
 a:link {
-	color: #42413C;
-	text-decoration: underline; /* a no ser que aplique estilos a los vínculos para que tengan un aspecto muy exclusivo, es recomendable proporcionar subrayados para facilitar una identificación visual rápida */
+	color: #FFFFFF;
+	text-decoration: none; /* a no ser que aplique estilos a los vínculos para que tengan un aspecto muy exclusivo, es recomendable proporcionar subrayados para facilitar una identificación visual rápida */
 }
 a:visited {
-	color: #6E6C64;
-	text-decoration: underline;
+	color: #FFFFFF;
+	text-decoration: none;
 }
 a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usuario que navegue mediante el teclado la misma experiencia de hover (paso por encima) que experimenta un usuario que emplea un ratón. */
 	text-decoration: none;
 }
 
 /* ~~ este contenedor de anchura fija rodea a las demás divs~~ */
-.container {
-	width: 1024px; /* el valor automático de los lados, unido a la anchura, centra el diseño */
-	/*overflow: hidden; /* esta declaración hace que .container conozca dónde terminan las columnas flotantes incluidas y las contenga */
-	margin-top: 0;
-	margin-right: auto;
-	margin-bottom: 0;
-	margin-left: auto;
-}
 
 .content {
 
@@ -95,6 +86,17 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* esto cambia el color de fon
 	line-height: 0px;
 }
 
+
+
+.container {
+	width: 1024px; /* el valor automático de los lados, unido a la anchura, centra el diseño */
+	/*overflow: hidden; /* esta declaración hace que .container conozca dónde terminan las columnas flotantes incluidas y las contenga */
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+
 .pruebatexto {
 	font-family: "Arial Black", Gadget, sans-serif;
 	font-size: 500%;
@@ -104,6 +106,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* esto cambia el color de fon
 	font-weight: bolder;
 	font-variant: normal;
 }
+
 .logo {
 	text-align: left;
 	position: static;
@@ -158,6 +161,37 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* esto cambia el color de fon
 	left: 500px;
 }
 
+@import url(http://fonts.googleapis.com/css?family=Cuprum:400,700);
+
+.mainmenu { color: #FFFFFF; font-size: 18px;font-family: 'Cuprum', Georgia, "Times New Roman", Times, Serif; background: #07819A; width: 95%; height: 51px; text-shadow: 0 1px0 #000;}
+
+.mainmenu ul {margin: 0; padding: 0; }
+.mainmenu li i { position: absolute; margin-left: -35px; margin-top: 6px; color: #fff;  text-shadow: 0 1px 0 #fff;}
+.mainmenu li { float: left; display: block; padding: 10px 10px 10px 50px; border-right: 1px solid #fff; cursor: pointer; min-width: 100px; max-width: 100px; }
+
+.mainmenu li:hover { background: #ED7D34; }
+.mainmenu li:hover i {color: #012; text-shadow: 0 1px 0 #000;}
+.mainmenu li main {font-weight: 700; margin-top: -18px; }
+.mainmenu li desc { position: relative; float: left; font-size: 11px; color: #888; }
+
+.mainmenu li, .mainmenu li i, .mainmenu li main, .mainmenu li desc {
+    -moz-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+    -webkit-transition: all 0.8s ease-in-out;}
+
+.mainmenu li:hover main { margin-left: 10px; 
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;}
+.mainmenu li:hover desc { margin-left: 30px; 
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;}
+
+
 
 -->
 </style></head>
@@ -209,9 +243,19 @@ setInterval (function() {
 </style>
 
 <body>
-<div class="logo"><img src="http://127.0.0.1:8000/mod/static/_2.14.6/images/logo.png" width="450" height="200" alt="logo" /></div>
+<div class="logo"><img src="http://127.0.0.1:8000/mod/static/_2.14.6/images/logo.png" width="400" height="200" alt="logo" /></div>
 
 <div class="container">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+<div class="mainmenu">
+  <ul>
+      <li><i class="icon-home icon-large"><a href="{{=URL(c="clientes",f="inicio")}}"></i>&nbsp;<main>Inicio</main></li></a>
+    <li><i class="icon-tint icon-large"></i><a href="{{=URL(c="clientes",f="listadoPlanes")}}">&nbsp;<main>Planes</main></li></a>
+      <li><i class="icon-comments icon-large"></i><a href="{{=URL(c="clientes",f="consulta")}}">&nbsp;<main>Contacto</main></li></a>
+  </ul>
+</div>
+    </br>
   <div id="slideshow">
     <div> <img src="http://127.0.0.1:8000/mod/static/_2.14.6/images/soporte_tecnico.png" width="949" height="600" alt="img 3" aling="middle" /></div>
        

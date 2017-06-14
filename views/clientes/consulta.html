@@ -22,12 +22,12 @@ a img { /* este selector elimina el borde azul predeterminado que se muestra en 
 
 /* ~~ La aplicación de estilo a los vínculos del sitio debe permanecer en este orden (incluido el grupo de selectores que crea el efecto hover -paso por encima-). ~~ */
 a:link {
-	color: #42413C;
-	text-decoration: underline; /* a no ser que aplique estilos a los vínculos para que tengan un aspecto muy exclusivo, es recomendable proporcionar subrayados para facilitar una identificación visual rápida */
+	color: #FFFFFF;
+	text-decoration: none; /* a no ser que aplique estilos a los vínculos para que tengan un aspecto muy exclusivo, es recomendable proporcionar subrayados para facilitar una identificación visual rápida */
 }
 a:visited {
-	color: #6E6C64;
-	text-decoration: underline;
+	color: #FFFFFF;
+	text-decoration: none;
 }
 a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usuario que navegue mediante el teclado la misma experiencia de hover (paso por encima) que experimenta un usuario que emplea un ratón. */
 	text-decoration: none;
@@ -35,7 +35,7 @@ a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usu
 
 /* ~~ este contenedor de anchura fija rodea a las demás divs~~ */
 .container {
-	width: 960px;
+	width: 1024px;
 	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño */
 	overflow: hidden; /* esta declaración hace que .container conozca dónde terminan las columnas flotantes incluidas y las contenga */
 }
@@ -95,6 +95,36 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* esto cambia el color de fon
 	font-size: 1px;
 	line-height: 0px;
 }
+    
+@import url(http://fonts.googleapis.com/css?family=Cuprum:400,700);
+
+.mainmenu { color: #FFFFFF; font-size: 18px;font-family: 'Cuprum', Georgia, "Times New Roman", Times, Serif; background: #07819A; width: 95%; height: 51px; text-shadow: 0 1px0 #000;}
+
+.mainmenu ul {margin: 0; padding: 0; }
+.mainmenu li i { position: absolute; margin-left: -35px; margin-top: 6px; color: #fff;  text-shadow: 0 1px 0 #fff;}
+.mainmenu li { float: left; display: block; padding: 10px 10px 10px 50px; border-right: 1px solid #fff; cursor: pointer; min-width: 100px; max-width: 100px; }
+
+.mainmenu li:hover { background: #ED7D34; }
+.mainmenu li:hover i {color: #012; text-shadow: 0 1px 0 #000;}
+.mainmenu li main {font-weight: 700; margin-top: -18px; }
+.mainmenu li desc { position: relative; float: left; font-size: 11px; color: #888; }
+
+.mainmenu li, .mainmenu li i, .mainmenu li main, .mainmenu li desc {
+    -moz-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+    -webkit-transition: all 0.8s ease-in-out;}
+
+.mainmenu li:hover main { margin-left: 10px; 
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;}
+.mainmenu li:hover desc { margin-left: 30px; 
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;}
 -->
 </style></head>
 
@@ -104,7 +134,18 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* esto cambia el color de fon
 <!-- end .sidebar1 --></div>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-<div class="container"> <h1>Contáctanos</h1>
+<div class="container">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+<div class="mainmenu">
+  <ul>
+    <li><i class="icon-home icon-large"><a href="{{=URL(c="clientes",f="inicio")}}"></i>&nbsp;<main>Inicio</main></a></li>
+    <li><i class="icon-tint icon-large"><a href="{{=URL(c="clientes",f="listadoPlanes")}}"></i>&nbsp;<main>Planes</main><a/></li>
+    <li><i class="icon-comments icon-large"><a href="{{=URL(c="clientes",f="consulta")}}"></i>&nbsp;<main>Contacto</main></li><a/>
+  </ul>
+</div>
+    </br>
+    <h1>Contáctanos</h1>
   <p>Comunicate con nosotros llamando o mandando mensaje de texto (WhatsAap) al <strong>11-55784169</strong>. Tambien puedes mandarnos tu consulta llenando el siguiente formulario.
 
 <div class="content">
