@@ -1,0 +1,46 @@
+#login-bg {
+    min-height: 500px;
+    background-color: #D2E4E2;
+}
+
+#login-bg-top {
+    background-image: url('http://5www.ecestaticos.com/imagestatic/clipping/eff/b50/effb50cb14929b0b432bdfce46952279/los-diez-avances-tecnicos-mas-importantes-desde-el-abaco.jpg?mtime=1382725393');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 60% 60%;
+    height: 300px;
+    display: block;
+    text-align: center;
+}
+
+#login-bg-top h3 {
+    color: #101010;
+}
+
+.logo-circle {
+    background-image: url('http://img.freepik.com/iconos-gratis/simbolo-de-usuario-negro-macho_318-60703.jpg?size=338&ext=jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 125px;
+    width: 150px;
+    height: 150px;
+    margin-top: 50px;
+    display: inline-block;
+    border: 5px solid rgba(211,211,211,0.9);
+}
+
+.bg-content {
+    text-align: center;
+    padding-top: 50px;
+    padding-left: 110px;
+    padding-right: 110px;
+    margin-top: 40px;
+    margin-bottom: 90px;
+    background-image: url('https://it.umn.edu/sites/it.umn.edu/files/wifi-network.jpg');
+    min-height: 300px;
+}
+
+.input-group {
+    width: 100%;
+}
+
