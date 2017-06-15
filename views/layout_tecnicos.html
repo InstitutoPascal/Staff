@@ -9,8 +9,12 @@
         <link rel="shortcut icon" href="{{=URL('static','images/favicon.ico')}}" type="image/x-icon"> <!--cambiar favicon-->
         <link rel="apple-touch-icon" href="{{=URL('static','images/favicon.png')}}">
         <link rel="stylesheet" href="{{=URL('static','css/menu_tecnicos.css')}}"/>
+        <link rel="stylesheet" href="{{=URL('static','css/inicio_tecnicos.css')}}"/>
         <script src="{{=URL('static','js/modernizr-2.8.3.min.js')}}"></script>
-        <!--Menu-->
+        {{include 'web2py_ajax.html'}} <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
+     </head>
+    <body>
+    <!-- Navbar ======================================= -->
         <html lang=''>
             <body style="background-color:#E7E6EE;">
                 <div id='cssmenu'>
@@ -44,5 +48,6 @@
         {{block center}}
         {{include}}
         {{end}}
-    </head>
+     <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>
+    </body>
 </html>
