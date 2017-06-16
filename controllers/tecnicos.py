@@ -9,6 +9,10 @@ def nuevoCliente():
     d = 4
     return dict(datos=d)
 
+def busquedaSoporte():
+    d = 4
+    return dict(datos=d)
+
 def instalacionesDiaActual():
     d = 4
     return dict(datos=d)
