@@ -1,0 +1,44 @@
+{{extend 'layout_tecnicos.html'}}
+
+
+<div class="container">
+
+    <div id="loginbox" class="mainbox col-md-6 col-sm-6 col-sm-offset-3"> 
+        <div class="panel panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title text-center">Busqueda de soporte</div>
+            </div>
+
+            <div class="panel-body" >
+
+                <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                        <input id="user" type="text" class="form-control" name="user" value="" placeholder="Ingrese numero de DNI">
+                    </div>
+                           <br>
+                        </br>
+
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-md-6,5 ">
+
+                           <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<br>
+<table class="table table-hover" border="3px" >
+    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>DNI</center></th><th><center>Cliente</center></th><th><center>Problematica</center></th><th><center>Fecha estimada</center><th><center>Registrar solucion</center></th></tr></thead>
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>40512534</center></td> <td><center>Emanuel Carabajal</center></td><td><center>XXXX</center></td><td><center>2017-05-25</center></td><td><center><a href="{{=URL(c="altas",f="alta_historiales")}}" target="_blank"><i class="glyphicon glyphicon-copy"></i></a></center></td></tr></tbody></table>
+</div>
