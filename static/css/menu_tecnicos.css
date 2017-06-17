@@ -64,7 +64,7 @@
 /* Custom CSS Styles */
 #cssmenu {
   background: #333333;			/* color de fondo */
-  border-bottom: 4px solid #0F7601;	/* barra inferior */
+  border-bottom: 4px solid #E84528;	/* barra inferior */
   font-family: 'Oxygen Mono', Tahoma, Arial, sans-serif;
   font-size: 12px;
 }
@@ -81,14 +81,14 @@
   text-transform: uppercase;
 }
 #cssmenu ul ul {
-  border-top: 4px solid #0F7601;	/*barra superior de opciones*/
+  border-top: 4px solid #E84528;	/*barra superior de opciones*/
   text-transform: none;
   min-width: 190px;
 }
 #cssmenu ul ul a {
-  background: #0F7601;	/* fondo de opciones */
+  background: #E84528;	/* fondo de opciones */
   color: #ffffff;	/* letras de submenu*/
-  border: 1px solid #095000;	/* bordes laterales e inferior de submenu*/
+  border: 1px solid #D12102;	/* bordes laterales e inferior de submenu*/
   border-top: 0 none;
   line-height: 150%;
   padding: 16px 20px;
@@ -101,10 +101,10 @@
   position: relative;
 }
 #cssmenu ul ul li:first-child > a {
-  border-top: 1px solid #095000;	/* borde superior de submenu*/
+  border-top: 1px solid #DF2302;	/* borde superior de submenu*/
 }
 #cssmenu ul ul li:hover > a {
-  background: #4eb1ff;		/*submenu activo*/
+  background: #D78D7F;		/*submenu activo*/
   color: #ffffff;		/*letras de submenu activas*/
 }
 #cssmenu ul ul li:last-child > a {
@@ -115,8 +115,8 @@
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   -moz-box-shadow: 0 1px 0 #1b9bff;
-  -webkit-box-shadow: 0 1px 0 #1b9bff;
-  box-shadow: 0 1px 0 #1b9bff;
+  -webkit-box-shadow: 0 1px 0 #D12102;
+  box-shadow: 0 1px 0 #D12102;
 }
 #cssmenu ul ul li:last-child:hover > a {
   -moz-border-radius: 0 0 0 3px;
@@ -135,7 +135,7 @@
 }
 #cssmenu ul li:hover > a,
 #cssmenu ul li.active > a {
-  background: #0F7601;
+  background: #E84528;
   color: #ffffff;
 }
 #cssmenu ul li.has-sub > a:after {

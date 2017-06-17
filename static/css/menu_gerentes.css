@@ -104,7 +104,7 @@
   border-top: 1px solid #095000;	/* borde superior de submenu*/
 }
 #cssmenu ul ul li:hover > a {
-  background: #4eb1ff;		/*submenu activo*/
+  background: #099C2B;		/*submenu activo*/
   color: #ffffff;		/*letras de submenu activas*/
 }
 #cssmenu ul ul li:last-child > a {
@@ -114,9 +114,9 @@
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -moz-box-shadow: 0 1px 0 #1b9bff;
-  -webkit-box-shadow: 0 1px 0 #1b9bff;
-  box-shadow: 0 1px 0 #1b9bff;
+  -moz-box-shadow: 0 1px 0 #095000;
+  -webkit-box-shadow: 0 1px 0 #95FBAC;
+  box-shadow: 0 1px 0 #95FBAC;
 }
 #cssmenu ul ul li:last-child:hover > a {
   -moz-border-radius: 0 0 0 3px;
