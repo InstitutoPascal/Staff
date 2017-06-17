@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{=T.accepted_language or 'en'}}"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge{{=not request.is_local and ',chrome=1' or ''}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="">
+    <link rel="stylesheet" href="{{=URL('static','css/bootstrap.min.css')}}"/>
+    <link rel="shortcut icon" href="{{=URL('static','images/favicon.ico')}}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{=URL('static','images/favicon.png')}}">
+    <link rel="stylesheet" href="{{=URL('static','css/opcionesPago.css')}}"/>
+    <link rel="stylesheet" href="{{=URL('static','css/menu_gerentes.css')}}"/>
+    <script src="{{=URL('static','js/modernizr-2.8.3.min.js')}}"></script>
+    {{include 'web2py_ajax.html'}} <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
+  </head>
+  <body>
+    <!-- Navbar ======================================= -->
+    <html lang=''>
+            <body style="background-color:#E7E6EE;">
+                <div id='cssmenu'>
+                    <ul>
+                       <li class='active'><a href="{{=URL(c="administradores",f="inicio")}}"><span>SESION</span></a></li>
+                       <li><a href='#'><span>Altas</span></a>
+                            <ul>
+                                <li><a href="#"><span>Usuarios</span></a>
+                                    <ul>
+                                        <li><a href="{{=URL(c="altas",f="alta_administradores")}}"><span>Adimnistradores</span></a></li>
+                                        <li><a href="{{=URL(c="altas",f="alta_tecnicos")}}"><span>Tecnicos</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><span>Costos</span></a>
+                                    <ul>
+                                        <li><a href="{{=URL(c="altas",f="alta_costos_instalaciones")}}"><span>Instalaciones</span></a></li>
+                                        <li><a href="{{=URL(c="altas",f="alta_costos_soportes")}}"><span>Soportes</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{=URL(c="altas",f="alta_planes")}}"><span>Planes</span></a></li>
+                                <li><a href="{{=URL(c="altas",f="alta_nodos")}}"><span>Nodos</span></a></li>
+                                <li><a href="{{=URL(c="altas",f="alta_paneles")}}"><span>Paneles</span></a></li>
+                                <li><a href="{{=URL(c="altas",f="alta_localidad")}}"><span>Localidades</span></a></li>
+                            </ul>
+                       </li>
+                       <li><a href='#'><span>Registros completos</span></a>
+                           <ul>
+                                <li><a href="#"><span>Usuarios</span></a>
+                                    <ul>
+                                        <li><a href="{{=URL(c="altas",f="alta_administradores")}}"><span>Adimnistradores</span></a></li>
+                                        <li><a href="{{=URL(c="altas",f="alta_tecnicos")}}"><span>Tecnicos</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><span>Costos</span></a>
+                                    <ul>
+                                        <li><a href="{{=URL(c="altas",f="alta_costos_instalaciones")}}"><span>Instalaciones</span></a></li>
+                                        <li><a href="{{=URL(c="altas",f="alta_costos_soportes")}}"><span>Soportes</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{=URL(c="altas",f="alta_planes")}}"><span>Planes</span></a></li>
+                                <li><a href="{{=URL(c="altas",f="alta_nodos")}}"><span>Nodos</span></a></li>
+                                <li><a href="{{=URL(c="altas",f="alta_paneles")}}"><span>Paneles</span></a></li>
+                                <li><a href="{{=URL(c="altas",f="alta_localidad")}}"><span>Localidades</span></a></li>
+                            </ul>
+                       </li>
+                       <li><a href='#'><span>Instalaciones</span></a></li>
+                       <li><a href='#'><span>Soportes tecnicos</span></a></li>
+                       <li><a href='#'><span>Mantenimientos</span></a></li>
+                     </ul>
+                 </div>
+            </body>
+        </html>
+        <br>
+        <br>
+        {{block center}}
+        {{include}}
+        {{end}}
+    <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>
+  </body>
+</html>
