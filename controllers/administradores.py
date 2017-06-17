@@ -47,14 +47,6 @@ def clientes_nro_tarjeta():
         i= i+1
     return dict(datos=cliente, cantidad=i)
 
-def tecnicos_dni():
-    #Se debe recibir el dni, desde la vista y devolver el registro.
-    i=0
-    tecnico =db().select(db.tecnicos.ALL)
-    for x in tecnico:
-        i= i+1
-    return dict(datos=tecnico, cantidad=i)
-
 def solicitarSoporte():
     #recibir dni, comparar con los registros y devolver
     i=0
@@ -62,15 +54,6 @@ def solicitarSoporte():
     for x in instalacion:
         i= i+1
     return dict(datos=instalacion, cantidad=i)
-
-def archivarSoporte():
-    #recibir dni, comparar con los registros y devolver
-    i=0
-    instalacion =db().select(db.instalaciones.ALL)
-    for x in instalacion:
-        i= i+1
-    return dict(datos=instalacion, cantidad=i)
-
     
 def clientes_nombre_apellido():
     #Se debe recibir el dni, desde la vista y devolver el registro.
@@ -79,14 +62,6 @@ def clientes_nombre_apellido():
     for x in cliente:
         i= i+1
     return dict(datos=cliente, cantidad=i)
-
-def tecnicos_nombre_apellido():
-    #Se debe recibir el dni, desde la vista y devolver el registro.
-    i=0
-    tecnico =db().select(db.tecnicos.ALL)
-    for x in tecnico:
-        i= i+1
-    return dict(datos=tecnico, cantidad=i)
 
 def clientes_ip():
     #Se debe recibir el dni, desde la vista y devolver el registro.
@@ -126,22 +101,6 @@ def listadoClientes():
          i=i+1
     return dict (datos=datosClientes, cantidad=i)
 
-def listadoLocalidades():
-    datosLocalidades = db().select(db.localidades.ALL)
-    i=0
-    for x in datosLocalidades:
-         i=i+1
-    return dict (datos=datosLocalidades, cantidad=i)
-
-def listadoMantenimientos():
-    datosMantenimiento = db((db.mantenimientos.nodo == db.nodos.id)
-                            &(db.mantenimientos.tecnico_principal == db.tecnicos.id)
-                            &(db.mantenimientos.tecnico_secundario == db.tecnicos.id)).select(db.mantenimientos.ALL,db.nodos.ALL, db.tecnicos.ALL)
-    i=0
-    for x in datosMantenimiento:
-         i=i+1
-    return dict (datos=datosMantenimiento, cantidad=i)
-
 def listadoNodos():
     datosNodos = db(db.nodos.localidad==db.localidades.id).select(db.nodos.ALL, db.localidades.localidad, db.localidades.id)
     i=0
@@ -155,16 +114,6 @@ def listadoPaneles():
     for x in datosPaneles:
          i=i+1
     return dict (datos=datosPaneles, cantidad=i)
-
-def listadoTecnicos():
-    datosTecnicos = db().select(db.tecnicos.ALL)
-    i=0
-    for x in datosTecnicos:
-         i=i+1
-    return dict (datos=datosTecnicos, cantidad=i)
-
-
-
 
 def listadoCostos_instalaciones():
     datosCostos_instalaciones = db().select(db.costos_instalaciones.ALL)
@@ -194,3 +143,10 @@ def listadoPlanes():
     for x in datosPlanes:
          i=i+1
     return dict (datos=datosPlanes, cantidad=i)
+
+def listadoHistoriales():
+    datosHistorial = db().select(db.historiales.ALL)
+    i=0
+    for x in datosHistorial:
+         i=i+1
+    return dict (datos=datosHistorial, cantidad=i)
