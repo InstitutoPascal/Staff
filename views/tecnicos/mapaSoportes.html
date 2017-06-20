@@ -1,0 +1,48 @@
+{{extend 'layout_tecnicos.html'}}
+
+<div class="container col-md-offset-0">
+    <div class="row profile">
+		<div class="col-md-3">
+			<div class="profile-sidebar">
+
+				<div class="profile-userpic">
+					<img src="http://www.repuestosparamotos.co/page/images/user.png" class="img-responsive" alt="">
+				</div>
+
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						TÉCNICO
+					</div>
+					<div class="profile-usertitle-job">
+						Martin Martinez
+					</div>
+				</div>
+
+				<div class="profile-usermenu">
+					<ul class="nav">
+						<li>
+							<a href="{{=URL(c="tecnicos",f="mapaInstalaciones")}}">
+							<i class="glyphicon glyphicon-signal"></i>
+							  Mapa de Instalaciones</a>
+						</li>
+						<li>
+							<a href="{{=URL(c="tecnicos",f="mapaSoportes")}}">
+							<i class="glyphicon glyphicon-wrench"></i>
+							  Mapa de Soportes</a>
+						</li>
+						<li>
+							<a href="#">
+							<i class="glyphicon glyphicon-comment"></i>
+							   Abrir Conversación</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		<div class="col-md-9">
+          <img src="{{=URL('static','images/geo_nodos.jpg')}}" width="1100" height="600"</img>
+            </div>
+		</div>
+	</div>
+</div>
