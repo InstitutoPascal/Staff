@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="{{=URL('static','css/inicioDeSesion.css')}}"/>
+<script src="{{=URL('static','js/inicio_sesion.js')}}"></script>
+<br>
+<br>
+<body style="background-color:#E7E6EE;">
+<div class="container">
+  <div class="card"></div>
+  <div class="card">
+    <center><img src="{{=URL('static','images/logo.png')}}"style="width: 200px; border-radius:43px;"></center>
+    <form>
+        <br>
+        <br>
+      <div class="input-container">
+        <input type="text" id="usuario" required="required"/>
+        <label for="usuario">Usuario</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" id="contraseña" required="required"/>
+        <label for="contraseña">Contraseña</label>
+        <div class="bar"></div>
+      </div>
+      <div class="button-container">
+        <button><span>Iniciar Sesión</span></button>
+      </div>
+    </form>
+</div>
+</div>
+</body>
