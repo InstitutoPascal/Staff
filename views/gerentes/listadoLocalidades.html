@@ -1,0 +1,11 @@
+{{extend 'layout_gerentes.html'}}
+
+<br>
+{{if cantidad > 0:}}
+<table class="table table-hover" class="table table-hover" border="3px">
+    <thead bgcolor= "#366B32" span style="color:#FFFFFF"><tr><th><center>Localidad</center></th><th><center>Codigo Postal</center></th></tr></thead>
+        {{for x in datos: }}
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.localidad}}</center></td><td><center>{{=x.codigo_postal}}</center></td></tr></tbody>
+    {{pass}}
+    </table>
+{{pass}}

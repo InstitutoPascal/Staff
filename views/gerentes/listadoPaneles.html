@@ -1,0 +1,9 @@
+{{extend 'layout_gerentes.html'}}
+
+<br>
+{{if cantidad > 0:}}
+<table class="table table-hover" class="table table-hover" border="3px">
+    <thead bgcolor= "#366B32" span style="color:#FFFFFF"><tr><th><center>Nodo</center></th><th><center>Panel</center></th><th><center>Nombre</center></th><th><center>Equipo</center></th><th><center>Descripción de ubicación</center></th><th><center>AP ST</center></th><th><center>Orientación</center></th><th><center>Frecuencia</center></th><th><center>RX TX</center></th><th><center>SSID</center></th><th><center>Password</center></th></tr></thead>
+        {{for x in datos: }}
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.nodos.nombre}}</center></td> <td><center>{{=x.paneles.panel}}</center></td><td><center>{{=x.paneles.nombre}}</center></td><td><center>{{=x.paneles.equipo}}</center></td><td><center>{{=x.paneles.descripcion_ubicacion}}</center></td><td><center>{{=x.paneles.ap_st}}</center></td><td><center>{{=x.paneles.orientacion}}</center></td><td><center>{{=x.paneles.frecuencia}}</center></td><td><center>{{=x.paneles.rx_tx}}</center></td><td><center>{{=x.paneles.ssid}}</center></td><td><center>{{=x.paneles.password}}</center></td></tr></tbody>{{pass}}</table>
+{{pass}}

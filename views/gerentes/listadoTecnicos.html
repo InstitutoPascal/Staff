@@ -1,0 +1,9 @@
+{{extend 'layout_gerentes.html'}}
+
+<br>
+{{if cantidad > 0:}}
+<table class="table table-hover" border="3px" >
+   <thead bgcolor= "#366B32" span style="color:#FFFFFF"><tr><th><center>Nombre</center></th><th><center>Apellido</center></th><th><center>DNI</center></th><th><center>E-mail</center></th><th><center>Telefono</center></th><th><center>Password</center></th></tr></thead>
+       {{for x in datos: }}
+   <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.nombre}}</center></td><td><center>{{=x.apellido}}</center></td><td><center>{{=x.dni}}</center></td><td><center>{{=x.email}}</center></td><td><center>{{=x.telefono}}</center></td><td><center>{{=x.password}}</center></td></tr></tbody>{{pass}}</table>
+{{pass}}

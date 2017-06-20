@@ -31,7 +31,7 @@
                 <body style="background-color:#E7E6EE;">
                     <div id='cssmenu'>
                         <ul>
-                           <li class='active'><a href="#"><span>SESION</span></a></li>
+                           <li class='active'><a href="{{=URL(c="gerentes",f="inicio")}}"><span>SESION</span></a></li>
                            <li><a href='#'><span>Altas</span></a>
                                 <ul>
                                     <li><a href="#"><span>Usuarios</span></a>
@@ -56,20 +56,20 @@
                                <ul>
                                     <li><a href="#"><span>Usuarios</span></a>
                                         <ul>
-                                            <li><a href="#"><span>Administradores</span></a></li>
-                                            <li><a href="#"><span>Técnicos</span></a></li>
+                                            <li><a href="{{=URL(c="gerentes",f="listadoAdministradores")}}"><span>Administradores</span></a></li>
+                                            <li><a href="{{=URL(c="gerentes",f="listadoTecnicos")}}"><span>Técnicos</span></a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#"><span>Costos</span></a>
                                         <ul>
-                                            <li><a href="#"><span>Instalaciones</span></a></li>
-                                            <li><a href="#"><span>Soportes</span></a></li>
+                                            <li><a href="{{=URL(c="gerentes",f="listadoCostos_instalaciones")}}"><span>Instalaciones</span></a></li>
+                                            <li><a href="{{=URL(c="gerentes",f="listadoCostos_soportes")}}"><span>Soportes</span></a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#"><span>Planes</span></a></li>
-                                    <li><a href="#"><span>Nodos</span></a></li>
-                                    <li><a href="#"><span>Paneles</span></a></li>
-                                    <li><a href="#"><span>Localidades</span></a></li>
+                                    <li><a href="{{=URL(c="gerentes",f="listadoPlanes")}}"><span>Planes</span></a></li>
+                                    <li><a href="{{=URL(c="gerentes",f="listadoNodos")}}"><span>Nodos</span></a></li>
+                                    <li><a href="{{=URL(c="gerentes",f="listadoPaneles")}}"><span>Paneles</span></a></li>
+                                    <li><a href="{{=URL(c="gerentes",f="listadoLocalidades")}}"><span>Localidades</span></a></li>
                                 </ul>
                            </li>
                            <li><a href="{{=URL(c="gerentes",f="estadisticas")}}"><span>Estadísticas</span></a></li>

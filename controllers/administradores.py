@@ -18,6 +18,10 @@ def geolocalizacionNodos():
     d = 4
     return dict(datos=d)
 
+def geolocalizacionClientes():
+    d = 4
+    return dict(datos=d)
+
 def clientesCuenta():
     d = 4
     return dict(datos=d)
