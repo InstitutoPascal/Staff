@@ -55,3 +55,11 @@ def imprimirInstalacion():
 def mantenimientosDetalles():
     d=4
     return dict(datos=d)
+
+def mapaInstalaciones():
+    d=4
+    return dict(datos=d)
+
+def mapaSoportes():
+    d=4
+    return dict(datos=d)

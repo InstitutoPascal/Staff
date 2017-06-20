@@ -1,30 +1,50 @@
 {{extend 'layout_tecnicos.html'}}
 
 
-<section id="login-bg">
-    <div id="login-bg-top">
-        <div class="logo-circle"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                   <font color="white"><h2>BIENVENIDO A</h2> <img src="{{=URL('static','images/logo.png')}}" width="200" height="100"</img></font>
-                </div>
-            </div>
-          </div>
-       </div>
-  <div class="container">
-        <div class="col-md-12">
-            <div class="bg-content">
-                <div>
-                   <font color="white"><h3>TÉCNICO</h3></font>
-                </div>
-                <div>
-                   <font color="white"><h3>Martin Martinez</h3></font>
-                </div>
-                <div class="input-group" style="margin-top: 50px;">
-                  <a href="#" class="btn btn-danger btn-lg">Cerrar Sesión</a>
-                </div>
-            </div>
-        </div>
+<div class="col-md-2">
+    <img class="img-responsive" src="{{=URL('static','images/logo.png')}}"style="width: 200px; border-radius:43px;">
     </div>
-</section>
+<br><br>
+<br><br>
+<div class="container">
+    <div class="row profile">
+		<div class="col-md-4 col-md-offset-3">
+			<div class="profile-sidebar">
+
+				<div class="profile-userpic">
+					<img src="http://www.repuestosparamotos.co/page/images/user.png" class="img-responsive" alt="">
+				</div>
+
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						TÉCNICO
+					</div>
+					<div class="profile-usertitle-job">
+						Martin Martinez
+					</div>
+				</div>
+
+				<div class="profile-userbuttons">
+					<a href="{{=URL(c="default",f="inicioDeSesion")}}" type="button" class="btn btn-danger btn-sm">Cerrar Sesión</a>
+				</div>
+
+				<div class="profile-usermenu">
+					<ul class="nav">
+						<li>
+						    <a href="{{=URL(c="tecnicos",f="mapaInstalaciones")}}">
+							<i class="glyphicon glyphicon-signal"></i>
+							   Mapa de Instalaciones</a>
+						</li>
+						<li>
+							<a href="{{=URL(c="tecnicos",f="mapaSoportes")}}">
+							<i class="glyphicon glyphicon-wrench"></i>
+							   Mapa de Soportes</a>
+						</li>
+						<li>
+							<a href="#">
+							<i class="glyphicon glyphicon-comment"></i>
+							   Abrir Conversación</a>
+						</li>
+					</ul>
+				</div>
+			</div>
