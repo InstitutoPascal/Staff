@@ -1,0 +1,328 @@
+<style type="text/css">
+/* ~~ Selectores de elemento/etiqueta ~~ */
+ul, ol, dl { /* Debido a las diferencias existentes entre los navegadores, es recomendable no añadir relleno ni márgenes en las listas. Para lograr coherencia, puede especificar las cantidades deseadas aquí o en los elementos de lista (LI, DT, DD) que contienen. Recuerde que lo que haga aquí se aplicará en cascada en la lista .nav, a no ser que escriba un selector más específico. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* la eliminación del margen superior resuelve un problema que origina que los márgenes escapen de la etiqueta div contenedora. El margen inferior restante lo mantendrá separado de los elementos de que le sigan. */
+	padding-right: 15px;
+	padding-left: 15px; /* la adición de relleno a los lados del elemento dentro de las divs, en lugar de en las divs propiamente dichas, elimina todas las matemáticas de modelo de cuadro. Una div anidada con relleno lateral también puede usarse como método alternativo. */
+}
+a img { /* este selector elimina el borde azul predeterminado que se muestra en algunos navegadores alrededor de una imagen cuando está rodeada por un vínculo */
+	border: none;
+}
+
+/* ~~ La aplicación de estilo a los vínculos del sitio debe permanecer en este orden (incluido el grupo de selectores que crea el efecto hover -paso por encima-). ~~ */
+a:link {
+	color: #FFFFFF;
+	text-decoration: none; /* a no ser que aplique estilos a los vínculos para que tengan un aspecto muy exclusivo, es recomendable proporcionar subrayados para facilitar una identificación visual rápida */
+}
+a:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usuario que navegue mediante el teclado la misma experiencia de hover (paso por encima) que experimenta un usuario que emplea un ratón. */
+	text-decoration: none;
+}
+
+/* ~~ este contenedor de anchura fija rodea a las demás divs~~ */
+
+.content {
+
+	padding: 10px 0;
+	width: 600px;
+	float: left;
+}
+
+
+/* ~~ Este selector agrupado da espacio a las listas del área de .content ~~ */
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px; /* este relleno reproduce en espejo el relleno derecho de la regla de encabezados y de párrafo incluida más arriba. El relleno se ha colocado en la parte inferior para que el espacio existente entre otros elementos de la lista y a la izquierda cree la sangría. Estos pueden ajustarse como se desee. */
+}
+
+/* ~~ Los estilos de lista de navegación (pueden eliminarse si opta por usar un menú desplegable predefinido como el de Spry) ~~ */
+ul.nav {
+	list-style: none; /* esto elimina el marcador de lista */
+	border-top: 1px solid #666; /* esto crea el borde superior de los vínculos (los demás se sitúan usando un borde inferior en el LI) */
+	margin-bottom: 15px; /* esto crea el espacio entre la navegación en el contenido situado debajo */
+}
+ul.nav li {
+	border-bottom: 1px solid #666; /* esto crea la separación de los botones */
+}
+ul.nav a, ul.nav a:visited { /* al agrupar estos selectores, se asegurará de que los vínculos mantengan el aspecto de botón incluso después de haber sido visitados */
+	padding: 5px 5px 5px 15px;
+	display: block; /* esto asigna propiedades de bloque al vínculo, lo que provoca que llene todo el LI que lo contiene. Esto provoca que toda el área reaccione a un clic de ratón. */
+	width: 160px;  /*esta anchura hace que se pueda hacer clic en todo el botón para IE6. Puede eliminarse si no es necesario proporcionar compatibilidad con IE6. Calcule la anchura adecuada restando el relleno de este vínculo de la anchura del contenedor de barra lateral. */
+	text-decoration: none;
+	background-color: #C6D580;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* esto cambia el color de fondo y del texto tanto para usuarios que naveguen con ratón como para los que lo hagan con teclado */
+	background-color: #ADB96E;
+	color: #FFF;
+}
+
+/* ~~ clases float/clear varias ~~ */
+.fltrt {  /* esta clase puede utilizarse para que un elemento flote en la parte derecha de la página. El elemento flotante debe preceder al elemento junto al que debe aparecer en la página. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* esta clase puede utilizarse para que un elemento flote en la parte izquierda de la página. El elemento flotante debe preceder al elemento junto al que debe aparecer en la página. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* esta clase puede situarse en una <br /> o div vacía como elemento final tras la última div flotante (dentro de #container) si se elimina overflow:hidden en .container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-image: url(http://127.0.0.1:8000/mod/static/images/fon.jpg);
+}
+
+.container {
+	width: 960px;
+	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño */
+}
+.sidebar1 {
+	float: left;
+	width: 180px;
+	padding-bottom: 10px;
+}
+.content {
+
+	padding: 10px 0;
+	width: 600px;
+	float: left;
+
+}
+
+@import url(http://fonts.googleapis.com/css?family=Cuprum:400,700);
+
+.mainmenu { color: #FFFFFF; font-size: 18px;font-family: 'Cuprum', Georgia, "Times New Roman", Times, Serif; background: #07819A; width: 104%; height: 51px; text-shadow: 0 1px0 #000;}
+
+.mainmenu ul {margin: 0; padding: 0; }
+.mainmenu li i { position: absolute; margin-left: -35px; margin-top: 6px; color: #fff;  text-shadow: 0 1px 0 #FFF;}
+.mainmenu li { float: left; display: block; padding: 10px 10px 10px 50px; border-right: 1px solid #fff; cursor: pointer; min-width: 100px; max-width: 100px; }
+
+.mainmenu li:hover { background: #ED7D34; }
+.mainmenu li:hover i {color: #012; text-shadow: 0 1px 0 #000;}
+.mainmenu li main {font-weight: 700; margin-top: -18px; }
+.mainmenu li desc { position: relative; float: left; font-size: 11px; color: #888; }
+
+.mainmenu li, .mainmenu li i, .mainmenu li main, .mainmenu li desc {
+    -moz-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+    -webkit-transition: all 0.8s ease-in-out;}
+
+.mainmenu li:hover main { margin-left: 10px; 
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;}
+.mainmenu li:hover desc { margin-left: 30px; 
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;}
+.pruebatexto {
+	font-family: "Arial Black", Gadget, sans-serif;
+	font-size: 500%;
+	font-style: normal;
+	text-transform: none;
+	line-height: normal;
+	font-weight: bolder;
+	font-variant: normal;
+}
+
+.logo {
+	text-align: left;
+	position: static;
+}
+.mapa {
+	margin: 5px;
+	border-top-style: double;
+	border-right-style: double;
+	border-bottom-style: double;
+	border-left-style: double;
+	border-top-color: #333;
+	border-right-color: #333;
+	border-bottom-color: #333;
+	border-left-color: #333;
+}
+#slideshow  {
+	margin: 0%;
+	position: relative;
+	width: 960px;
+	height: 610px;
+	box-shadow: 0 0 20px rgba(0,0,,0,.4);
+	top: 0px;
+	left: 10px;
+	text-align: center;
+	background-color: #A75A12;
+}
+
+#slideshow > div {
+	position: absolute;
+	top: 5px;
+	left::15px;
+	right: 0x;
+	bottom::0px;
+    width: 930;
+    padding-left:5px;
+}
+.tabla {
+	width: 300px;
+	margin: 0;
+	padding-left:0px;
+}
+.tabla img:hover { 
+	-webkit-transform: scale(1.2);
+  	-moz-transform: scale(1.2);
+  	-o-transform: scale(1.2);
+  	-moz-box-shadow:3px 5px 7px rgba(0,0,0,.7);
+  	-webkit-box-shadow: 3px 5px 7px rgba(0,0,0,.7);
+  	box-shadow:3px 5px 7px rgba(0,0,0,.7);
+    cursor: pointer;
+}
+.taxto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	font-style: italic;
+	line-height: normal;
+	color: #030303;
+	text-align: justify;
+	height: 0px;
+	right: 1024px;
+	left: 500px;
+}
+
+    .zoom{
+	/* Aumentamos la anchura y altura durante 2 segundos */
+	transition: width 2s, height 2s, transform 2s;
+	-moz-transition: width 2s, height 2s, -moz-transform 2s;
+	-webkit-transition: width 2s, height 2s, -webkit-transform 2s;
+	-o-transition: width 2s, height 2s,-o-transform 2s;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #001E40;
+	border-right-color: #001E40;
+	border-bottom-color: #001E40;
+	border-left-color: #001E40;
+	position: relative;
+	left: 0px;
+	top: auto;
+    }
+    .zoom:hover{
+        /* tranformamos el elemento al pasar el mouse por encima al doble de
+           su tamaño con scale(2). */
+        transform : scale(2);
+        -moz-transform : scale(2);      /* Firefox */
+        -webkit-transform : scale(2);   /* Chrome - Safari */
+        -o-transform : scale(2);        /* Opera */
+    }
+
+.texto_blanco {
+	font-family: "Courier New", Courier, monospace;
+	color: #FFF;
+	font-size: 18px;
+	font-weight: bolder;
+	text-transform: capitalize;
+}
+.texto_rojo {
+	color: #F30;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 36px;
+	font-weight: bold;
+}
+.texto_negro {
+	color: #030303;
+	font-size: 16px;
+	font-family: "Courier New", Courier, monospace;
+	text-transform: capitalize;
+	font-weight: bold;
+}
+
+
+.pricing_table img:hover { 
+	-webkit-transform: scale(1.1);
+  	-moz-transform: scale(1.1);
+  	-o-transform: scale(1.1);
+  	-moz-box-shadow:3px 5px 7px rgba(0,0,0,.7);
+  	-webkit-box-shadow: 3px 5px 7px rgba(0,0,0,.7);
+  	box-shadow:3px 5px 7px rgba(0,0,0,.7);
+    cursor: pointer;
+}
+
+.pricing_table tr td {  
+	border-bottom:1px dashed #cfd2d2;
+	padding:10px 0;
+}
+
+
+
+.elige {
+	font-size: 60px;
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bolder;
+	font-variant: small-caps;
+	text-transform: none;
+	font-style: normal;
+	line-height: normal;
+	color: #2D2D2D;
+	text-decoration: underline;
+}
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+<script>
+$("slideshow > div:gt(0)").hide();
+
+setInterval (function() {
+	$('#slideshow > div:first')
+		.fadeOut(1000)
+		.next(4000)
+		.fadeIn(1000)
+		.end()
+		.appendTo('#slideshow')
+}, 6000); 
+</script>
+
+
+</head>
+  <body>
+  <div class="sidebar1">
+  <img src="http://127.0.0.1:8000/mod/static/_2.14.6/images/logo.png" width="400" height="200" alt="logo" />
+<!-- end .sidebar1 --></div>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+ <div class="container">
+
+ <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+<div class="mainmenu">
+  <ul>
+      <li><i class="icon-home icon-large"></i><a href="{{=URL(c="clientes",f="inicio")}}">&nbsp;<main>Inicio</main></li></a>
+      <li><i class="icon-tint icon-large"></i><a href="{{=URL(c="clientes",f="listadoPlanes")}}">&nbsp;<main>Planes</main></li></a>
+      <li><i class="icon-comments icon-large"></i><a href="{{=URL(c="clientes",f="consulta")}}">&nbsp;<main>Contacto</main></li></a>
+  </ul>
+</div>
+<div class="container">
+        {{block center}}
+        {{include}}
+        {{end}}
+
+      </div>
+
+<!-- Begin page content -->
