@@ -89,10 +89,41 @@ def registrarDescuento():
         i= i+1
     return dict(datos=cliente, cantidad=i)
 
+
+def editar_instalacion():
+    id_instalacion = request.args[0]                                           # obtengo el primer argumento (ver URL)
+    solicitud =  db(db.instalaciones.id == id_instalacion).select().first()    # busco el registro en la bbdd
+    form=SQLFORM(db.instalaciones, solicitud)                                  # armo el formulario para modificar este registro:
+    if form.accepts(request.vars, session):
+        session.flash = 'Formulario correctamente cargado'
+        redirect(URL(c="consultas", f="listado_clientes"))
+    elif form.errors:
+		response.flash = 'Su formulario contiene errores, porfavor modifiquelo'
+    else: 
+		response.flash = 'Por favor rellene el formulario'
+    return dict(f=form)
+
+
+def editar_soporte():
+    id_soporte = request.args[0]                                                # obtengo el primer argumento (ver URL)
+    solicitud =  db(db.soportes_tecnicos.id == id_soporte).select().first()     # busco el registro en la bbdd
+    form=SQLFORM(db.soportes_tecnicos, solicitud)                               # armo el formulario para modificar este registro:
+    if form.accepts(request.vars, session):
+        session.flash = 'Formulario correctamente cargado'
+        redirect(URL(c="consultas", f="listado_clientes"))
+    elif form.errors:
+		response.flash = 'Su formulario contiene errores, porfavor modifiquelo'
+    else:
+		response.flash = 'Por favor rellene el formulario'
+    return dict(f=form)
+
+
+
+
 ################################################### < LISTADOS > ########################################################################
 
 def listadoSoportes():
-    datosSoportes = db((db.soportes_tecnicos.tecnico_asignado==db.tecnicos.id)|(db.soportes_tecnicos.tecnico_asignado == None) & (db.soportes_tecnicos.cliente==db.clientes.id)).select(db.soportes_tecnicos.ALL, db.tecnicos.ALL, db.clientes.ALL)
+    datosSoportes = db((db.soportes_tecnicos.tecnico_asignado==db.tecnicos.id) & (db.soportes_tecnicos.cliente==db.clientes.id)).select(db.soportes_tecnicos.ALL, db.tecnicos.ALL, db.clientes.ALL)
     i=0
     for x in datosSoportes:
          i=i+1

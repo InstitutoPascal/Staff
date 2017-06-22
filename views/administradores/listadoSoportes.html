@@ -1,28 +1,42 @@
 {{extend 'layout_admin.html'}}
 
-<br><br>
+<br>
 
 
-<select name="OS">
-   <option selected value="0"> Filtrar </option>
-       <optgroup label="Tecnico"> 
-           <option value="1">Tecnico1</option> 
-           <option value="2">Tecnico2</option> 
-           <option value="3">Tecnico3</option> 
-   </optgroup> 
-    <optgroup label="Estado"> 
-       <option value="10">Pendientes</option> 
-       <option value="11">Finalizados</option> 
-   </optgroup> 
-</select>
+{{if cantidad > 0:}}
+
+<div class="col-md-2">
+    <select name="tecnico" class="form-control">
+        <option selected value="0"> Tecnicos </option>
+        <option value="10">Tecnico1</option> 
+        <option value="11">Tecnico2</option> 
+        <option value="12">Tecnico3</option> 
+    </select>
+</div>
+
+<div class="col-md-2">
+        <input type="date" class="form-control" id="date" name="date">
+</div>
+
+<div class="col-md-2">
+    <select name="estado" class="form-control">
+        <option selected value="0"> Estado </option>
+        <option value="10">Pendientes</option> 
+        <option value="11">Finalizados</option>  
+    </select>
+</div>
+
 
 <br></br>
+<br></br>
+
 
 <table class="table table-hover" border="3px" >
-    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Cliente</center></th><th><center>Problematica</center></th><th><center>Tecnico asignado</center></th><th><center>Fecha estimada</center></th><th><center>Estado</center><th><center>Editar</center></th><th><center>Borrar</center></th></tr></thead>
+    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Cliente</center></th><th><center>Problematica</center></th><th><center>Tecnico asignado</center></th><th><center>Fecha estimada</center></th><th><center>Estado</center><th><center>Editar</center></th></tr></thead>
+    {{for x in datos: }}
     <tbody style="background-color:#FFFFFF;">
-        <tr><td><center>Emanuel Carabajal</center></td> <td><center>No anda nada</center></td><td><center>David Gonzalez</center></td><td><center>24/10/1997</center></td><td><center>Finalizado</center></td><td><center><span class="glyphicon glyphicon-pencil"></span></center></td><td><center><span class="glyphicon glyphicon-trash"></span></center></td></tr>
-        <tr><td><center>Agustin Marichal</center></td> <td><center>No tiene conexion</center></td><td><center>sin asignar</center></td><td><center>sin asignar</center></td><td><center>Pendiente</center></td><td><center><span class="glyphicon glyphicon-pencil"></span></center></td><td><center><span class="glyphicon glyphicon-trash"></span></center></td></tr>
-     </tbody></table>
+        <tr><td><center>{{=x.clientes.nombre}}</center></td> <td><center>{{=x.soportes_tecnicos.problematica}}</center></td><td><center>{{=x.tecnicos.nombre}}</center></td><td><center>{{=x.soportes_tecnicos.fecha_estimada}}</center></td><td><center>{{=x.soportes_tecnicos.estado}}</center></td><td><center><A href="{{=URL(c='administradores', f='editar_soporte', args=(x.soportes_tecnicos.id, ))}}"><i class="glyphicon glyphicon-pencil"></i></A></center></td></tr>
+     </tbody>{{pass}}</table>
 
 <a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
+{{pass}}
