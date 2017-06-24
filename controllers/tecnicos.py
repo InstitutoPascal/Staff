@@ -5,7 +5,7 @@ def inicio():
     d = 4
     return dict(datos=d)
 
-def nuevoCliente():
+def busquedaInstalacion():
     d = 4
     return dict(datos=d)
 
