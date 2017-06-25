@@ -15,6 +15,14 @@ def listadoPlanes():
          i=i+1
     return dict (datos=datosPlanes, cantidad=i)
 
+def cobertura():
+    d = 4
+    return dict(datos=d)
+
+def tipoInstalacion():
+    d = 4
+    return dict(datos=d)
+
 def descripcionPlan():
     d = 4
     return dict(datos=d)
