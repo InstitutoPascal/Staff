@@ -1,40 +1,39 @@
-{{extend 'layout.html'}}
-<h1>Descripcion del plan</h1>
-
-<table style="height: 617px; border-color: #d72f2f; margin-left: auto; margin-right: auto;" border="6" width="810" cellspacing="5" cellpadding="5"><caption>&nbsp;</caption>
-<tbody>
-<tr>
-<td style="text-align: center;" colspan="3">
-<h1>DESCRIPCION</h1>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>FINAL POR MES</p>
-<p>&nbsp;</p>
-    <p><strong><button class="btn btn-default" type="#" >$ 200.00</button>
-</strong></p>
-</td>
-<td style="text-align: center;">
-<p>&nbsp;</p>
-<p>TIPO DE INSTALACION</p>
-<p>&nbsp;</p>
-<p><strong><button class="btn btn-default" type="#" >Con router: $ 500.00</button></strong></p>
-<p><strong><button class="btn btn-default" type="#" >Sin router: $ 100.00</button></strong></p>
-</td>
-<td style="text-align: center;">
-<p>&nbsp; &nbsp; &nbsp;</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; MEGAS &nbsp; &nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp;</p>
-<p><strong><button class="btn btn-default" type="#" >1 Mega &nbsp;</button></strong></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;" colspan="3">
-     <a href="{{=URL(c="clientes",f="datosUbicacion")}}" class="btn btn-primary btn-sm" role="button">Contratar online</a>
-     <a href="{{=URL(c="altas",f="alta_cliente")}}" class="btn btn-primary btn-sm" role="button">Contactarme</a></td>
-</tr>
-</tbody>
+{{extend 'layout_clientes.html'}}
+<body>
+    </br>
+<center>
+<div class="pricing_table" id="tabla">
+<table width="960" border="0" align="center" cellpadding="0" cellspacing="2">
+  <tr>
+    <th colspan="4" align="center" valign="baseline" nowrap="nowrap" bgcolor="#2D2D2D" class="texto_blanco"><p>&nbsp;</p><h1>
+     Descripción del plan</h1></th>
+    </tr>
+  <tr>
+    <td align="center" nowrap="nowrap" bgcolor="#EEEEEE" class="texto_rojo"><p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p><span class="texto_negro">Final por mes</span></p>
+      <p>$200</p>
+      <p>&nbsp;</p>      <p>&nbsp;</p></td>
+    <td colspan="2" align="center" nowrap="nowrap" bgcolor="#EEEEEE" class="texto_rojo"><p>&nbsp;</p>
+      <p><span class="texto_negro">Instalación con router wifi</span></p>
+      <p>$1600</p>
+      <p>&nbsp;</p>
+      <p><span class="texto_negro">Instalación sin router wifi</span></p>
+      <p>$1000</p>
+      <p>&nbsp;</p></td>
+    <td align="center" nowrap="nowrap" bgcolor="#EEEEEE" class="texto_rojo"><p>&nbsp;</p>
+      <p><span class="texto_negro">velocidad de bajada</span>
+      <p>1Mbps</p>
+      <p>&nbsp;</p>
+      <p><span class="texto_negro">Velocidad de subida</span></p>
+      <p>512Kbps</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td colspan="4" align="center" valign="bottom" nowrap="nowrap" bgcolor="#EEEEEE" class="texto_negro"><a href="{{=URL(c="clientes",f="tipoInstalacion")}}" ><img src="http://127.0.0.1:8000/mod/static/_2.14.6/images/contratar.png" width="200" height="50" alt="cont"/></a>
+    </tr>
 </table>
+ </br> </br>
+</div>
+</center>
+</body>
