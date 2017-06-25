@@ -23,6 +23,14 @@ def descripcionPlan2():
     d = 4
     return dict(datos=d)
 
+def descripcionPlan3():
+    d = 4
+    return dict(datos=d)
+
+def descripcionPlan4():
+    d = 4
+    return dict(datos=d)
+
 def datosUbicacion():
     d = 4
     return dict(datos=d)
