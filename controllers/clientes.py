@@ -56,6 +56,6 @@ def consulta():
     d=4
     return dict(datos=d)
 
-def cierreFomulario():
+def cierreFormulario():
     d=4
     return dict(datos=d)
