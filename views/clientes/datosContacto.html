@@ -114,16 +114,18 @@
     </br>
 <div class="form-style-5">
 <form>
-<center><img src="http://127.0.0.1:8000/mod/static/_2.14.6/images/contacto.png" width="200" height="200" alt="logo" /></center>
+<center><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contacto.png" width="200" height="200" alt="logo" /></center>
 <fieldset>
-<legend><span class="number">3</span>Contacto</legend>
+<legend><span class="number">4</span>Contacto</legend>
 <input type="text" name="field1" placeholder="Telefono">(opcional)
 <input type="text" name="field2" placeholder="Telefono 2">(opcional)
 <input type="text" name="field3" placeholder="Telefono 3">
 <input type="email" name="field3" placeholder="Email: ejemplo@gmail.com" required>
 </select>
 </fieldset>
-<a href="{{=URL(c="clientes",f="descripcionPlan")}}" role="button">Siguiente</a>
+<a href="{{=URL(c="clientes",f="cierreFomulario")}}" role="button">Siguiente</a>
+    </br>
+<a href="{{=URL(c="clientes",f="datosPersonales")}}" role="button">Atras</a>
 </form>
 </div>
 </body>
