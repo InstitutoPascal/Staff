@@ -448,6 +448,7 @@
 'Seleccione problematica': 'Seleccione problematica',
 'Seleccione rol': 'Seleccione rol',
 'Seleccione tecnico': 'Seleccione tecnico',
+'Seleccione unidad': 'Seleccione unidad',
 'Seleccione usuario': 'Seleccione usuario',
 'Seleccione velocidad': 'Seleccione velocidad',
 'Semantic': 'Semántica',

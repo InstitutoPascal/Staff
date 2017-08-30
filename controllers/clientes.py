@@ -16,12 +16,13 @@ def listadoPlanes():
     return dict (datos=datosPlanes, cantidad=i)
 
 def cobertura():
-    d = 4
-    return dict(datos=d)
+    return dict()
 
 def tipoInstalacion():
-    d = 4
-    return dict(datos=d)
+    if request.vars.seleccion:
+        session.tipo_inst = request.vars.seleccion
+        redirect(URL(c="clientes",f="datosUbicacion"))
+    return {}
 
 def descripcionPlan():
     d = 4
@@ -40,8 +41,14 @@ def descripcionPlan4():
     return dict(datos=d)
 
 def datosUbicacion():
-    d = 4
-    return dict(datos=d)
+    if request.vars.localidad:
+        session.localidad = request.vars.localidad
+        session.direccion = request.vars.direccion
+        session.num_calle = request.vars.num_calle
+        session.entre_calle1 = request.vars.entre_calle_1
+        session.entre_calle2 = request.vars.entre_calle_2
+        redirect(URL(c="clientes",f="datosPersonales"))
+    return {}
 
 
 def datosPersonales():

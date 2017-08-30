@@ -112,23 +112,23 @@
 <body>
     </br>
 <div class="form-style-5">
-<center><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contacto.png" width="200" height="200" alt="logo" /></center>
+<center><img src="{{=URL('static','images/contacto.png')}}" width="200" height="200" alt="logo" /></center>
 <form>
 <fieldset>
 <legend><span class="number">2</span>Ubicacion</legend>
 <label for="job">Localidad:</label>
-<select id="job" name="field1">
+<select id="job" name="localidad">
 <optgroup label="Localidades">
   <option value="laferrere">Gregorio Laferrere</option>
   <option value="catan">Gonzalez Catan</option>
   <option value="casanova">Isidro Casanova</option>
-<input type="text" name="field2" placeholder="Calle">
-<input type="text" name="field3" placeholder="Numero de calle">
-<input type="text" name="field4" placeholder="Entre calle 1">
-<input type="text" name="field5" placeholder="Entre calle 2">
+<input type="text" name="direccion" placeholder="Direccion">
+<input type="text" name="num_calle" placeholder="Numero de calle">
+<input type="text" name="entre_calle_1" placeholder="Entre calle 1">
+<input type="text" name="entre_calle_2" placeholder="Entre calle 2">
 </select>
 </fieldset>
-<a href="{{=URL(c="clientes",f="datosPersonales")}}" role="button">Siguiente</a>
+<input type="submit" value="Siguiente">
   </br>
  <a href="{{=URL(c="clientes",f="tipoInstalacion")}}" role="button">Atras</a>
 </form>

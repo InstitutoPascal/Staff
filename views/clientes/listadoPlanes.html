@@ -1,61 +1,46 @@
 {{extend 'layout_clientes.html'}}
 <body>
     </br>
+ {{datos = db().select(db.planes.ALL)}}
 <div class="pricing_table" id="tabla">
-<table width="960" border="0" align="center" cellpadding="0" cellspacing="2">
+<table width="960" border="0"  cellpadding="0" cellspacing="2">
   <tr>
-    <td align="center" nowrap="nowrap" bgcolor="#2D2D2D" class="texto_blanco"><p>Plan internet 1 Mega</p></td>
-    <td align="center" nowrap="nowrap" bgcolor="#2D2D2D" class="texto_blanco"><p>Plan internet 2 Mega</p></td>
-    <td align="center" nowrap="nowrap" bgcolor="#2D2D2D" class="texto_blanco"><p>Plan internet 3 Mega</p></td>
-    <td align="center" nowrap="nowrap" bgcolor="#2D2D2D" class="texto_blanco"><p>Plan internet 5 Mega</p></td>
+      {{for x in datos:}}
+    <td align="center" nowrap="nowrap" bgcolor="#2D2D2D" class="texto_blanco"><p>Plan internet {{=x.velocidad_de_bajada}} Mega</p></td>
+        {{pass}}
   </tr>
   <tr>
-    <td align="center" bgcolor="#FFFFFF" class="texto_rojo"><p>$200</p>
-        <p><a href="{{=URL(c="clientes",f="descripcionPlan")}}" ><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contratar.png" width="200" height="50" alt="cont"/></a></p></td>
-    <td align="center" bgcolor="#FFFFFF" class="texto_rojo"><p>$300</p>
-        <p><a href="{{=URL(c="clientes",f="descripcionPlan2")}}" ><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contratar.png" width="200" height="50" alt="cont" /></a></p></td>
-    <td align="center" bgcolor="#FFFFFF" class="texto_rojo"><p>$400</p>
-        <p><a href="{{=URL(c="clientes",f="descripcionPlan3")}}" ><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contratar.png" width="200" height="50" alt="cont" /></a></p></td>
-    <td align="center" bgcolor="#FFFFFF" class="texto_rojo"><p>$600</p>
-        <p><a href="{{=URL(c="clientes",f="descripcionPlan4")}}" ><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contratar.png" width="200" height="50" alt="cont" /></a></p></td>
+      {{for x in datos:}}
+    <td align="center" bgcolor="#FFFFFF" class="texto_rojo"><p>$ {{=x.precio}}</p>
+        <p><a href="{{=URL(c="clientes",f="descripcionPlan")}}" ><img src="{{=URL('static','images/contratar.png')}}" width="200" height="50" alt="cont"/></a></p></td>
+      {{pass}}
   </tr>
   <tr>
-    <td align="center" valign="bottom" nowrap="nowrap" bgcolor="#FFFFFF"><p><span class="texto_negro">1 mbps</span></p>
+      {{for x in datos:}}
+    <td align="center" valign="bottom" nowrap="nowrap" bgcolor="#FFFFFF"><p><span class="texto_negro">{{=x.velocidad_de_bajada}} {{=x.unidad_de_bajada}}</span></p>
       <p><span class="texto_negro">velocidad de bajada</span></p></td>
-    <td align="center" valign="bottom" bgcolor="#FFFFFF"><p><span class="texto_negro">2 mbps</span></p>
-      <p><span class="texto_negro">velocidad de bajada</span></p></td>
-    <td align="center" valign="bottom" bgcolor="#FFFFFF"><p><span class="texto_negro">3 mbps</span></p>
-      <p><span class="texto_negro">velocidad de bajada</span></p></td>
-    <td align="center" valign="bottom" bgcolor="#FFFFFF"><p><span class="texto_negro">5 mbps</span></p>
-      <p><span class="texto_negro">velocidad de bajada</span></p></td>
+      {{pass}}
   </tr>
   <tr>
-    <td align="center" valign="bottom" nowrap="nowrap" bgcolor="#E6E6E6"><p><span class="texto_negro">512 Kbps</span></p>
+      {{for x in datos:}}
+    <td align="center" valign="bottom" nowrap="nowrap" bgcolor="#E6E6E6"><p><span class="texto_negro">{{=x.velocidad_de_subida}} {{=x.unidad_de_subida}}</span></p>
       <p><span class="texto_negro">Velocidad de subida</span></p></td>
-    <td align="center" valign="bottom" bgcolor="#E6E6E6"><p><span class="texto_negro">1 Mbps </span></p>
-      <p><span class="texto_negro">Velocidad de subida</span></p></td>
-    <td align="center" valign="bottom" bgcolor="#E6E6E6"><p><span class="texto_negro">1.5 Mbps</span></p>
-      <span class="texto_negro">      Velocidad de subida</span></td>
-    <td align="center" valign="bottom" bgcolor="#E6E6E6"><p><span class="texto_negro">2 Mbps</span></p>
-      <p><span class="texto_negro">Velocidad de subida</span></p></td>
+      {{pass}}
   </tr>
   <tr>
+      {{for x in datos:}}
     <td align="center" valign="bottom" nowrap="nowrap" bgcolor="#FFFFFF"><p><span class="texto_negro">Incluye Wi-fi</span></p></td>
-    <td align="center" valign="bottom" bgcolor="#FFFFFF"><p><span class="texto_negro">Incluye Wi-fi</span></p></td>
-    <td align="center" valign="bottom" bgcolor="#FFFFFF"><p><span class="texto_negro">Incluye Wi-fi</span></p></td>
-    <td align="center" valign="bottom" bgcolor="#FFFFFF"><p><span class="texto_negro">Incluye Wi-fi</span></p></td>
+      {{pass}}
   </tr>
   <tr>
+      {{for x in datos:}}
     <td align="center" valign="bottom" nowrap="nowrap" bgcolor="#E6E6E6"><p><span class="texto_negro">Soporte Técnico</span></p></td>
-    <td align="center" valign="bottom" bgcolor="#E6E6E6"><p class="texto_negro">Soporte Técnico</p></td>
-    <td align="center" valign="bottom" bgcolor="#E6E6E6"><p class="texto_negro">Soporte Técnico</p></td>
-    <td align="center" valign="bottom" bgcolor="#E6E6E6"><p class="texto_negro">Soporte Técnico</p></td>
+      {{pass}}
   </tr>
   <tr>
+      {{for x in datos:}}
     <td align="center" valign="bottom" nowrap="nowrap" bgcolor="#FFFFFF" class="texto_negro"><p>Antivirus y antispam</p></td>
-    <td align="center" valign="bottom" bgcolor="#FFFFFF"><p class="texto_negro">Antivirus y antispam</p></td>
-    <td align="center" valign="bottom" bgcolor="#FFFFFF"><p class="texto_negro">Antivirus y antispam</p></td>
-    <td align="center" valign="bottom" bgcolor="#FFFFFF"><p class="texto_negro">Antivirus y antispam</p></td>
+      {{pass}}
   </tr>
 </table>
      </br> </br>
