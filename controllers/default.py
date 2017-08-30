@@ -62,3 +62,13 @@ def call():
 def inicioDeSesion():
     d = 4
     return dict(datos=d)
+
+def alta_gerentes():
+    form = SQLFORM(db.gerentes)
+    if form.accepts(request.vars, session):
+        response.flash = 'Formulario aceptado'
+    elif form.errors:
+        response.flash = 'El formulario tiene errores'
+    else:
+        response.flash = 'Complete el formulario'
+    return dict(f=form)
