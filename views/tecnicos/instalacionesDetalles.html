@@ -1,0 +1,29 @@
+{{extend 'layout_tecnicos.html'}}
+
+<br>
+<div class="container">
+    <div class="row">
+  <div class="col-md-6 col-md-offset-3">
+<div class="panel panel-danger">
+  <div class="panel-heading"><center>Detalles sobre la solicitud</center></div>
+  <table class="table">
+    {{for x in datos: }}
+      <tbody>
+          <tr><td><strong>Nombre y apellido:   </strong>{{=x.instalaciones.nombre}} {{=x.instalaciones.apellido}}</td></tr>
+          <tr><td><strong>Dni:   </strong>{{=x.instalaciones.dni}}</td></tr>
+          <tr><td><strong>Dirección:    </strong>{{=x.instalaciones.direccion}} {{=x.instalaciones.numero_de_calle}}</td></tr>
+          <tr><td><strong>Entre las calles:   </strong>{{=x.instalaciones.entre_calle_1}} Y {{=x.instalaciones.entre_calle_2}}</td></tr>
+          <tr><td><strong>Localidad:   </strong>{{=x.localidades.localidad}}</td></tr>
+          <tr><td><strong>Télefono:   </strong>{{=x.instalaciones.telefono}}</td></tr>
+          <tr><td><strong>Télefono alternativo:   </strong>{{=x.instalaciones.telefono_alternativo}}</td></tr>
+          <tr><td><strong>Correo eléctronico:  </strong>{{=x.instalaciones.correo_electronico}}</td></tr>
+          <tr><td><strong>Tipo de plan:   </strong>{{=x.planes.velocidad_de_bajada}} Mb</td></tr>
+          <tr><td><strong>Costo de instalacion:   </strong>$ {{=x.costos_instalaciones.precio}} ( {{=x.costos_instalaciones.descripcion}} )</td></tr>
+          <tr><td><strong>Fecha de instalacion:   </strong>{{=x.instalaciones.fecha_estimada}}</td></tr>
+      </tbody>
+      {{pass}}
+      </table>
+</div>
+</div>
+</div>
+</div>
