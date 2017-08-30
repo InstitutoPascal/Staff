@@ -1,104 +1,22 @@
 {{extend 'layout_tecnicos.html'}}
 
 <br>
+
+{{if cantidad > 0:}}
+
+<br>
 <head>
     <title>Instalaciones</title>
 </head>
 
+
 <table class="table table-hover" border="3px" >
-    <thead bgcolor= "#BC4141" span style="color:#FFFFFF"><tr><th><center>Solicitante</center></th><th><center>Localidad</center></th><th><center>Telefono</center><th><center>Plan</center><th><center>Costo de instalacion</center></th><th><center>Fecha estimada</center></th><th><center>Imprimir</center></th></tr></thead>
-    <tbody style="background-color:#FFFFFF;">
-        <tr><td><center>Emanuel Carabajal</center></td>
-            <td><center>Isidro Casanova</center></td>
-            <td><center>46945419</center></td>
-            <td><center>1 Mb</center></td>
-            <td><center>$ 100.0 (con router)</center></td>
-            <td><center>24/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></tr>
-        <tr><td><center>Mariano Diaz</center></td>
-            <td><center>Gonzalez Catán</center></td>
-            <td><center>11234565</center></td>
-            <td><center>6 Mb</center></td>
-            <td><center>$ 20.0 (Sin router)</center></td>
-            <td><center>27/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Lucas Suarez</center></td>
-            <td><center>Ciudad Evita</center></td>
-            <td><center>46942268</center></td>
-            <td><center>1 Mb</center></td>
-            <td><center>$ 100.0 (Con router)</center></td>
-            <td><center>21/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Sebastian Dominguez</center></td>
-            <td><center>Laferrere</center></td>
-            <td><center>1129897849</center></td>
-            <td><center>4 Mb</center></td>
-            <td><center>$ 100.0 (Con router)</center></td>
-            <td><center>27/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Walter Ramirez</center></td>
-            <td><center>Laferrere</center></td>
-            <td><center>1145656786</center></td>
-            <td><center>6 Mb</center></td>
-            <td><center>$ 20.0 (Sin router)</center></td>
-            <td><center>21/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Agustin Marichal</center></td>
-            <td><center>Ciudad Evita</center></td>
-            <td><center>1165746578</center></td>
-            <td><center>6 Mb</center></td>
-            <td><center>$ 20.0 (Sin router)</center></td>
-            <td><center>27/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Leandro Mendoza</center></td>
-            <td><center>Laferrere</center></td>
-            <td><center>46954456</center></td>
-            <td><center>2 Mb</center></td>
-            <td><center>$ 20.0 (Sin router)</center></td>
-            <td><center>27/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Lautaro Benitez</center></td>
-            <td><center>Gonzalez Catán</center></td>
-            <td><center>46985743</center></td>
-            <td><center>3 Mb</center></td>
-            <td><center>$ 100.0 (Con router)</center></td>
-            <td><center>21/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Claudio Lopez</center></td>
-            <td><center>Isidro Casanova</center></td>
-            <td><center>46987765</center></td>
-            <td><center>2 Mb</center></td>
-            <td><center>$ 100.0 (Conn router)</center></td>
-            <td><center>24/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Pablo perez</center></td>
-            <td><center>Laferrere</center></td>
-            <td><center>1138234098</center></td>
-            <td><center>2 Mb</center></td>
-            <td><center>$ 100.0 (Conn router)</center></td>
-            <td><center>01/08/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>David Gonzalez</center></td>
-            <td><center>Ciudad Evita</center></td>
-            <td><center>46956677</center></td>
-            <td><center>2 Mb</center></td>
-            <td><center>$ 100.0 (Con router)</center></td>
-            <td><center>10/07/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Lucas Romero</center></td>
-            <td><center>Laferrere</center></td>
-            <td><center>46987658</center></td>
-            <td><center>1 Mb</center></td>
-            <td><center>$ 100.0 (Con router)</center></td>
-            <td><center>03/07/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-        <tr><td><center>Cristian Gonzalez</center></td>
-            <td><center>Isidro Casanova</center></td>
-            <td><center>11234543</center></td>
-            <td><center>4 Mb</center></td>
-            <td><center>$ 100.0 (Sin router)</center></td>
-            <td><center>30/06/2017</center></td>
-            <td><center><a href="{{=URL(c="tecnicos",f="imprimirInstalacion")}}" target="_blank"><i class="glyphicon glyphicon-paste"></i></a></center></td></tr>
-     </tbody></table>
-</div>
-      </div>
+    <thead bgcolor= "#BC4141" span style="color:#FFFFFF"><tr><th><center>Solicitante</center></th><th><center>Direccion</center></th><th><center>Localidad</center></th><th><center>Fecha</center></th><th><center>Ver ubicacion</center></th><th><center>Ver detalles</center></th><th><center>Agregar cliente</center></th></tr></thead>
+        {{for x in datos: }}
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.instalaciones.nombre}} {{=x.instalaciones.apellido}}</center></td><td><center>{{=x.instalaciones.direccion}} {{=x.instalaciones.numero_de_calle}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.instalaciones.fecha_estimada}}</center></td><td><center><A href="{{=URL(c='tecnicos', f='ubicacionSolicitante', args=(x.instalaciones.id, ))}}" target="_blank"><i class="glyphicon glyphicon-map-marker"></i></A></center></td><td><center><A href="{{=URL(c='tecnicos', f='instalacionesDetalles', args=(x.instalaciones.id, ))}}" target="_blank"><i class="glyphicon glyphicon-th-list"></i></A></center></td><td><center><A href="{{=URL(c='tecnicos', f='agregar_cliente', args=(x.instalaciones.id, ))}}"><i class="glyphicon glyphicon-user"></i></A></center></td></tr></tbody>{{pass}}</table>
+
+{{pass}}
+
+{{if cantidad == 0:}}
+<center><a href="#" class="btn btn-primary btn-lg disabled" role="button">Sin Registros</a></center>
+{{pass}}
