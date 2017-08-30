@@ -43,9 +43,9 @@
 
 
 <table class="table table-hover" border="3px" >
-    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Cliente</center></th><th><center>Localidad</center></th><th><center>Direccion</center></th><th><center>Entre calles</center><th><center>Telefono 1</center></th><th><center>Telefono 2</center></th><th><center>Telefono 3</center></th><th><center>Tipo de plan</center></th><th><center>Panel</center></th><th><center>Numero de tarjeta</center></th><th><center>Fecha de alta</center></th><th><center>Fecha de baja</center></th></tr></thead>
+    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Cliente</center></th><th><center>Dni</center></th><th><center>Localidad</center></th><th><center>Plan</center></th><th><center>Panel</center></th><th><center>Ver detalles</center></th></tr></thead>
         {{for x in datos: }}
-    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.clientes.nombre}} {{=x.clientes.apellido}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.clientes.calle}} {{=x.clientes.numero_calle}}</center></td><td><center>{{=x.clientes.entre_calle_1}} | {{=x.clientes.entre_calle_2}}</center></td><td><center>{{=x.clientes.telefono_1}}</center></td><td><center>{{=x.clientes.telefono_2}}</center></td><td><center>{{=x.clientes.telefono_3}}</center></td><td><center>{{=x.planes.velocidad}}</center></td><td><center>{{=x.paneles.panel}}</center></td><td><center>{{=x.clientes.numero_tarjeta}}</center></td><td><center>{{=x.clientes.fecha_alta}}</center></td><td><center>{{=x.clientes.fecha_baja}}</center></td></tr></tbody>{{pass}}</table>
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.clientes.nombre}} {{=x.clientes.apellido}}</center></td><td><center>{{=x.clientes.dni}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.planes.velocidad_de_bajada}} Mb</center></td><td><center>{{=x.paneles.panel}}</center></td><td><center><A href="{{=URL(c='administradores', f='clientesDetalles', args=(x.clientes.id, ))}}" target="_blank"><i class="glyphicon glyphicon-th-list"></i></A></center></td></tr></tbody>{{pass}}</table>
 
 <a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
 {{pass}}

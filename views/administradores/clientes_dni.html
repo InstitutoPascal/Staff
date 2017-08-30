@@ -1,10 +1,8 @@
 {{extend 'layout_admin.html'}}
 
 <div class="container">
-
     <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"> 
         <br> <center><img src="{{=URL('static','images/logo.png')}}" width="300" height="150"</img></center></br>
-
         <div class="panel panel panel-info" >
             <div class="panel-heading">
                 <div class="panel-title text-center">Busqueda de cliente</div>
@@ -12,29 +10,43 @@
 
             <div class="panel-body" >
 
-                <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
-
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                        <input id="user" type="text" class="form-control" name="user" value="" placeholder="Ingrese numero de DNI">
+                <form class="form-horizontal" enctype="multipart/form-data" action="" method="post">
+                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                        <input type="number" class="form-control" name="dni" placeholder="Ingrese numero de DNI">
                     </div>
                            <br>
                         </br>
 
                     <div class="form-group">
-                        <!-- Button -->
                         <div class="col-md-6,5 ">
-
-                           <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                           <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-search"></i> Buscar</button>
                         </div>
                     </div>
-
                 </form>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
+
+
+
+{{if request.vars.dni:}}
+
+{{if datos == 0:}}
+
+<div class="col-md-offset-4">
+    <div class="col-md-6">
+        <div class="alert alert-info"> <center>No existe el dni ingresado!</center> </div>
+    </div>
+</div>
+
+{{else:}}
+
+
+<table class="table table-hover" border="3px" >
+    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Dni</center></th><th><center>Cliente</center></th><th><center>Localidad</center></th><th><center>Telefono</center><th><center>Fecha de alta</center></th><th><center>Ver detalles</center></th></tr></thead>
+        {{for x in datos: }}
+        <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.clientes.dni}}</center></td><td><center>{{=x.clientes.nombre}} {{=x.clientes.apellido}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.clientes.telefono}}</center></td><td><center>{{=x.clientes.fecha_alta}}</center></td><td><center><A href="{{=URL(c='administradores', f='clientesDetalles', args=(x.clientes.id, ))}}" target="_blank"><i class="glyphicon glyphicon-th-list"></i></A></center></td></tr></tbody>{{pass}}</table>
+
+{{pass}}
+{{pass}}
