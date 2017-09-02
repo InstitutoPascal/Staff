@@ -135,7 +135,7 @@ def mantenimientosRealizados():
     d = 4
     return dict(datos=d)
 
-def instalacionesDetalles():
+def solicitudesInstalacionDetalles():
     id_solicitud = request.args[0]
     resultado = db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.instalaciones.ALL)
     return dict(datos=resultado)
@@ -144,7 +144,7 @@ def mantenimientosDetalles():
     d=4
     return dict(datos=d)
 
-def mapaInstalaciones():
+def mapaSolicitudesInstalacion():
     rows=db((db.solicitudes_instalacion.id>0)&(db.solicitudes_instalacion.estado == 'Pendiente')&(db.solicitudes_instalacion.localidad==db.localidades.id)).select(
             db.solicitudes_instalacion.nombre,
             db.solicitudes_instalacion.apellido,
