@@ -1,0 +1,69 @@
+{{extend 'layout_admin.html'}}
+<br>
+
+{{if cantidad > 0:}}
+
+<div class="col-md-2">
+    <select name="localidad" class="form-control">
+           <option selected value="0"> Localidad </option>
+           <option value="1">Localidad1</option> 
+           <option value="2">Localidad2</option> 
+           <option value="3">Localidad3</option> 
+    </select>
+</div>
+
+<div class="col-md-2">
+    <select name="plan" class="form-control">
+       <option selected value="0"> Plan </option>
+       <option value="10">Plan1</option> 
+       <option value="11">Plan2</option> 
+       <option value="12">Plan3</option> 
+    </select>
+</div>
+
+<div class="col-md-2">
+    <select name="tipo" class="form-control">
+        <option selected value="0"> Tipo de instalacion </option>
+        <option value="10">Tipo1</option> 
+        <option value="11">Tipo2</option> 
+       <option value="12">Tipo3</option> 
+    </select>
+</div>
+
+<div class="col-md-2">
+    <select name="tecnico" class="form-control">
+        <option selected value="0"> Tecnicos </option>
+        <option value="10">Tecnico1</option> 
+        <option value="11">Tecnico2</option> 
+        <option value="12">Tecnico3</option> 
+    </select>
+</div>
+
+<div class="col-md-2">
+        <input type="date" class="form-control" id="date" name="date">
+</div>
+
+<div class="col-md-2">
+    <select name="estado" class="form-control">
+        <option selected value="0"> Estado </option>
+        <option value="10">Pendientes</option> 
+        <option value="11">Finalizados</option>  
+    </select>
+</div>
+
+<br></br>
+<br></br>
+
+
+
+<table class="table table-hover" border="3px" >
+    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Localidad</center></th><th><center>Plan</center></th><th><center>Tipo de instalacion</center></th><th><center>Tecnico</center></th><th><center>Fecha</center></th><th><center>Estado</center></th><th><center>Ver detalles</center></th><th><center>Editar</center></th></tr></thead>
+        {{for x in datos: }}
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.planes.velocidad_de_bajada}} Mb</center></td><td><center>$ {{=x.costos_instalaciones.precio}} - ({{=x.costos_instalaciones.descripcion}})</center></td><td><center>{{=x.tecnicos.nombre}} {{=x.tecnicos.apellido}}</center></td><td><center>{{=x.instalaciones.fecha_estimada}}</center></td><td><center>{{=x.instalaciones.estado}}</center></td><td><center><A href="{{=URL(c='administradores', f='instalacionesDetalles', args=(x.instalaciones.id, ))}}" target="_blank"><i class="glyphicon glyphicon-th-list"></i></A></center></td><td><center><A href="{{=URL(c='administradores', f='editar_instalacion', args=(x.instalaciones.id, ))}}"><i class="glyphicon glyphicon-pencil"></i></A></center></td></tr></tbody>{{pass}}</table>
+
+<a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
+{{pass}}
+
+{{if cantidad == 0:}}
+<center><a href="#" class="btn btn-primary btn-lg disabled" role="button">Sin Registros</a></center>
+{{pass}}
