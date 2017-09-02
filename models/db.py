@@ -133,7 +133,7 @@ db.define_table('administradores',
                  db.Field('nombre','string'),
                  db.Field('apellido','string'),
                  db.Field('dni','integer'),
-                 db.Field('coreo_electronico' ,'string'),
+                 db.Field('correo_electronico' ,'string'),
                  db.Field('telefono', 'integer'),
                  db.Field('clave', 'password'))
 
@@ -285,7 +285,7 @@ db.define_table('instalaciones',
                  db.Field('direccion_ip','string'),
                  db.Field('fecha_alta','date'))
 
-db.datos_tecnicos.panel.requires=IS_IN_DB(db,db.paneles.id, '%(panel)s',zero=T('Seleccione panel'), error_message= 'Campo obligatorio')
+db.instalaciones.panel.requires=IS_IN_DB(db,db.paneles.id, '%(panel)s',zero=T('Seleccione panel'), error_message= 'Campo obligatorio')
 
 #############################################################################################
 
