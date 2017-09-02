@@ -218,7 +218,7 @@ db.nodos.localidad.requires=IS_IN_DB(db,db.localidades.id,'%(localidad)s',zero=T
 db.define_table('paneles',
                  db.Field('nombre','string'),
                  db.Field('modelo', 'string'),
-                 db.Field('modalidad_de_equipo', 'string'),
+                 db.Field('modalidad', 'string'),
                  db.Field('orientacion', 'string'),
                  db.Field('frecuencia','string'),
                  db.Field('velocidad_de_bajada','string'),
@@ -231,7 +231,7 @@ db.define_table('paneles',
 
 db.paneles.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
 db.paneles.modelo.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
-db.paneles.modalidad_de_equipo.requires=IS_IN_SET(['Punto de acceso','Estacion'], zero=T('Seleccione modo'), error_message= 'Campo obligatorio')
+db.paneles.modalidad.requires=IS_IN_SET(['Punto de acceso','Estacion'], zero=T('Seleccione modo'), error_message= 'Campo obligatorio')
 db.paneles.frecuencia.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
 db.paneles.unidad_de_bajada.requires=IS_IN_SET(['Mbps','Kbps', 'Gbps'], zero=T('Seleccione unidad'), error_message= 'Campo obligatorio')
 db.paneles.unidad_de_subida.requires=IS_IN_SET(['Mbps','Kbps', 'Gbps'], zero=T('Seleccione unidad'), error_message= 'Campo obligatorio')
