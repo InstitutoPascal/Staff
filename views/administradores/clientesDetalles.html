@@ -9,6 +9,7 @@
   <table class="table">
     {{for x in datos: }}
       <tbody>
+          <tr><td><strong>Número de instalación   </strong>{{=x.clientes.numero_de_instalacion}}</td></tr>
           <tr><td><strong>Nombre y apellido:   </strong>{{=x.clientes.nombre}} {{=x.clientes.apellido}}</td></tr>
           <tr><td><strong>Dni:   </strong>{{=x.clientes.dni}}</td></tr>
           <tr><td><strong>Dirección:    </strong>{{=x.clientes.direccion}} {{=x.clientes.numero_de_calle}}</td></tr>
