@@ -132,7 +132,7 @@ def clientes_ip():
     return dict(datos=cliente, cantidad=i)
 
 def listadoClientes():
-    datosClientes = db((db.clientes.localidad==db.localidades.id)&(db.clientes.panel==db.paneles.id)&(db.clientes.tipo_de_plan==db.planes.id)).select(db.clientes.ALL, db.localidades.localidad, db.paneles.panel, db.planes.ALL)
+    datosClientes = db((db.clientes.localidad==db.localidades.id)&(db.clientes.tipo_de_plan==db.planes.id)&(db.clientes.numero_de_instalacion == db.instalaciones.id)&(db.instalaciones.panel == db.paneles.id)).select(db.clientes.ALL, db.localidades.localidad, db.paneles.ALL, db.planes.ALL)
     i=0
     for x in datosClientes:
          i=i+1
@@ -222,5 +222,5 @@ def solicitudesDetalles():
 
 def clientesDetalles():
     id_cliente = request.args[0]
-    resultado = db((db.clientes.id == id_cliente)&(db.clientes.localidad == db.localidades.id)&(db.clientes.tipo_de_plan == db.planes.id)&(db.paneles.nodo == db.nodos.id)&(db.clientes.panel == db.paneles.id)).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.clientes.ALL, db.nodos.ALL, db.paneles.ALL)
+    resultado = db((db.clientes.id == id_cliente)&(db.clientes.localidad==db.localidades.id)&(db.clientes.tipo_de_plan==db.planes.id)&(db.clientes.numero_de_instalacion == db.instalaciones.id)&(db.instalaciones.panel == db.paneles.id)).select(db.clientes.ALL, db.localidades.localidad, db.paneles.ALL, db.planes.ALL, db.instalaciones.ALL)
     return dict(datos=resultado)

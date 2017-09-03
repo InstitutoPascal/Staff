@@ -285,7 +285,7 @@ db.define_table('instalaciones',
                  db.Field('direccion_ip','string'),
                  db.Field('fecha_alta','date'))
 
-db.instalaciones.panel.requires=IS_IN_DB(db,db.paneles.id, '%(panel)s',zero=T('Seleccione panel'), error_message= 'Campo obligatorio')
+db.instalaciones.panel.requires=IS_IN_DB(db,db.paneles.id, '%(nombre)s',zero=T('Seleccione panel'), error_message= 'Campo obligatorio')
 
 #############################################################################################
 
