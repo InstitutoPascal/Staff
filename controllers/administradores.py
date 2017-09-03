@@ -195,7 +195,7 @@ def editar_solicitud_instalacion():
     form=SQLFORM(db.solicitudes_instalacion, solicitud)                                  # armo el formulario para modificar este registro:
     if form.accepts(request.vars, session):
         session.flash = 'Formulario correctamente cargado'
-        redirect(URL(c="consultas", f="listadoClientes"))
+        redirect(URL(c="administradores", f="listadoSolicitudes_instalacion"))
     elif form.errors:
 		response.flash = 'Su formulario contiene errores, porfavor modifiquelo'
     else: 

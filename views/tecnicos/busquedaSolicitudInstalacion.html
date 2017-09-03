@@ -10,7 +10,7 @@
     <div id="loginbox" class="mainbox col-md-6 col-sm-6 col-sm-offset-3"> 
         <div class="panel panel-danger">
             <div class="panel-heading">
-                <div class="panel-title text-center">Busqueda de solicitud de instalacion</div>
+                <div class="panel-title text-center">Búsqueda de solicitud de instalacion</div>
             </div>
 
             <div class="panel-body" >
@@ -43,14 +43,14 @@
 
 <div class="col-md-offset-4">
     <div class="col-md-6">
-        <div class="alert alert-danger"> <center>No existe el dni ingresado!</center> </div>
+        <div class="alert alert-danger"> <center>¡No existe el dni ingresado!</center> </div>
     </div>
 </div>
 
 {{else:}}
 
 <table class="table table-hover" border="3px" >
-    <thead bgcolor= "#BC4141" span style="color:#FFFFFF"><tr><th><center>Solicitante</center></th><th><center>Direccion</center></th><th><center>Localidad</center></th><th><center>Fecha</center></th><th><center>Ver ubicacion</center></th><th><center>Ver detalles</center></th><th><center>Agregar cliente</center></th></tr></thead>
+    <thead bgcolor= "#BC4141" span style="color:#FFFFFF"><tr><th><center>Solicitante</center></th><th><center>Dirección</center></th><th><center>Localidad</center></th><th><center>Fecha</center></th><th><center>Ver ubicación</center></th><th><center>Ver detalles</center></th><th><center>Agregar cliente</center></th></tr></thead>
         {{for x in datos: }}
     <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.solicitudes_instalacion.nombre}} {{=x.solicitudes_instalacion.apellido}}</center></td><td><center>{{=x.solicitudes_instalacion.direccion}} {{=x.solicitudes_instalacion.numero_de_calle}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.solicitudes_instalacion.fecha_estimada}}</center></td><td><center><A href="{{=URL(c='tecnicos', f='ubicacionSolicitante', args=(x.instalaciones.id, ))}}" target="_blank"><i class="glyphicon glyphicon-map-marker"></i></A></center></td><td><center><A href="{{=URL(c='tecnicos', f='solicitudesInstalacionDetalles', args=(x.solicitudes_instalacion.id, ))}}" target="_blank"><i class="glyphicon glyphicon-th-list"></i></A></center></td><td><center><A href="{{=URL(c='tecnicos', f='alta_instalacion', args=(x.solicitudes_instalacion.id, ))}}"><i class="glyphicon glyphicon-user"></i></A></center></td></tr></tbody>{{pass}}</table>
 
