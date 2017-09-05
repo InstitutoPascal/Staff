@@ -276,6 +276,8 @@ db.solicitudes_instalacion.costo_de_instalacion.requires=IS_IN_DB(db,db.costos_i
 db.solicitudes_instalacion.tecnico_asignado.requires=IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico'),error_message= 'Campo obligatorio')
 db.solicitudes_instalacion.fecha_estimada.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
 db.solicitudes_instalacion.estado.default='Pendiente'
+db.solicitudes_instalacion.tecnico_asignado.default=None
+db.solicitudes_instalacion.fecha_estimada.default=None
 
 #############################################################################################
 
