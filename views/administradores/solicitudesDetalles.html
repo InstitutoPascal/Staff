@@ -19,8 +19,8 @@
           <tr><td><strong>Correo eléctronico:  </strong>{{=x.solicitudes_instalacion.correo_electronico}}</td></tr>
           <tr><td><strong>Tipo de plan:   </strong>{{=x.planes.velocidad_de_bajada}} Mb</td></tr>
           <tr><td><strong>Costo de instalacion:   </strong>$ {{=x.costos_instalaciones.precio}} ( {{=x.costos_instalaciones.descripcion}} )</td></tr>
-          <tr><td><strong>Tecnico asignado:   </strong>{{=x.tecnicos.nombre}} {{=x.tecnicos.apellido}}</td></tr>
-          <tr><td><strong>Fecha de instalacion:   </strong>{{=x.solicitudes_instalacion.fecha_estimada}}</td></tr>
+          <tr><td><strong>Tecnico asignado:   </strong>{{if x.solicitudes_instalacion.tecnico_asignado == None:}} A definir {{else:}} {{=x.tecnicos.nombre}} {{=x.tecnicos.apellido}} {{pass}}</td></tr>
+          <tr><td><strong>Fecha de instalacion:   </strong>{{if x.solicitudes_instalacion.fecha_estimada == None:}} A definir {{else:}} {{=x.solicitudes_instalacion.fecha_estimada}} {{pass}}</td></tr>
           <tr><td><strong>Estado de instalacion:   </strong>{{=x.solicitudes_instalacion.estado}}</td></tr>
 
       </tbody>
