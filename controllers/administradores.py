@@ -58,7 +58,7 @@ def alta_solicitud_instalacion():
     return dict(f=form)
 
 def listadoSolicitudes_instalacion():
-    datosSolicitudes = db((db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&(db.solicitudes_instalacion.tecnico_asignado==db.tecnicos.id)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.tecnicos.ALL)
+    datosSolicitudes = db((db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&((db.solicitudes_instalacion.tecnico_asignado == db.tecnicos.id) | db.solicitudes_instalacion.tecnico_asignado != db.tecnicos.id)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.tecnicos.ALL)
     i=0
     for x in datosSolicitudes:
          i=i+1
@@ -217,7 +217,7 @@ def editar_soporte():
 
 def solicitudesDetalles():
     id_solicitud = request.args[0]
-    resultado = db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.tecnico_asignado == db.tecnicos.id)).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL, db.tecnicos.ALL)
+    resultado = db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&((db.solicitudes_instalacion.tecnico_asignado == db.tecnicos.id) | db.solicitudes_instalacion.tecnico_asignado != db.tecnicos.id)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.tecnicos.ALL)
     return dict(datos=resultado)
 
 def clientesDetalles():
