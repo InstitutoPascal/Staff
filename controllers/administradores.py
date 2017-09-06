@@ -67,21 +67,24 @@ def listadoSolicitudes_instalacion():
 ##################################################################
 
 def solicitarSoporte():
-    i=0
-    instalacion =db().select(db.solicitudes_instalacion.ALL)
-    for x in instalacion:
-        i= i+1
-    return dict(datos=instalacion, cantidad=i)
+    dni_recibido=request.vars.dni
+    resultado = db((db.clientes.dni == dni_recibido)&(db.clientes.localidad==db.localidades.id)).select(db.clientes.ALL, db.localidades.ALL)
+    if resultado:
+        return dict(datos= resultado)
+    else:
+        return dict(datos=0)
 
 def alta_soportes():
+    id_cliente = request.args[0]
+    nombre = db(id_cliente == db.clientes.id).select(db.clientes.nombre)[0].nombre
+    apellido = db(id_cliente == db.clientes.id).select(db.clientes.apellido)[0].apellido
     form = SQLFORM(db.soportes_tecnicos)
+    form.vars.cliente = id_cliente
     if form.accepts(request.vars, session):
         response.flash = 'Formulario aceptado'
+        redirect(URL(c="administradores", f="inicio"))
     elif form.errors:
         response.flash = 'El formulario tiene errores'
-    else:
-        response.flash = 'Complete el formulario'
-    return dict(f=form)
 
 def listadoSoportes():
     datosSoportes = db((db.soportes_tecnicos.tecnico_asignado==db.tecnicos.id) & (db.soportes_tecnicos.cliente==db.clientes.id)).select(db.soportes_tecnicos.ALL, db.tecnicos.ALL, db.clientes.ALL)

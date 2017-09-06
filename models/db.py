@@ -311,16 +311,17 @@ db.define_table('clientes',
 #############################################################################################
 
 db.define_table('soportes_tecnicos',
-                 db.Field('cliente', db.clientes),
+                 db.Field('cliente', db.clientes, readable=False, writable=False),
                  db.Field('problematica', 'string'),
                  db.Field('tecnico_asignado', db.tecnicos),
                  db.Field('fecha_estimada','date'),
                  db.Field('estado', 'string', readable=False, writable=False))
 
-db.soportes_tecnicos.cliente.requires=IS_IN_DB(db,db.clientes.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione cliente'), error_message= 'Campo obligatorio')
+
 db.soportes_tecnicos.problematica.requires=IS_NOT_EMPTY(error_message='Campo obligatorio')
 db.soportes_tecnicos.tecnico_asignado.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
 db.soportes_tecnicos.fecha_estimada.requires=IS_EMPTY_OR(IS_DATE('%d/%M/%Y'))
+db.soportes_tecnicos.estado.default='Pendiente'
 
 #############################################################################################
 
