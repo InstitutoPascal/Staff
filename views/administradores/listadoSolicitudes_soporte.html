@@ -1,0 +1,42 @@
+{{extend 'layout_admin.html'}}
+
+<br>
+
+
+{{if cantidad > 0:}}
+
+<div class="col-md-2">
+    <select name="tecnico" class="form-control">
+        <option selected value="0"> Tecnicos </option>
+        <option value="10">Tecnico1</option> 
+        <option value="11">Tecnico2</option> 
+        <option value="12">Tecnico3</option> 
+    </select>
+</div>
+
+<div class="col-md-2">
+        <input type="date" class="form-control" id="date" name="date">
+</div>
+
+<div class="col-md-2">
+    <select name="estado" class="form-control">
+        <option selected value="0"> Estado </option>
+        <option value="10">Pendientes</option> 
+        <option value="11">Finalizados</option>  
+    </select>
+</div>
+
+
+<br></br>
+<br></br>
+
+
+<table class="table table-hover" border="3px" >
+    <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Cliente</center></th><th><center>Problematica</center></th><th><center>Tecnico asignado</center></th><th><center>Fecha estimada</center></th><th><center>Estado</center><th><center>Editar</center></th></tr></thead>
+    {{for x in datos: }}
+    <tbody style="background-color:#FFFFFF;">
+        <tr><td><center>{{=x.clientes.nombre}}</center></td> <td><center>{{=x.soportes_tecnicos.problematica}}</center></td><td><center>{{=x.tecnicos.nombre}}</center></td><td><center>{{=x.soportes_tecnicos.fecha_estimada}}</center></td><td><center>{{=x.soportes_tecnicos.estado}}</center></td><td><center><A href="{{=URL(c='administradores', f='editar_soporte', args=(x.soportes_tecnicos.id, ))}}"><i class="glyphicon glyphicon-pencil"></i></A></center></td></tr>
+     </tbody>{{pass}}</table>
+
+<a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
+{{pass}}
