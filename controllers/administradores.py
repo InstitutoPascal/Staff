@@ -96,6 +96,18 @@ def listadoSolicitudes_soporte():
          i=i+1
     return dict (datos=datosSolicitudes, cantidad=i)
 
+def editar_solicitud_soporte():
+    id_solicitud = request.args[0]
+    solicitud =  db(db.solicitudes_soporte.id == id_solicitud).select().first()
+    form=SQLFORM(db.solicitudes_soporte, solicitud)
+    if form.accepts(request.vars, session):
+        session.flash = 'Formulario correctamente cargado'
+        redirect(URL(c="administradores", f="listadoSolicitudes_soporte"))
+    elif form.errors:
+		response.flash = 'Su formulario contiene errores, porfavor modifiquelo'
+    else: 
+		response.flash = 'Por favor rellene el formulario'
+    return dict(f=form)
 
 ##################################################################
 
