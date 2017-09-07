@@ -74,17 +74,20 @@ def solicitarSoporte():
     else:
         return dict(datos=0)
 
-def alta_soportes():
+def alta_solicitud_soporte():
     id_cliente = request.args[0]
     nombre = db(id_cliente == db.clientes.id).select(db.clientes.nombre)[0].nombre
     apellido = db(id_cliente == db.clientes.id).select(db.clientes.apellido)[0].apellido
-    form = SQLFORM(db.soportes_tecnicos)
+    form = SQLFORM(db.solicitudes_soporte)
     form.vars.cliente = id_cliente
     if form.accepts(request.vars, session):
         response.flash = 'Formulario aceptado'
         redirect(URL(c="administradores", f="inicio"))
     elif form.errors:
         response.flash = 'El formulario tiene errores'
+    else:
+        response.flash = 'Complete el formulario'
+    return dict(f=form, nom=nombre, ape=apellido)
 
 def listadoSoportes():
     datosSoportes = db((db.soportes_tecnicos.tecnico_asignado==db.tecnicos.id) & (db.soportes_tecnicos.cliente==db.clientes.id)).select(db.soportes_tecnicos.ALL, db.tecnicos.ALL, db.clientes.ALL)
