@@ -89,19 +89,13 @@ def alta_solicitud_soporte():
         response.flash = 'Complete el formulario'
     return dict(f=form, nom=nombre, ape=apellido)
 
-def listadoSoportes():
-    datosSoportes = db((db.soportes_tecnicos.tecnico_asignado==db.tecnicos.id) & (db.soportes_tecnicos.cliente==db.clientes.id)).select(db.soportes_tecnicos.ALL, db.tecnicos.ALL, db.clientes.ALL)
+def listadoSolicitudes_soporte():
+    datosSolicitudes = db((db.solicitudes_soporte.tecnico_asignado==db.tecnicos.id) & (db.solicitudes_soporte.cliente==db.clientes.id)).select(db.solicitudes_soporte.ALL, db.tecnicos.ALL, db.clientes.ALL)
     i=0
-    for x in datosSoportes:
+    for x in datosSolicitudes:
          i=i+1
-    return dict (datos=datosSoportes, cantidad=i)
+    return dict (datos=datosSolicitudes, cantidad=i)
 
-def listadoHistoriales():
-    datosHistorial = db().select(db.historiales.ALL)
-    i=0
-    for x in datosHistorial:
-         i=i+1
-    return dict (datos=datosHistorial, cantidad=i)
 
 ##################################################################
 
@@ -208,18 +202,6 @@ def editar_solicitud_instalacion():
 		response.flash = 'Por favor rellene el formulario'
     return dict(f=form)
 
-def editar_soporte():
-    id_soporte = request.args[0]                                                # obtengo el primer argumento (ver URL)
-    solicitud =  db(db.soportes_tecnicos.id == id_soporte).select().first()     # busco el registro en la bbdd
-    form=SQLFORM(db.soportes_tecnicos, solicitud)                               # armo el formulario para modificar este registro:
-    if form.accepts(request.vars, session):
-        session.flash = 'Formulario correctamente cargado'
-        redirect(URL(c="consultas", f="listado_clientes"))
-    elif form.errors:
-		response.flash = 'Su formulario contiene errores, porfavor modifiquelo'
-    else:
-		response.flash = 'Por favor rellene el formulario'
-    return dict(f=form)
 
 def solicitudesDetalles():
     id_solicitud = request.args[0]
