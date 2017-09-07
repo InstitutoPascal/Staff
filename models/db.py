@@ -323,7 +323,7 @@ db.solicitudes_soporte.estado.default='Pendiente'
 #############################################################################################
 
 db.define_table('soportes',
-                 db.Field('soporte', db.solicitudes_soporte),
+                 db.Field('numero_de_solicitud', db.solicitudes_soporte, readable=False,writable=False),
                  db.Field('descripcion', 'string'),
                  db.Field('costo_de_soporte', db.costos_soportes))
 

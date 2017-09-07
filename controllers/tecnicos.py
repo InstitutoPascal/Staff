@@ -119,17 +119,64 @@ def solicitudesInstalacionTodas():
     return dict(datos=resultado, cantidad=i)
 
 
+def solicitudesSoporteDiaActual():
+    #La siguiente busqueda debe tener filtro de dia actual
+    resultado = db((db.solicitudes_soporte.cliente == db.clientes.id)&
+                   (db.clientes.localidad == db.localidades.id)&
+                   (db.solicitudes_soporte.estado == 'Pendiente')).select(db.localidades.ALL, db.solicitudes_soporte.ALL, db.clientes.ALL)
+    i=0
+    for x in resultado:
+         i=i+1
+    return dict(datos=resultado, cantidad=i)
 
+def alta_soporte():
+    id_solicitud = request.args[0]
+    nombre = db((id_solicitud == db.solicitudes_soporte.id)&(db.solicitudes_soporte.cliente==db.clientes.id)).select(db.clientes.nombre)[0].nombre
+    apellido = db((id_solicitud == db.solicitudes_soporte.id)&(db.solicitudes_soporte.cliente==db.clientes.id)).select(db.clientes.apellido)[0].apellido
+    form = SQLFORM(db.soportes)
+    form.vars.numero_de_solicitud = id_solicitud
+    if form.accepts(request.vars, session):
+        response.flash = 'Formulario aceptado'
+        redirect(URL(c="tecnicos", f="cambiar_estado_solicitudSoporte", args=(id_solicitud, nombre, apellido)))
+    elif form.errors:
+        response.flash = 'El formulario tiene errores'
+    else:
+        response.flash = 'Complete el formulario'
+    return dict(f=form, nom=nombre, ape=apellido)
 
-def soportesDiaActual():
-    d = 4
-    return dict(datos=d)
+def cambiar_estado_solicitudSoporte():
+    id_solicitud = request.args[0]
+    nombre = request.args[1]
+    apellido = request.args[2]
+    db(db.solicitudes_soporte.id == id_solicitud).update(estado='Finalizado')
+    redirect(URL(c="tecnicos", f="confirmacionNuevoSoporte", args=(nombre, apellido)))
+
 
 
 
 def soportesTodas():
     d = 4
     return dict(datos=d)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def mantenimientosRealizados():
     d = 4
