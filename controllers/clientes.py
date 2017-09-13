@@ -26,6 +26,14 @@ def tipoInstalacion():
         redirect(URL(c="clientes",f="datosUbicacion"))
     return {"precio": db(db.costos_instalaciones.id>0).select()}
 
+def vistaFormulario():
+    costo= db(db.costos_instalaciones.id == session.costo).select(db.costos_instalaciones.precio).first()
+    plan= db(db.planes.id == session.plan_id).select(db.planes.velocidad_de_bajada).first()
+    localidad= db(db.localidades.id == session.localidad).select(db.localidades.localidad).first()
+    if request.vars:
+        redirect(URL(c="clientes",f="cierreFormulario"))
+    return dict (costo=costo,plan=plan,localidad=localidad)
+
 def descripcionPlan():
     d = 4
     return dict(datos=d)
