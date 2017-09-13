@@ -44,6 +44,14 @@ def datosUbicacion():
         redirect(URL(c="clientes",f="datosPersonales"))
     return {"localidades": db(db.localidades.id>0).select()}
 
+def datosPersonales():
+    if request.vars.dni:
+        session.dni = request.vars.dni
+        session.nombre = request.vars.nombre
+        session.apellido = request.vars.apellido
+        redirect(URL(c="clientes",f="datosContacto"))
+    return {}
+
 def descripcionPlan():
     d = 4
     return dict(datos=d)
@@ -61,10 +69,6 @@ def descripcionPlan4():
     return dict(datos=d)
 
 
-
-def datosPersonales():
-    d = 4
-    return dict(datos=d)
 
 def datosContacto():
     d = 4
