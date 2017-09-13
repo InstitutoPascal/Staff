@@ -112,19 +112,16 @@
 <body>
     </br>
 <div class="form-style-5">
-<form>
+<form method="POST">
 <center><img src="{{=URL('static','images/contacto.png')}}" width="200" height="200" alt="logo" /></center>
 <fieldset>
 <legend><span class="number">4</span>Contacto</legend>
-<input type="text" name="field1" placeholder="Telefono">(opcional)
-<input type="text" name="field2" placeholder="Telefono 2">(opcional)
-<input type="text" name="field3" placeholder="Telefono 3">
-<input type="email" name="field3" placeholder="Email: ejemplo@gmail.com" required>
+<input type="text" name="tel" placeholder="Telefono">(opcional)
+<input type="text" name="tel2" placeholder="Telefono Alternativo">(opcional)
+<input type="email" name="email" placeholder="Email: ejemplo@gmail.com" required>
 </select>
 </fieldset>
-<a href="{{=URL(c="clientes",f="cierreFormulario")}}" role="button">Siguiente</a>
-    </br>
-<a href="{{=URL(c="clientes",f="datosPersonales")}}" role="button">Atras</a>
+    <input type="submit" value="Siguiente"/>
 </form>
 </div>
 </body>

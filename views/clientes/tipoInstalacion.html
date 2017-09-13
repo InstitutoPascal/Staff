@@ -108,25 +108,22 @@
     background: #109177;
 }
 </style>
-
 <body>
     </br>
 <div class="form-style-5">
 <center><img src="{{=URL('static','images/contacto.png')}}" width="200" height="200" alt="logo" /></center>
-<form>
+<form method="POST">
 <fieldset>
-<legend><span class="number">1</span>Instalación</legend>
-<label for="job">Seleccione instalación:</label>
-<select id="job" name="seleccion" method="POST">
-<optgroup label="Tipo">
-  <option value="1600">Con router wifi ($1600)</option>
-  <option value="1000">Sin router wifi ($1000)</option>
-
+<legend><span class="number">1</span>Instalacion</legend>
+<label for="job">Seleccione instalacion:</label>
+<select id="job" name="costo" method="POST">
+ <optgroup label="Tipo">
+    {{for reg in precio:}}
+    <option value="{{=reg.id}}">{{=reg.precio}} {{=reg.descripcion}}</option>
+    {{pass}}
 </select>
 </fieldset>
 <input type="submit" value= "Siguiente">
-    </br>
-<a href="{{=URL(c="clientes",f="listadoPlanes")}}" role="button">Atras</a>
 </form>
 </div>
 </body>
