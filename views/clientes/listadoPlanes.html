@@ -12,7 +12,7 @@
   <tr>
       {{for x in datos:}}
     <td align="center" bgcolor="#FFFFFF" class="texto_rojo"><p>$ {{=x.precio}}</p>
-        <p><a href="{{=URL(c="clientes",f="descripcionPlan")}}" ><img src="{{=URL('static','images/contratar.png')}}" width="200" height="50" alt="cont"/></a></p></td>
+        <p><a href="{{=URL(c="clientes",f="tipoInstalacion",args=[x.id])}}" ><img src="{{=URL('static','images/contratar.png')}}" width="200" height="50" alt="cont"/></a></p></td>
       {{pass}}
   </tr>
   <tr>
