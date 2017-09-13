@@ -19,10 +19,12 @@ def cobertura():
     return dict()
 
 def tipoInstalacion():
-    if request.vars.seleccion:
-        session.tipo_inst = request.vars.seleccion
+    if request.args:
+        session.plan_id = request.args[0]
+    if request.vars.costo:
+        session.costo = request.vars.costo
         redirect(URL(c="clientes",f="datosUbicacion"))
-    return {}
+    return {"precio": db(db.costos_instalaciones.id>0).select()}
 
 def descripcionPlan():
     d = 4
