@@ -34,6 +34,16 @@ def vistaFormulario():
         redirect(URL(c="clientes",f="cierreFormulario"))
     return dict (costo=costo,plan=plan,localidad=localidad)
 
+def datosUbicacion():
+    if request.vars.localidad:
+        session.localidad = request.vars.localidad
+        session.direccion = request.vars.direccion
+        session.num_calle = request.vars.num_calle
+        session.calle1 = request.vars.calle1
+        session.calle2 = request.vars.calle2
+        redirect(URL(c="clientes",f="datosPersonales"))
+    return {"localidades": db(db.localidades.id>0).select()}
+
 def descripcionPlan():
     d = 4
     return dict(datos=d)
@@ -50,15 +60,6 @@ def descripcionPlan4():
     d = 4
     return dict(datos=d)
 
-def datosUbicacion():
-    if request.vars.localidad:
-        session.localidad = request.vars.localidad
-        session.direccion = request.vars.direccion
-        session.num_calle = request.vars.num_calle
-        session.entre_calle1 = request.vars.entre_calle_1
-        session.entre_calle2 = request.vars.entre_calle_2
-        redirect(URL(c="clientes",f="datosPersonales"))
-    return {}
 
 
 def datosPersonales():
