@@ -61,6 +61,25 @@ def datosContacto():
         redirect(URL(c="clientes",f="vistaFormulario"))
     return {}
 
+def cierreFormulario():
+    db.solicitudes_instalacion.insert(
+                 costo_de_instalacion = session.costo,
+                 dni = session.dni,
+                 nombre =session.nombre,
+                 apellido =session.apellido,
+                 tipo_de_plan=session.plan_id,
+                 localidad =session.localidad,
+                 direccion=session.direccion,
+                 numero_de_calle =session.num_calle,
+                 entre_calle_1 =session.calle1,
+                 entre_calle_2 =session.calle2,
+                 telefono =session.tel,
+                 telefono_alternativo =session.tel2,
+                 correo_electronico =session.email
+                 )
+    session.flash= "Codigo OK!"
+    return {}
+
 def descripcionPlan():
     d = 4
     return dict(datos=d)
@@ -78,11 +97,6 @@ def descripcionPlan4():
     return dict(datos=d)
 
 
-
 def consulta():
-    d=4
-    return dict(datos=d)
-
-def cierreFormulario():
     d=4
     return dict(datos=d)
