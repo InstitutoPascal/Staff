@@ -80,23 +80,6 @@ def cierreFormulario():
     session.flash= "Codigo OK!"
     return {}
 
-def descripcionPlan():
-    d = 4
-    return dict(datos=d)
-
-def descripcionPlan2():
-    d = 4
-    return dict(datos=d)
-
-def descripcionPlan3():
-    d = 4
-    return dict(datos=d)
-
-def descripcionPlan4():
-    d = 4
-    return dict(datos=d)
-
-
 def consulta():
     d=4
     return dict(datos=d)
