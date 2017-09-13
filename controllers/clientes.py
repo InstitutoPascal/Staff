@@ -52,6 +52,15 @@ def datosPersonales():
         redirect(URL(c="clientes",f="datosContacto"))
     return {}
 
+
+def datosContacto():
+    if request.vars.tel:
+        session.tel = request.vars.tel
+        session.tel2 = request.vars.tel2
+        session.email = request.vars.email
+        redirect(URL(c="clientes",f="vistaFormulario"))
+    return {}
+
 def descripcionPlan():
     d = 4
     return dict(datos=d)
@@ -69,10 +78,6 @@ def descripcionPlan4():
     return dict(datos=d)
 
 
-
-def datosContacto():
-    d = 4
-    return dict(datos=d)
 
 def consulta():
     d=4
