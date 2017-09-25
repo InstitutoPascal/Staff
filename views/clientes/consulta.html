@@ -79,24 +79,111 @@
 }
 </style>
 
-<body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
 
-<div class="container">
+function mostrar(id) {
+    if (id == "no") {
+        $("#no").show();
+        $("#si").hide();
+    }
+
+    if (id == "si") {
+        $("#no").hide();
+        $("#si").show();
+    }
+
+        if (id == "nada") {
+        $("#si").hide();
+        $("#no").hide();
+    }
+
+}
+
+function mostrar2(id) {
+    if (id == "soporte") {
+        $("#soporte").show();
+        $("#consulta").hide();
+    }
+
+    if (id == "consulta") {
+        $("#soporte").hide();
+        $("#consulta").show();
+    }
+
+        if (id == "nada1") {
+        $("#soporte").hide();
+        $("#consulta").hide();
+    }
+
+}
+</script>
+<body>
+     </br></br>
+<div class="form-style-5">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
  </br>
     <h1>Contáctanos</h1>
-  <p>Comunicate con nosotros llamando o mandando mensaje de texto (WhatsApp) al <strong>11-55784169</strong>. Tambien puedes mandarnos tu consulta llenando el siguiente formulario.
- </br></br>
-<div class="form-style-6">
-<h1>Contacto</h1>
+    <h4>
+        Puedes mandarnos tu consulta o pedir soporte tecnico llenando el formulario correspondiente.
+    </h4>
+
+<form action="index.php" method="post" class="form-style-6">
+    <h4>
+        ¿Eres cliente?
+    </h4>
+    <select id="status" name="status" onChange="mostrar(this.value);">
+        <option value="nada" selected>Elige una opción</option>
+        <option value="no">No</option>
+        <option value="si" >Si</option>
+     </select>
+</form>
+
 <form>
-<input type="text" name="field1" placeholder="Nombre" />
+    <div class="form-style-6" id="si" style="display: none;">
+
+    <select id="status" name="status" onChange="mostrar2(this.value);">
+        <option value="nada1" selected>Elige una opción</option>
+        <option value="consulta">consulta</option>
+        <option value="soporte" >soporte</option>
+     </select>
+</form>
+    </div>
+
+<div class="form-style-6" id="nada" style="display: none;"></div>
+
+<div class="form-style-6" id="nada1" style="display: none;"></div>
+
+<div class="form-style-6" id="no" style="display: none;">
+<h1>Contacto</h1>
+<form >
+<input type="text" name="field1" placeholder="Nombre"/>
 <input type="text" name="field2" placeholder="Apellido" />
 <input type="email" name="field3" placeholder="Email" />
 <input type="text" name="field4" placeholder="Telefono" />
 <textarea name="field5" placeholder="Escribe tu mensaje"></textarea>
 <input type="submit" value="Enviar" />
+    </form>
+    </div>
+
+    <div class="form-style-6" id="consulta" style="display: none;">
+</form>
+<h1>Contacto</h1>
+<form >
+<input type="text" name="field1" placeholder="Dni"/>
+<input type="email" name="field3" placeholder="Email" />
+<textarea name="field5" placeholder="Escribe tu consulta"></textarea>
+<input type="submit" value="Enviar" />
 </form>
 </div>
 
+     <div class="form-style-6" id="soporte" style="display: none;">
+<h1>Soporte tecnico</h1>
+<form >
+<input type="text" name="dni_soporte" placeholder="Dni" />
+<input type="email" name="email_soporte" placeholder="Email" />
+<textarea name="comentario_soporte" placeholder="Escribe tu mensaje"></textarea>
+<input type="submit" value="Enviar" />
+</form>
+</div>
 </body>
