@@ -81,5 +81,15 @@ def cierreFormulario():
     return {}
 
 def consulta():
-    d=4
-    return dict(datos=d)
+    reg = db(db.clientes.dni == request.vars.dni_soporte).select(db.clientes.id).first()
+    if reg:
+        session.dni_soporte = request.vars.dni_soporte
+        session.email_soporte = request.vars.email_soporte
+        session.comentario_soporte = request.vars.comentario_soporte
+        db.solicitudes_soporte.insert(
+            cliente=reg)
+        response.flash= 'Se envio'
+
+    else:
+        response.flash='El dni ingresado no pertence a un cliente nuestro'
+    return {}
