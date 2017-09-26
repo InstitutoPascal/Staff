@@ -83,32 +83,59 @@ response.form_label_separator = myconf.get('forms.separator') or ''
 from gluon.tools import Auth, Service, PluginManager
 
 # host names must be a list of allowed host names (glob syntax allowed)
-auth = Auth(db, host_names=myconf.get('host.names'))
-service = Service()
-plugins = PluginManager()
+#auth = Auth(db, host_names=myconf.get('host.names'))
+#service = Service()
+#plugins = PluginManager()
 
 # -------------------------------------------------------------------------
 # create all tables needed by auth if not custom tables
 # -------------------------------------------------------------------------
-auth.define_tables(username=False, signature=False)
+#auth.define_tables(username=False, signature=False)
 
 # -------------------------------------------------------------------------
 # configure email
 # -------------------------------------------------------------------------
-mail = auth.settings.mailer
-mail.settings.server = 'logging' if request.is_local else myconf.get('smtp.server')
-mail.settings.sender = myconf.get('smtp.sender')
-mail.settings.login = myconf.get('smtp.login')
-mail.settings.tls = myconf.get('smtp.tls') or False
-mail.settings.ssl = myconf.get('smtp.ssl') or False
+#mail = auth.settings.mailer
+#mail.settings.server = 'logging' if request.is_local else myconf.get('smtp.server')
+#mail.settings.sender = myconf.get('smtp.sender')
+#mail.settings.login = myconf.get('smtp.login')
+#mail.settings.tls = myconf.get('smtp.tls') or False
+#mail.settings.ssl = myconf.get('smtp.ssl') or False
 
 # -------------------------------------------------------------------------
 # configure auth policy
 # -------------------------------------------------------------------------
-auth.settings.registration_requires_verification = False
-auth.settings.registration_requires_approval = False
-auth.settings.reset_password_requires_verification = True
+#auth.settings.registration_requires_verification = False
+#auth.settings.registration_requires_approval = False
+#auth.settings.reset_password_requires_verification = True
 
+#############################################################################################
+
+db.define_table('localidades',
+                 db.Field('localidad', 'string'),
+                 db.Field('codigo_postal','integer'))
+
+db.localidades.codigo_postal.requires= IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(4, error_message='Solo hasta 4 caracteres')
+
+#############################################################################################
+
+db.define_table('auth_user',
+                db.Field('first_name',length=128, label=T('First name')),
+                db.Field('last_name',length=128, label=T('Last name')),
+                db.Field('dni', 'integer'),
+                db.Field('email',length=128, label=T('E-mail')),
+                db.Field('telefono', 'integer'),
+                db.Field('localidad', db.localidades),
+                db.Field('direccion', 'string'),
+                db.Field('numero_de_calle', 'string'),
+                db.Field('password','password',default='',label=T('Password'),readable=False),
+                db.Field('registration_key',length=64,default='',readable=False,writable=False),
+                db.Field('reset_password_key',length=64,default='',readable=False,writable=False),
+                db.Field('registration_id', length=512, writable=False, readable=False, default=''))
+
+db.auth_user.localidad.requires=IS_IN_DB(db,db.localidades.id,'%(localidad)s',zero=T('Seleccione localidad'), error_message= 'Campo obligatorio')
+auth=Auth(globals(),db)
+auth.define_tables(username=False, signature=False)
 
 #############################################################################################
 
@@ -130,44 +157,16 @@ db.gerentes.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),I
 #############################################################################################
 
 db.define_table('administradores',
+                db.Field('id_usuario', db.auth_user),
                  db.Field('nombre','string'),
-                 db.Field('apellido','string'),
-                 db.Field('dni','integer'),
-                 db.Field('correo_electronico' ,'string'),
-                 db.Field('telefono', 'integer'),
-                 db.Field('clave', 'password'))
-
-db.administradores.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(12, error_message='Solo hasta 12 caracteres')
-db.administradores.apellido.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(12, error_message='Solo hasta 12 caracteres')
-db.administradores.dni.requires=IS_NOT_IN_DB(db, db.administradores.dni, error_message = 'El DNI ingresado  ya se encuentra registrado') ,IS_NOT_EMPTY(error_message= 'Campo obligatorio') ,IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
-db.administradores.correo_electronico.requires=IS_EMAIL(error_message='El correo electronico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres'),IS_NOT_EMPTY(error_message= 'Campo obligatorio')
-db.administradores.clave.requires = CRYPT(key=auth.settings.hmac_key,  error_message= 'Campo obligatorio')
-db.administradores.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(15, error_message='Solo hasta 15 caracteres')
+                 db.Field('apellido','string'))
 
 #############################################################################################
 
 db.define_table('tecnicos',
+                 db.Field('id_usuario', db.auth_user),
                  db.Field('nombre','string'),
-                 db.Field('apellido','string'),
-                 db.Field('dni','integer'),
-                 db.Field('correo_electronico' ,'string'),
-                 db.Field('telefono', 'integer'),
-                 db.Field('clave', 'password'))
-
-db.tecnicos.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(12, error_message='Solo hasta 12 caracteres')
-db.tecnicos.apellido.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(12, error_message='Solo hasta 12 caracteres')
-db.tecnicos.dni.requires=IS_NOT_IN_DB(db, db.tecnicos.dni, error_message = 'El DNI ingresado  ya se encuentra registrado') ,IS_NOT_EMPTY(error_message= 'Campo obligatorio') ,IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
-db.tecnicos.correo_electronico.requires=IS_EMAIL(error_message='El correo electronico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres'),IS_NOT_EMPTY(error_message= 'Campo obligatorio')
-db.tecnicos.clave.requires = CRYPT(key=auth.settings.hmac_key, error_message= 'Campo obligatorio')
-db.tecnicos.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(15, error_message='Solo hasta 15 caracteres')
-
-#############################################################################################
-
-db.define_table('localidades',
-                 db.Field('localidad', 'string'),
-                 db.Field('codigo_postal','integer'))
-
-db.localidades.codigo_postal.requires= IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(4, error_message='Solo hasta 4 caracteres')
+                 db.Field('apellido','string'))
 
 #############################################################################################
 
