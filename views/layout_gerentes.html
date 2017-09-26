@@ -36,8 +36,10 @@
                                 <ul>
                                     <li><a href="#"><span>Usuarios</span></a>
                                         <ul>
-                                            <li><a href="{{=URL(c="gerentes",f="alta_administradores")}}"><span>Administradores</span></a></li>
-                                            <li><a href="{{=URL(c="gerentes",f="alta_tecnicos")}}"><span>Técnicos</span></a></li>
+                                            {{tipo_usuario= "administrador"}}
+                                            <li><a href="{{=URL(c='gerentes',f='alta_usuarios', args=(tipo_usuario, ))}}"><span>Administradores</span></a></li>
+                                            {{tipo_usuario= "tecnico"}}
+                                            <li><a href="{{=URL(c='gerentes',f='alta_usuarios', args=(tipo_usuario, ))}}"><span>Técnicos</span></a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#"><span>Costos</span></a>
