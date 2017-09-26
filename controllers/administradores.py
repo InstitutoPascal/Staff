@@ -90,7 +90,7 @@ def alta_solicitud_soporte():
     return dict(f=form, nom=nombre, ape=apellido)
 
 def listadoSolicitudes_soporte():
-    datosSolicitudes = db((db.solicitudes_soporte.tecnico_asignado==db.tecnicos.id) & (db.solicitudes_soporte.cliente==db.clientes.id)).select(db.solicitudes_soporte.ALL, db.tecnicos.ALL, db.clientes.ALL)
+    datosSolicitudes = db(((db.solicitudes_soporte.tecnico_asignado == db.tecnicos.id) | db.solicitudes_soporte.tecnico_asignado != db.tecnicos.id) & (db.solicitudes_soporte.cliente==db.clientes.id)).select(db.solicitudes_soporte.ALL, db.tecnicos.ALL, db.clientes.ALL)
     i=0
     for x in datosSolicitudes:
          i=i+1
