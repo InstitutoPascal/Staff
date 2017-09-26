@@ -319,6 +319,8 @@ db.define_table('solicitudes_soporte',
 db.solicitudes_soporte.tecnico_asignado.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
 db.solicitudes_soporte.fecha_estimada.requires=IS_EMPTY_OR(IS_DATE('%d/%M/%Y'))
 db.solicitudes_soporte.estado.default='Pendiente'
+db.solicitudes_soporte.tecnico_asignado.default=None
+db.solicitudes_soporte.fecha_estimada.default=None
 
 #############################################################################################
 
