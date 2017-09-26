@@ -2,6 +2,30 @@
 # intente algo como
 def index(): return dict(message="hello from gerentes.py")
 
+def alta_usuarios():
+    tipo_usuario = request.args[0]
+    if (tipo_usuario == "administrador") | (tipo_usuario == "tecnico"):
+        form = SQLFORM(db.auth_user)
+        if form.accepts(request.vars, session):
+            response.flash = 'Formulario aceptado'
+            if tipo_usuario == "administrador":
+                id_usuario = db().select(db.auth_user.id).last().id
+                nom = db(id_usuario == db.auth_user.id).select(db.auth_user.first_name)[0].first_name
+                ape = db(id_usuario == db.auth_user.id).select(db.auth_user.last_name)[0].last_name
+                db.administradores.insert(id_usuario=id_usuario, nombre=nom, apellido=ape)
+            elif tipo_usuario == "tecnico":
+                id_usuario = db().select(db.auth_user.id).last().id
+                nom = db(id_usuario == db.auth_user.id).select(db.auth_user.first_name)[0].first_name
+                ape = db(id_usuario == db.auth_user.id).select(db.auth_user.last_name)[0].last_name
+                db.tecnicos.insert(id_usuario=id_usuario, nombre=nom, apellido=ape)
+        elif form.errors:
+            response.flash = 'El formulario tiene errores'
+        else:
+            response.flash = 'Complete el formulario'
+        return dict(f=form, usuario=tipo_usuario)
+    else:
+        redirect(URL(c="gerentes", f="inicio"))
+
 def alta_planes():
     form = SQLFORM(db.planes)
     if form.accepts(request.vars, session):
