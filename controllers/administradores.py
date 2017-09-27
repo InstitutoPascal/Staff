@@ -225,16 +225,103 @@ def clientesDetalles():
     resultado = db((db.clientes.id == id_cliente)&(db.clientes.localidad==db.localidades.id)&(db.clientes.tipo_de_plan==db.planes.id)&(db.clientes.numero_de_instalacion == db.instalaciones.id)&(db.instalaciones.panel == db.paneles.id)).select(db.clientes.ALL, db.localidades.localidad, db.paneles.ALL, db.planes.ALL, db.instalaciones.ALL)
     return dict(datos=resultado)
 
-
 ##################################################################
 
 import datetime
 from ConfigParser import SafeConfigParser
 from pyafipws.pyfepdf import FEPDF
+from pyafipws.wsaa import WSAA
+from pyafipws.wsfev1 import WSFEv1
+
+def obtener_cae():
+    # web service de factura electronica:
+    wsfev1 = WSFEv1()
+    wsfev1.LanzarExcepciones = True
+
+    # obteniendo el TA para pruebas
+    ta = WSAA().Autenticar("wsfe", "/home/rodrigo/pyafipws/staff.crt",
+                                   "/home/rodrigo/pyafipws/staff.key", debug=True)
+    wsfev1.SetTicketAcceso(ta)
+    wsfev1.Cuit = "20267565393"
+
+    ok = wsfev1.Conectar()
+
+    tipo_cbte = 6
+    punto_vta = 4001
+    cbte_nro = long(wsfev1.CompUltimoAutorizado(tipo_cbte, punto_vta) or 0)
+    fecha = datetime.datetime.now().strftime("%Y%m%d")
+    concepto = 1
+    tipo_doc = 80 # 80: CUIT, 96: DNI
+    nro_doc = "30500010912" # del cliente
+    cbt_desde = cbte_nro + 1; cbt_hasta = cbte_nro + 1
+    imp_total = "222.00"
+    imp_tot_conc = "0.00"
+    imp_neto = "200.00"
+    imp_iva = "21.00"
+    imp_trib = "1.00"
+    imp_op_ex = "0.00"
+    fecha_cbte = fecha
+    # Fechas del per�odo del servicio facturado y vencimiento de pago:
+    if concepto > 1:
+        fecha_venc_pago = fecha
+        fecha_serv_desde = fecha
+        fecha_serv_hasta = fecha
+    else:
+        fecha_venc_pago = fecha_serv_desde = fecha_serv_hasta = None
+    moneda_id = 'PES'
+    moneda_ctz = '1.000'
+
+    wsfev1.CrearFactura(concepto, tipo_doc, nro_doc, 
+                tipo_cbte, punto_vta, cbt_desde, cbt_hasta , 
+                imp_total, imp_tot_conc, imp_neto,
+                imp_iva, imp_trib, imp_op_ex, fecha_cbte, fecha_venc_pago, 
+                fecha_serv_desde, fecha_serv_hasta, #--
+                moneda_id, moneda_ctz)
+
+    # otros tributos:
+    tributo_id = 99
+    desc = 'Impuesto Municipal Matanza'
+    base_imp = None
+    alic = None
+    importe = 1
+    wsfev1.AgregarTributo(tributo_id, desc, base_imp, alic, importe)
+
+    # subtotales por alicuota de IVA:
+    iva_id = 3 # 0%
+    base_imp = 100    # neto al 0%
+    importe = 0
+    wsfev1.AgregarIva(iva_id, base_imp, importe)
+
+    # subtotales por alicuota de IVA:
+    iva_id = 5 # 21%
+    base_imp = 100   # neto al 21%
+    importe = 21     # iva liquidado al 21%
+    wsfev1.AgregarIva(iva_id, base_imp, importe)
+
+    wsfev1.CAESolicitar()
+
+    print "Nro. Cbte. desde-hasta", wsfev1.CbtDesde, wsfev1.CbtHasta
+    print "Resultado", wsfev1.Resultado
+    print "Reproceso", wsfev1.Reproceso
+    print "CAE", wsfev1.CAE
+    print "Vencimiento", wsfev1.Vencimiento
+    print "Observaciones", wsfev1.Obs
+
+    session.cae = wsfev1.CAE
+    response.view = "generic.html"
+    return {"Nro. Cbte. desde-hasta": wsfev1.CbtDesde,
+            "Resultado": wsfev1.Resultado,
+            "Reproceso": wsfev1.Reproceso,
+            "CAE": wsfev1.CAE,
+            "Vencimiento": wsfev1.Vencimiento,
+            "Observaciones": wsfev1.Obs,
+          }
+
+##################################################################
 
 def generar_pdf():
 
-    CONFIG_FILE = "ubicacion del archivo rece.ini"
+    CONFIG_FILE = "/home/rodrigo/pyafipws/rece.ini"
 
     config = SafeConfigParser()
     config.read(CONFIG_FILE)
