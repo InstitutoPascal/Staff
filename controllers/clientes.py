@@ -46,10 +46,15 @@ def datosUbicacion():
 
 def datosPersonales():
     if request.vars.dni:
-        session.dni = request.vars.dni
-        session.nombre = request.vars.nombre
-        session.apellido = request.vars.apellido
-        redirect(URL(c="clientes",f="datosContacto"))
+        reg = db(db.solicitudes_instalacion.dni == request.vars.dni).select(db.solicitudes_instalacion.id).first()
+        if reg:
+            redirect(URL(c="clientes",f="mensaje"))
+
+        else:
+            session.dni = request.vars.dni
+            session.nombre = request.vars.nombre
+            session.apellido = request.vars.apellido
+            redirect(URL(c="clientes",f="datosContacto"))
     return {}
 
 
