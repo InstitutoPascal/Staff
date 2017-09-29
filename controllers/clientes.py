@@ -97,7 +97,7 @@ def consulta():
         session.comentario_soporte = request.vars.comentario_soporte
         db.solicitudes_soporte.insert(
             cliente=reg,
-            descripcion=session.comentario_soporte)
+            problematica=session.comentario_soporte)
         response.flash= 'Se envio'
 
     else:
