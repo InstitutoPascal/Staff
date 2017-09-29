@@ -18,6 +18,10 @@ def listadoPlanes():
 def cobertura():
     return dict()
 
+def mensaje():
+    d = 4
+    return dict(datos=d)
+
 def tipoInstalacion():
     if request.args:
         session.plan_id = request.args[0]
