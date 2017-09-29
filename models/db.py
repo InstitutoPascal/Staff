@@ -311,6 +311,7 @@ db.define_table('clientes',
 
 db.define_table('solicitudes_soporte',
                  db.Field('cliente', db.clientes, readable=False, writable=False),
+                 db.Field('descripcion','string'),
                  db.Field('tecnico_asignado', db.tecnicos),
                  db.Field('fecha_estimada','date'),
                  db.Field('estado', 'string', readable=False, writable=False))

@@ -96,7 +96,8 @@ def consulta():
         session.email_soporte = request.vars.email_soporte
         session.comentario_soporte = request.vars.comentario_soporte
         db.solicitudes_soporte.insert(
-            cliente=reg)
+            cliente=reg,
+            descripcion=session.comentario_soporte)
         response.flash= 'Se envio'
 
     else:
