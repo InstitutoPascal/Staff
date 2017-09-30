@@ -92,7 +92,8 @@ def inicio():
 
 def busquedaSolicitudInstalacion():
     dni_recibido=request.vars.dni
-    resultado = db((db.solicitudes_instalacion.dni == dni_recibido)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
+    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
+    resultado = db((db.solicitudes_instalacion.tecnico == tecnico_logueado)&(db.solicitudes_instalacion.fecha_estimada != None)&(db.solicitudes_instalacion.dni == dni_recibido)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
     if resultado:
         return dict(datos= resultado)
     else:
@@ -103,8 +104,11 @@ def busquedaSoporte():
     return dict(datos=d)
 
 def solicitudesInstalacionDiaActual():
-    #La siguiente busqueda debe tener filtro de dia actual
-    resultado = db((db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
+    import datetime
+    fecha_hoy = datetime.datetime.now().strftime("%Y-%m-%d")
+    #Solo funciona si se loguean
+    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
+    resultado = db((db.solicitudes_instalacion.fecha_estimada == fecha_hoy)&(db.solicitudes_instalacion.tecnico == tecnico_logueado)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
     i=0
     for x in resultado:
          i=i+1
@@ -112,7 +116,9 @@ def solicitudesInstalacionDiaActual():
 
 
 def solicitudesInstalacionTodas():
-    resultado = db((db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
+    #Solo funciona si se loguean
+    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
+    resultado = db((db.solicitudes_instalacion.tecnico == tecnico_logueado)&(db.solicitudes_instalacion.fecha_estimada != None)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
     i=0
     for x in resultado:
          i=i+1
