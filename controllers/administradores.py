@@ -58,11 +58,18 @@ def alta_solicitud_instalacion():
     return dict(f=form)
 
 def listadoSolicitudes_instalacion():
-    datosSolicitudes = db((db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&((db.solicitudes_instalacion.tecnico_asignado == db.tecnicos.id) | db.solicitudes_instalacion.tecnico_asignado != db.tecnicos.id)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.tecnicos.ALL)
-    i=0
-    for x in datosSolicitudes:
-         i=i+1
-    return dict (datos=datosSolicitudes, cantidad=i)
+    solicitudesConTecnico = db((db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&(db.solicitudes_instalacion.tecnico == db.auth_user.id)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.auth_user.ALL)
+    
+    solicitudesSinTecnico = db((db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&(db.solicitudes_instalacion.tecnico == None)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL)
+
+    cantidadConTecnico=0
+    for x in solicitudesConTecnico:
+         cantidadConTecnico=cantidadConTecnico+1
+
+    cantidadSinTecnico=0
+    for x in solicitudesSinTecnico:
+         cantidadSinTecnico=cantidadSinTecnico+1
+    return dict (datos=solicitudesConTecnico, cantidad=cantidadConTecnico, datos2=solicitudesSinTecnico, cantidad2=cantidadSinTecnico)
 
 ##################################################################
 
@@ -217,8 +224,10 @@ def editar_solicitud_instalacion():
 
 def solicitudesDetalles():
     id_solicitud = request.args[0]
-    resultado = db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&((db.solicitudes_instalacion.tecnico_asignado == db.tecnicos.id) | db.solicitudes_instalacion.tecnico_asignado != db.tecnicos.id)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.tecnicos.ALL)
-    return dict(datos=resultado)
+    solicitudesConTecnico = db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&(db.solicitudes_instalacion.tecnico == db.auth_user.id)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.auth_user.ALL)
+    
+    solicitudesSinTecnico = db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&(db.solicitudes_instalacion.tecnico == None)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL)
+    return dict (datos=solicitudesConTecnico, datos2=solicitudesSinTecnico)
 
 def clientesDetalles():
     id_cliente = request.args[0]
