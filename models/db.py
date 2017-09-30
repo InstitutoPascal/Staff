@@ -256,7 +256,7 @@ db.define_table('solicitudes_instalacion',
                  db.Field('correo_electronico','string'),
                  db.Field('tipo_de_plan',db.planes),
                  db.Field('costo_de_instalacion',db.costos_instalaciones),
-                 db.Field('tecnico_asignado', db.tecnicos),
+                 db.Field('tecnico',db.auth_user),
                  db.Field('fecha_estimada', 'date'),
                  db.Field('estado', 'string', readable=False, writable=False))
 
@@ -272,10 +272,11 @@ db.solicitudes_instalacion.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo 
 db.solicitudes_instalacion.correo_electronico.requires=IS_EMAIL(error_message='El correo electronico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres'),IS_NOT_EMPTY(error_message= 'Campo obligatorio')
 db.solicitudes_instalacion.tipo_de_plan.requires=IS_IN_DB(db,db.planes.id,'%(velocidad_de_bajada)s' + ' ' + '%(unidad_de_bajada)s',zero=T('Seleccione plan'), error_message= 'Campo obligatorio')
 db.solicitudes_instalacion.costo_de_instalacion.requires=IS_IN_DB(db,db.costos_instalaciones.id,'$ ' + '%(precio)s' + ' ( ' + '%(descripcion)s' + ' )',zero=T('Seleccione costo'), error_message= 'Campo obligatorio')
-db.solicitudes_instalacion.tecnico_asignado.requires=IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico'),error_message= 'Campo obligatorio')
-db.solicitudes_instalacion.fecha_estimada.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
+
+db.solicitudes_instalacion.tecnico.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id_usuario,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
+db.solicitudes_instalacion.fecha_estimada.requires=IS_EMPTY_OR(IS_DATE(str(T('%Y-%m-%d'))))
 db.solicitudes_instalacion.estado.default='Pendiente'
-db.solicitudes_instalacion.tecnico_asignado.default=None
+db.solicitudes_instalacion.tecnico.default=None
 db.solicitudes_instalacion.fecha_estimada.default=None
 
 #############################################################################################
