@@ -51,10 +51,10 @@ def alta_solicitud_instalacion():
         response.flash = 'Complete el formulario'
     return dict(f=form)
 
-def confirmacionNuevaSolicitudInstalacion():
-    id_solicitud = request.args[0]
-    mensaje = "Solicitud de instalacion numero " + id_solicitud + " agregada correctamente"
-    return dict(mensaje=mensaje, solicitud=id_solicitud)
+def confirmacion():
+    mensaje = request.args[0]
+    id_solicitud = request.args[1]
+    return dict(mensaje=mensaje, id_solicitud=id_solicitud)
 
 def editar_solicitud_instalacion():
     id_solicitud = request.args[0]
@@ -62,17 +62,12 @@ def editar_solicitud_instalacion():
     form=SQLFORM(db.solicitudes_instalacion, solicitud)
     if form.accepts(request.vars, session):
         session.flash = 'Formulario correctamente cargado'
-        redirect(URL(c="administradores", f="confirmacionSolicitudInstalacionEditada", args=(id_solicitud)))
+        redirect(URL(c="administradores", f="actualizar_coords", args=(id_solicitud)))
     elif form.errors:
 		response.flash = 'Su formulario contiene errores, porfavor modifiquelo'
     else: 
 		response.flash = 'Por favor rellene el formulario'
     return dict(f=form)
-
-def confirmacionSolicitudInstalacionEditada():
-    id_solicitud = request.args[0]
-    mensaje = "Solicitud de instalacion numero " + id_solicitud + " editada correctamente"
-    return dict(mensaje=mensaje, solicitud=id_solicitud)
 
 def listadoSolicitudes_instalacion():
     solicitudesConTecnico = db((db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&(db.solicitudes_instalacion.tecnico == db.auth_user.id)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.auth_user.ALL)
@@ -211,16 +206,30 @@ def coords_by_address(direccion):
     return 0.0,0.0,url
 
 def actualizar_coords():
-    ret = ""
-    criterios = db.solicitudes_instalacion.localidad == db.localidades.id
-    #criterios &= db.clientes.latitud == 0
-    for reg in db(criterios).select(db.solicitudes_instalacion.id, db.solicitudes_instalacion.direccion, db.solicitudes_instalacion.numero_de_calle, db.localidades.localidad, db.localidades.codigo_postal):
-        dom = "%s %s, %s, %s, %s" % (reg.solicitudes_instalacion.direccion, reg.solicitudes_instalacion.numero_de_calle, reg.localidades.localidad,"buenos aires","argentina")
-        lat, lon , url = coords_by_address(dom)
-        db(db.solicitudes_instalacion.id==reg.solicitudes_instalacion.id).update(latitud=lat, longitud=lon)
-        ret += "solicitante: %s coords= %s,%s url: %s\n\r" % (reg.solicitudes_instalacion.id, lat, lon, url)
-        id_solicitud = db().select(db.solicitudes_instalacion.id).last().id
-        redirect(URL(c="administradores", f="confirmacionNuevaSolicitudInstalacion", args=(id_solicitud)))
+    if request.args:
+        id_solicitud_editada = request.args[0]
+        mensaje = "Solicitud de instalacion numero " + id_solicitud_editada + " editada correctamente"
+        ret = ""
+        criterios = db.solicitudes_instalacion.localidad == db.localidades.id
+        #criterios &= db.clientes.latitud == 0
+        for reg in db(criterios).select(db.solicitudes_instalacion.id, db.solicitudes_instalacion.direccion, db.solicitudes_instalacion.numero_de_calle, db.localidades.localidad, db.localidades.codigo_postal):
+            dom = "%s %s, %s, %s, %s" % (reg.solicitudes_instalacion.direccion, reg.solicitudes_instalacion.numero_de_calle, reg.localidades.localidad,"buenos aires","argentina")
+            lat, lon , url = coords_by_address(dom)
+            db(db.solicitudes_instalacion.id==reg.solicitudes_instalacion.id).update(latitud=lat, longitud=lon)
+            ret += "solicitante: %s coords= %s,%s url: %s\n\r" % (reg.solicitudes_instalacion.id, lat, lon, url)
+            redirect(URL(c="administradores", f="confirmacion", args=(mensaje, id_solicitud_editada)))
+    else:
+        ret = ""
+        criterios = db.solicitudes_instalacion.localidad == db.localidades.id
+        #criterios &= db.clientes.latitud == 0
+        for reg in db(criterios).select(db.solicitudes_instalacion.id, db.solicitudes_instalacion.direccion, db.solicitudes_instalacion.numero_de_calle, db.localidades.localidad, db.localidades.codigo_postal):
+            dom = "%s %s, %s, %s, %s" % (reg.solicitudes_instalacion.direccion, reg.solicitudes_instalacion.numero_de_calle, reg.localidades.localidad,"buenos aires","argentina")
+            lat, lon , url = coords_by_address(dom)
+            db(db.solicitudes_instalacion.id==reg.solicitudes_instalacion.id).update(latitud=lat, longitud=lon)
+            ret += "solicitante: %s coords= %s,%s url: %s\n\r" % (reg.solicitudes_instalacion.id, lat, lon, url)
+            id_solicitud = db().select(db.solicitudes_instalacion.id).last().id
+            mensaje = "Solicitud de instalacion numero " + id_solicitud + " agregada correctamente"
+            redirect(URL(c="administradores", f="confirmacion", args=(mensaje, id_solicitud)))
 
 def geolocalizacionClientes():
     rows=db((db.clientes.id>0)&(db.clientes.localidad==db.localidades.id)).select(

@@ -1,9 +1,20 @@
 {{extend 'layout_gerentes.html'}}
 
-<br>
+<br><br>
 {{if cantidad > 0:}}
 <table class="table table-hover" class="table table-hover" border="3px">
-    <thead bgcolor= "#366B32" span style="color:#FFFFFF"><tr><th><center>Empresa</center></th><th><center>Localidad</center></th><th><center>Direccion</center></th><th><center>Correo</center></th><th><center>Telefono</center></th><th><center>Tipo de provision</center></th><th><center>Condicion IVA</center></th><th><center>Cuit</center></th><th><center>Ingresos brutos</center></th></tr></thead>
+    <thead bgcolor= "#366B32" span style="color:#FFFFFF"><tr><th><center>Empresa</center></th><th><center>Localidad</center></th><th><center>Direccion</center></th><th><center>Correo electronico</center></th><th><center>Telefono</center></th><th><center>Tipo de provision</center></th><th><center>Condicion IVA</center></th><th><center>Cuit</center></th><th><center>Ingresos brutos</center></th></tr></thead>
         {{for x in datos: }}
-    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.proveedores.empresa}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.proveedores.direccion}} {{x.proveedores.numero_de_calle}}</center></td><td><center>{{=x.proveedores.correo}}</center></td><td><center>{{=x.proveedores.telefono}}</center></td><td><center>{{=x.proveedores.tipo_de_provision}}</center></td><td><center>{{=x.proveedores.condicion_iva}}</center></td><td><center>{{=x.proveedores.numero_de_cuit}}</center></td><td><center>{{=x.proveedores.ingresos_brutos}}</center></td></tr></tbody>{{pass}}</table>
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.proveedores.empresa}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.proveedores.direccion}} {{x.proveedores.numero_de_calle}}</center></td><td><center>{{=x.proveedores.correo_electronico}}</center></td><td><center>{{=x.proveedores.telefono}}</center></td><td><center>{{=x.proveedores.tipo_de_provision}}</center></td><td><center>{{=x.proveedores.condicion_iva}}</center></td><td><center>{{=x.proveedores.numero_de_cuit}}</center></td><td><center>{{=x.proveedores.ingresos_brutos}}</center></td></tr></tbody>{{pass}}</table>
+<h3><span class="label label-success"> {{=cantidad}} Registro/s de proveedores</span></h3>
+{{else:}}
+
+<div class="col-md-offset-4">
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading"><center>¡No se han encontrado registros de proveedores!</center></div>
+            <div class="panel-body" class="h3"><center><h1><span class="glyphicon glyphicon-file"></span></center></h1></div>
+        </div>
+    </div>
+</div>
 {{pass}}

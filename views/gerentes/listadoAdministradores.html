@@ -1,9 +1,21 @@
 {{extend 'layout_gerentes.html'}}
 
-<br>
+<br><br>
 {{if cantidad > 0:}}
 <table class="table table-hover" border="3px" >
-   <thead bgcolor= "#366B32" span style="color:#FFFFFF"><tr><th><center>Nombre</center></th><th><center>dni</center></th><th><center>Correo electronico</center></th><th><center>Telefono</center></th><th><center>clave</center></th></tr></thead>
+    <thead bgcolor= "#366B32" span style="color:#FFFFFF"><tr><th><center>Nombre</center></th><th><center>dni</center></th><th><center>Correo electronico</center></th><th><center>Telefono</center></th><th><center>Direccion</center></th><th><center>Localidad</center></th><th><center>Contraseña</center></th></tr></thead>
        {{for x in datos: }}
-   <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.nombre}} {{=x.apellido}}</center></td><td><center>{{=x.dni}}</center></td><td><center>{{=x.correo_electronico}}</center></td><td><center>{{=x.telefono}}</center></td><td><center>{{=x.clave}}</center></td></tr></tbody>{{pass}}</table>
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.auth_user.first_name}} {{=x.auth_user.last_name}}</center></td><td><center>{{=x.auth_user.dni}}</center></td><td><center>{{=x.auth_user.email}}</center></td><td><center>{{=x.auth_user.telefono}}</center></td><td><center>{{=x.auth_user.direccion}} {{=x.auth_user.numero_de_calle}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.auth_user.password}}</center></td></tr></tbody>{{pass}}</table>
+<h3><span class="label label-success"> {{=cantidad}} Registro/s de administradores</span></h3>
+
+{{else:}}
+
+<div class="col-md-offset-4">
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading"><center>¡No se han encontrado registros de administradores!</center></div>
+            <div class="panel-body" class="h3"><center><h1><span class="glyphicon glyphicon-file"></span></center></h1></div>
+        </div>
+    </div>
+</div>
 {{pass}}

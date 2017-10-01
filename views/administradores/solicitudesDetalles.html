@@ -1,6 +1,8 @@
 {{extend 'layout_admin.html'}}
 
 <br>
+
+{{if datos:}}
 <div class="container">
     <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -19,10 +21,9 @@
           <tr><td><strong>Correo eléctronico:  </strong>{{=x.solicitudes_instalacion.correo_electronico}}</td></tr>
           <tr><td><strong>Tipo de plan:   </strong>{{=x.planes.velocidad_de_bajada}} Mb</td></tr>
           <tr><td><strong>Costo de instalacion:   </strong>$ {{=x.costos_instalaciones.precio}} ( {{=x.costos_instalaciones.descripcion}} )</td></tr>
-          <tr><td><strong>Tecnico asignado:   </strong>{{if x.solicitudes_instalacion.tecnico_asignado == None:}} A definir {{else:}} {{=x.tecnicos.nombre}} {{=x.tecnicos.apellido}} {{pass}}</td></tr>
+          <tr><td><strong>Tecnico asignado:   </strong>{{=x.auth_user.first_name}} {{=x.auth_user.last_name}}</td></tr>
           <tr><td><strong>Fecha de instalacion:   </strong>{{if x.solicitudes_instalacion.fecha_estimada == None:}} A definir {{else:}} {{=x.solicitudes_instalacion.fecha_estimada}} {{pass}}</td></tr>
           <tr><td><strong>Estado de instalacion:   </strong>{{=x.solicitudes_instalacion.estado}}</td></tr>
-
       </tbody>
       {{pass}}
       </table>
@@ -30,3 +31,36 @@
 </div>
 </div>
 </div>
+
+{{else:}}
+
+<div class="container">
+    <div class="row">
+  <div class="col-md-6 col-md-offset-3">
+<div class="panel panel panel-info">
+  <div class="panel-heading"><center>Detalles sobre la solicitud</center></div>
+  <table class="table">
+    {{for x in datos2: }}
+      <tbody>
+          <tr><td><strong>Nombre y apellido:   </strong>{{=x.solicitudes_instalacion.nombre}} {{=x.solicitudes_instalacion.apellido}}</td></tr>
+          <tr><td><strong>Dni:   </strong>{{=x.solicitudes_instalacion.dni}}</td></tr>
+          <tr><td><strong>Dirección:    </strong>{{=x.solicitudes_instalacion.direccion}} {{=x.solicitudes_instalacion.numero_de_calle}}</td></tr>
+          <tr><td><strong>Entre las calles:   </strong>{{=x.solicitudes_instalacion.entre_calle_1}} Y {{=x.solicitudes_instalacion.entre_calle_2}}</td></tr>
+          <tr><td><strong>Localidad:   </strong>{{=x.localidades.localidad}}</td></tr>
+          <tr><td><strong>Télefono:   </strong>{{=x.solicitudes_instalacion.telefono}}</td></tr>
+          <tr><td><strong>Télefono alternativo:   </strong>{{=x.solicitudes_instalacion.telefono_alternativo}}</td></tr>
+          <tr><td><strong>Correo eléctronico:  </strong>{{=x.solicitudes_instalacion.correo_electronico}}</td></tr>
+          <tr><td><strong>Tipo de plan:   </strong>{{=x.planes.velocidad_de_bajada}} Mb</td></tr>
+          <tr><td><strong>Costo de instalacion:   </strong>$ {{=x.costos_instalaciones.precio}} ( {{=x.costos_instalaciones.descripcion}} )</td></tr>
+          <tr><td><strong>Tecnico asignado:   </strong>A definir...</td></tr>
+          <tr><td><strong>Fecha de instalacion:   </strong>{{if x.solicitudes_instalacion.fecha_estimada == None:}} A definir {{else:}} {{=x.solicitudes_instalacion.fecha_estimada}} {{pass}}</td></tr>
+          <tr><td><strong>Estado de instalacion:   </strong>{{=x.solicitudes_instalacion.estado}}</td></tr>
+      </tbody>
+      {{pass}}
+      </table>
+</div>
+</div>
+</div>
+</div>
+
+{{pass}}

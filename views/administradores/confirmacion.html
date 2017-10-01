@@ -1,0 +1,19 @@
+{{extend 'layout_admin.html'}}
+
+
+<br><br>
+
+<div class="col-md-offset-4">
+    <div class="col-md-6">
+        <div class="alert alert-info"> <center>¡Operación Exitosa!<br>{{=mensaje}}</center> <center> <h1><span  class="glyphicon glyphicon-thumbs-up"> </span> </center></h1></div>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br>
+<div class="col-md-offset-3">
+<div class="col-md-7">
+    <button type="button" class="btn btn-primary pull-right" onclick=" location.href='{{=URL(c='administradores', f='listadoSolicitudes_instalacion')}}' "> Listado de solicitudes</button>
+<button type="button" class="btn btn-primary pull-right" onclick=" location.href='{{=URL(c='administradores', f='alta_solicitud_instalacion')}}' "> Nueva solicitud </button>
+        <button type="button" class="btn btn-primary pull-right" onclick=" location.href='{{=URL(c='administradores', f='editar_solicitud_instalacion', args=(id_solicitud, ))}}' "> Editar solicitud </button>
+</div>
+</div>

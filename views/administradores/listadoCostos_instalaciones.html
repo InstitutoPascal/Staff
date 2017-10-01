@@ -1,14 +1,20 @@
 {{extend 'layout_admin.html'}}
 
-<br>
+<br><br>
 {{if cantidad > 0:}}
 <table class="table table-hover" border="3px" >
     <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Descripcion</center></th><th><center>Precio</center></th></tr></thead>
         {{for x in datos: }}
     <tbody style="background-color:#FFFFFF;"><tr><td ><center>{{=x.descripcion}}</center></td> <td><center>$ {{=x.precio}}</center></td></tr></tbody>{{pass}}</table>
-<a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a>
-{{pass}}
+<h3><span class="label label-primary"> {{=cantidad}} Registro/s de costos de instalaciones</span></h3>
+{{else:}}
 
-{{if cantidad == 0:}}
-<center><a href="#" class="btn btn-primary btn-lg disabled" role="button">Sin Registros</a></center>
+<div class="col-md-offset-4">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><center>¡No se han encontrado registros de costos de instalaciones!</center></div>
+            <div class="panel-body" class="h3"><center><h1><span class="glyphicon glyphicon-file"></span></center></h1></div>
+        </div>
+    </div>
+</div>
 {{pass}}
