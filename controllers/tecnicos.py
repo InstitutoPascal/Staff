@@ -1,26 +1,41 @@
 # -*- coding: utf-8 -*-
-# intente algo como
+def inicio(): return dict(message="hello from tecnicos.py")
 
+######################################### SOLICITUDES DE INSTALACION #########################################
 
-def alta_mantenimientos():
-    form = SQLFORM(db.mantenimientos)
-    if form.accepts(request.vars, session):
-        response.flash = 'Formulario aceptado'
-    elif form.errors:
-        response.flash = 'El formulario tiene errores'
+def solicitudesInstalacionDiaActual():
+    import datetime
+    fecha_hoy = datetime.datetime.now().strftime("%Y-%m-%d")
+    #Solo funciona si se loguean
+    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
+    resultado = db((db.solicitudes_instalacion.fecha_estimada == fecha_hoy)&(db.solicitudes_instalacion.tecnico == tecnico_logueado)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
+    i=0
+    for x in resultado:
+         i=i+1
+    return dict(datos=resultado, cantidad=i)
+
+def solicitudesInstalacionTodas():
+    #Solo funciona si se loguean
+    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
+    resultado = db((db.solicitudes_instalacion.tecnico == tecnico_logueado)&(db.solicitudes_instalacion.fecha_estimada != None)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
+    i=0
+    for x in resultado:
+         i=i+1
+    return dict(datos=resultado, cantidad=i)
+
+def busquedaSolicitudInstalacion():
+    dni_recibido=request.vars.dni
+    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
+    resultado = db((db.solicitudes_instalacion.tecnico == tecnico_logueado)&(db.solicitudes_instalacion.fecha_estimada != None)&(db.solicitudes_instalacion.dni == dni_recibido)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
+    if resultado:
+        return dict(datos= resultado)
     else:
-        response.flash = 'Complete el formulario'
-    return dict(f=form)
+        return dict(datos=0)
 
-def alta_historiales():
-    form = SQLFORM(db.historiales)
-    if form.accepts(request.vars, session):
-        response.flash = 'Formulario aceptado'
-    elif form.errors:
-        response.flash = 'El formulario tiene errores'
-    else:
-        response.flash = 'Complete el formulario'
-    return dict(f=form)
+def solicitudesInstalacionDetalles():
+    id_solicitud = request.args[0]
+    resultado = db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
+    return dict(datos=resultado)
 
 def alta_instalacion():
     id_solicitud = request.args[0]
@@ -81,59 +96,40 @@ def cambiar_estado_solicitudInstalacion():
 def confirmacionNuevoCliente():
     nombre = request.args[0]
     apellido = request.args[1]
-    return dict(nom=nombre, ape=apellido)
+    mensaje = "Nuevo cliente agregado: " + nombre + " " + apellido
+    return dict(mensaje=mensaje)
 
+def ubicacionSolicitante():
+    id_solicitud = request.args[0]
+    rows=db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad==db.localidades.id)).select(
+            db.solicitudes_instalacion.nombre,
+            db.solicitudes_instalacion.apellido,
+            db.solicitudes_instalacion.direccion,
+            db.solicitudes_instalacion.numero_de_calle,
+            db.localidades.localidad,
+            db.solicitudes_instalacion.latitud,
+            db.solicitudes_instalacion.longitud)
+    x0,y0= COORDS_INICIO_MAPA
+    d = dict(x0=x0,y0=y0,rows=rows)
+    return response.render(d)
 
-def inicio():
-    d = 4
-    return dict(datos=d)
+######################################### SOLICITUDES DE SOPORTE #########################################
 
-
-
-def busquedaSolicitudInstalacion():
-    dni_recibido=request.vars.dni
-    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
-    resultado = db((db.solicitudes_instalacion.tecnico == tecnico_logueado)&(db.solicitudes_instalacion.fecha_estimada != None)&(db.solicitudes_instalacion.dni == dni_recibido)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
-    if resultado:
-        return dict(datos= resultado)
-    else:
-        return dict(datos=0)
+def solicitudesSoporteDiaActual():
+    #La siguiente busqueda debe tener filtro de dia actual
+    resultado = db((db.solicitudes_soporte.cliente == db.clientes.id)&(db.clientes.localidad == db.localidades.id)&(db.solicitudes_soporte.estado == 'Pendiente')).select(db.localidades.ALL, db.solicitudes_soporte.ALL, db.clientes.ALL)
+    i=0
+    for x in resultado:
+         i=i+1
+    return dict(datos=resultado, cantidad=i)
 
 def busquedaSoporte():
     d = 4
     return dict(datos=d)
 
-def solicitudesInstalacionDiaActual():
-    import datetime
-    fecha_hoy = datetime.datetime.now().strftime("%Y-%m-%d")
-    #Solo funciona si se loguean
-    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
-    resultado = db((db.solicitudes_instalacion.fecha_estimada == fecha_hoy)&(db.solicitudes_instalacion.tecnico == tecnico_logueado)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
-    i=0
-    for x in resultado:
-         i=i+1
-    return dict(datos=resultado, cantidad=i)
-
-
-def solicitudesInstalacionTodas():
-    #Solo funciona si se loguean
-    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
-    resultado = db((db.solicitudes_instalacion.tecnico == tecnico_logueado)&(db.solicitudes_instalacion.fecha_estimada != None)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)&(db.solicitudes_instalacion.estado == 'Pendiente')).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
-    i=0
-    for x in resultado:
-         i=i+1
-    return dict(datos=resultado, cantidad=i)
-
-
-def solicitudesSoporteDiaActual():
-    #La siguiente busqueda debe tener filtro de dia actual
-    resultado = db((db.solicitudes_soporte.cliente == db.clientes.id)&
-                   (db.clientes.localidad == db.localidades.id)&
-                   (db.solicitudes_soporte.estado == 'Pendiente')).select(db.localidades.ALL, db.solicitudes_soporte.ALL, db.clientes.ALL)
-    i=0
-    for x in resultado:
-         i=i+1
-    return dict(datos=resultado, cantidad=i)
+def soportesTodas():
+    d = 4
+    return dict(datos=d)
 
 def alta_soporte():
     id_solicitud = request.args[0]
@@ -157,45 +153,27 @@ def cambiar_estado_solicitudSoporte():
     db(db.solicitudes_soporte.id == id_solicitud).update(estado='Finalizado')
     redirect(URL(c="tecnicos", f="confirmacionNuevoSoporte", args=(nombre, apellido)))
 
+######################################### MANTENIMIENTOS #########################################
 
-
-
-def soportesTodas():
-    d = 4
-    return dict(datos=d)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def alta_mantenimientos():
+    form = SQLFORM(db.mantenimientos)
+    if form.accepts(request.vars, session):
+        response.flash = 'Formulario aceptado'
+    elif form.errors:
+        response.flash = 'El formulario tiene errores'
+    else:
+        response.flash = 'Complete el formulario'
+    return dict(f=form)
 
 def mantenimientosRealizados():
     d = 4
     return dict(datos=d)
 
-def solicitudesInstalacionDetalles():
-    id_solicitud = request.args[0]
-    resultado = db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion == db.costos_instalaciones.id)).select(db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.solicitudes_instalacion.ALL)
-    return dict(datos=resultado)
-
 def mantenimientosDetalles():
     d=4
     return dict(datos=d)
+
+######################################### OTRAS #########################################
 
 def mapaSolicitudesInstalacion():
     rows=db((db.solicitudes_instalacion.id>0)&(db.solicitudes_instalacion.estado == 'Pendiente')&(db.solicitudes_instalacion.localidad==db.localidades.id)).select(
@@ -210,21 +188,6 @@ def mapaSolicitudesInstalacion():
     d = dict(x0=x0,y0=y0,rows=rows)
     return response.render(d)
 
-
 def mapaSoportes():
     d=4
     return dict(datos=d)
-
-def ubicacionSolicitante():
-    id_solicitud = request.args[0]
-    rows=db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad==db.localidades.id)).select(
-            db.solicitudes_instalacion.nombre,
-            db.solicitudes_instalacion.apellido,
-            db.solicitudes_instalacion.direccion,
-            db.solicitudes_instalacion.numero_de_calle,
-            db.localidades.localidad,
-            db.solicitudes_instalacion.latitud,
-            db.solicitudes_instalacion.longitud)
-    x0,y0= COORDS_INICIO_MAPA
-    d = dict(x0=x0,y0=y0,rows=rows)
-    return response.render(d)
