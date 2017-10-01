@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-def inicio(): return dict(message="hello from administradores.py")
+def inicio(): return dict(message="Hola desde administradores.py")
 
 ######################################### REGISTROS COMPLETOS #########################################
 
