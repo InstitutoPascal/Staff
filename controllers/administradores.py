@@ -253,8 +253,8 @@ def obtener_cae():
     wsfev1.LanzarExcepciones = True
 
     # obteniendo el TA para pruebas
-    ta = WSAA().Autenticar("wsfe", "/home/hernan/pyafipws/staff.crt",
-                                   "/home/hernan/pyafipws/staff.key", debug=True)
+    ta = WSAA().Autenticar("wsfe", "/home/rodrigo/pyafipws/staff.crt",
+                                   "/home/rodrigo/pyafipws/staff.key", debug=True)
     wsfev1.SetTicketAcceso(ta)
     wsfev1.Cuit = "20267565393"
 
@@ -331,20 +331,27 @@ def obtener_cae():
             "Observaciones": wsfev1.Obs,
           }
 
-def generar_pdf():
-    CONFIG_FILE = "/home/hernan/pyafipws/rece.ini"
+def generar_pdf(): 
+    CONFIG_FILE = "/home/rodrigo/pyafipws/rece.ini"
+
     config = SafeConfigParser()
     config.read(CONFIG_FILE)
     conf_fact = dict(config.items('FACTURA'))
     conf_pdf = dict(config.items('PDF'))
+
     fepdf = FEPDF()
+
     # cargo el formato CSV por defecto (factura.csv)
     fepdf.CargarFormato(conf_fact.get("formato", "factura.csv"))
+
     # establezco formatos (cantidad de decimales) según configuración:
     fepdf.FmtCantidad = conf_fact.get("fmt_cantidad", "0.2")
     fepdf.FmtPrecio = conf_fact.get("fmt_precio", "0.2")
+
+
     # creo una factura de ejemplo
     HOMO = True
+
     # datos generales del encabezado:
     tipo_cbte = 1
     punto_vta = 4000
@@ -363,15 +370,15 @@ def generar_pdf():
     fecha_venc_pago = fecha
     # Fechas del período del servicio facturado (solo si concepto> 1)
     fecha_serv_desde = fecha
-    fecha_ser
-    v_hasta = fecha
+    fecha_serv_hasta = fecha
     # campos p/exportación (ej): DOL para USD, indicando cotización:
     moneda_id = 'PES'
     moneda_ctz = 1
     incoterms = 'FOB'                   # solo exportación
     idioma_cbte = 1                     # 1: es, 2: en, 3: pt
+
     # datos adicionales del encabezado:
-    nombre_cliente = 'Nestor Ortigoza'
+    nombre_cliente = 'Juan Perez'
     domicilio_cliente = 'Rua 76 km 34.5 Alagoas'
     pais_dst_cmp = 212                  # 200: Argentina, ver tabla
     id_impositivo = 'PJ54482221-l'      # cat. iva (mercado interno)
@@ -382,17 +389,17 @@ def generar_pdf():
 
     # datos devueltos por el webservice (WSFEv1, WSMTXCA, etc.):
     motivo_obs = "Factura individual, DocTipo: 80, DocNro 30000000007 no se encuentra registrado en los padrones de AFIP."
-    cae = "61123022925855"
+    cae = session.cae
     fch_venc_cae = "20110320"
 
     fepdf.CrearFactura(concepto, tipo_doc, nro_doc, tipo_cbte, punto_vta,
-                cbte_nro, imp_total, imp_tot_conc, imp_neto,
-                imp_iva, imp_trib, imp_op_ex, fecha_cbte, fecha_venc_pago, 
-                fecha_serv_desde, fecha_serv_hasta, 
-                moneda_id, moneda_ctz, cae, fch_venc_cae, id_impositivo,
-                nombre_cliente, domicilio_cliente, pais_dst_cmp, 
-                obs_comerciales, obs_generales, forma_pago, incoterms, 
-                idioma_cbte, motivo_obs)
+        cbte_nro, imp_total, imp_tot_conc, imp_neto,
+        imp_iva, imp_trib, imp_op_ex, fecha_cbte, fecha_venc_pago, 
+        fecha_serv_desde, fecha_serv_hasta, 
+        moneda_id, moneda_ctz, cae, fch_venc_cae, id_impositivo,
+        nombre_cliente, domicilio_cliente, pais_dst_cmp, 
+        obs_comerciales, obs_generales, forma_pago, incoterms, 
+        idioma_cbte, motivo_obs)
 
     # completo campos extra del encabezado:
     ok = fepdf.EstablecerParametro("localidad_cliente", "Hurlingham")
@@ -422,7 +429,6 @@ def generar_pdf():
     importe = 21
     fepdf.AgregarIva(iva_id, base_imp, importe)
 
-
     # detalle de artículos:
     u_mtx = 123456
     cod_mtx = 1234567890123
@@ -431,7 +437,7 @@ def generar_pdf():
     qty = 1.00
     umed = 7
     if tipo_cbte in (1, 2, 3, 4, 5, 34, 39, 51, 52, 53, 54, 60, 64):
-                # discriminar IVA si es clase A / M
+        # discriminar IVA si es clase A / M
         precio = 110.00
         imp_iva = 23.10
     else:
@@ -444,7 +450,7 @@ def generar_pdf():
     despacho = u'Nº 123456'
     dato_a = "Dato A"
     fepdf.AgregarDetalleItem(u_mtx, cod_mtx, codigo, ds, qty, umed, 
-                precio, bonif, iva_id, imp_iva, importe, despacho, dato_a)
+            precio, bonif, iva_id, imp_iva, importe, despacho, dato_a)
 
     # descuento general (a tasa 21%):
     u_mtx = cod_mtx = codigo = None
@@ -459,7 +465,7 @@ def generar_pdf():
         imp_iva = None
     importe = -12.10
     fepdf.AgregarDetalleItem(u_mtx, cod_mtx, codigo, ds, qty, umed, 
-                precio, bonif, iva_id, imp_iva, importe, "")
+            precio, bonif, iva_id, imp_iva, importe, "")
 
     # descripción (sin importes ni cantidad):
     u_mtx = cod_mtx = codigo = None
@@ -469,13 +475,13 @@ def generar_pdf():
     fepdf.AgregarDetalleItem(u_mtx, cod_mtx, codigo, ds, qty, umed, 
             precio, bonif, iva_id, imp_iva, importe, "")
 
-
     # completo campos personalizados de la plantilla:
     fepdf.AgregarDato("custom-nro-cli", "Cod.123")
     fepdf.AgregarDato("custom-pedido", "1234")
     fepdf.AgregarDato("custom-remito", "12345")
     fepdf.AgregarDato("custom-transporte", "Camiones Ej.")
     print "Prueba!"
+    
     # datos fijos:
     for k, v in conf_pdf.items():
         fepdf.AgregarDato(k, v)
@@ -487,7 +493,10 @@ def generar_pdf():
     fepdf.ProcesarPlantilla(num_copias=int(conf_fact.get("copias", 1)),
                             lineas_max=int(conf_fact.get("lineas_max", 24)),
                             qty_pos=conf_fact.get("cant_pos") or 'izq')
+
     salida = "/tmp/factura.pdf"
     fepdf.GenerarPDF(archivo=salida)
+    ##fepdf.MostrarPDF(archivo=salida,imprimir=False)
+    
     response.headers['Content-Type'] = "application/pdf"
     return open(salida, "rb")
