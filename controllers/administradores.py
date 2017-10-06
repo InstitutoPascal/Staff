@@ -135,11 +135,19 @@ def editar_solicitud_soporte():
     return dict(f=form)
 
 def listadoSolicitudes_soporte():
-    datosSolicitudes = db(((db.solicitudes_soporte.tecnico_asignado == db.tecnicos.id) | db.solicitudes_soporte.tecnico_asignado != db.tecnicos.id) & (db.solicitudes_soporte.cliente==db.clientes.id)).select(db.solicitudes_soporte.ALL, db.tecnicos.ALL, db.clientes.ALL)
-    i=0
-    for x in datosSolicitudes:
-         i=i+1
-    return dict (datos=datosSolicitudes, cantidad=i)
+    solicitudesConTecnico = db((db.solicitudes_instalacion.tecnico == db.auth_user.id)&(db.solicitudes_soporte.cliente == db.clientes.id)).select(db.solicitudes_soporte.ALL, db.clientes.ALL, db.auth_user.ALL)
+    
+    solicitudesSinTecnico = db((db.solicitudes_soporte.tecnico == None)&(db.solicitudes_soporte.cliente == db.clientes.id)).select(db.solicitudes_soporte.ALL, db.clientes.ALL)
+    
+    cantidadConTecnico=0
+    for x in solicitudesConTecnico:
+         cantidadConTecnico=cantidadConTecnico+1
+
+    cantidadSinTecnico=0
+    for x in solicitudesSinTecnico:
+         cantidadSinTecnico=cantidadSinTecnico+1
+            
+    return dict (datos=solicitudesConTecnico, cantidad=cantidadConTecnico, datos2=solicitudesSinTecnico, cantidad2=cantidadSinTecnico)
 
 ######################################### CONSULTAS #########################################
 
