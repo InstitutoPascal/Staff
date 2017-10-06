@@ -51,10 +51,10 @@ def alta_solicitud_instalacion():
         response.flash = 'Complete el formulario'
     return dict(f=form)
 
-def confirmacion():
-    mensaje = request.args[0]
+def confirmacion_solicitud_instalacion():
+    tipo_conf = request.args[0]
     id_solicitud = request.args[1]
-    return dict(mensaje=mensaje, id_solicitud=id_solicitud)
+    return dict(tipo_conf=tipo_conf, id_solicitud=id_solicitud)
 
 def editar_solicitud_instalacion():
     id_solicitud = request.args[0]
@@ -107,21 +107,27 @@ def alta_solicitud_soporte():
     form = SQLFORM(db.solicitudes_soporte)
     form.vars.cliente = id_cliente
     if form.accepts(request.vars, session):
-        response.flash = 'Formulario aceptado'
-        redirect(URL(c="administradores", f="inicio"))
+        tipo_conf = 2
+        id_solicitud = db().select(db.solicitudes_soporte.id).last().id
+        redirect(URL(c="administradores", f="confirmacion_solicitud_soporte", args=(tipo_conf, id_solicitud)))
     elif form.errors:
         response.flash = 'El formulario tiene errores'
     else:
         response.flash = 'Complete el formulario'
     return dict(f=form, nom=nombre, ape=apellido)
 
+def confirmacion_solicitud_soporte():
+    tipo_conf = request.args[0]
+    id_solicitud = request.args[1]
+    return dict(tipo_conf=tipo_conf, id_solicitud=id_solicitud)
+
 def editar_solicitud_soporte():
     id_solicitud = request.args[0]
     solicitud =  db(db.solicitudes_soporte.id == id_solicitud).select().first()
     form=SQLFORM(db.solicitudes_soporte, solicitud)
     if form.accepts(request.vars, session):
-        session.flash = 'Formulario correctamente cargado'
-        redirect(URL(c="administradores", f="listadoSolicitudes_soporte"))
+        tipo_conf = 1
+        redirect(URL(c="administradores", f="confirmacion_solicitud_soporte", args=(tipo_conf, id_solicitud)))
     elif form.errors:
 		response.flash = 'Su formulario contiene errores, porfavor modifiquelo'
     else: 
@@ -208,7 +214,7 @@ def coords_by_address(direccion):
 def actualizar_coords():
     if request.args:
         id_solicitud_editada = request.args[0]
-        mensaje = "Solicitud de instalacion numero " + id_solicitud_editada + " editada correctamente"
+        tipo_conf = 1
         ret = ""
         criterios = db.solicitudes_instalacion.localidad == db.localidades.id
         #criterios &= db.clientes.latitud == 0
@@ -217,7 +223,7 @@ def actualizar_coords():
             lat, lon , url = coords_by_address(dom)
             db(db.solicitudes_instalacion.id==reg.solicitudes_instalacion.id).update(latitud=lat, longitud=lon)
             ret += "solicitante: %s coords= %s,%s url: %s\n\r" % (reg.solicitudes_instalacion.id, lat, lon, url)
-            redirect(URL(c="administradores", f="confirmacion", args=(mensaje, id_solicitud_editada)))
+        redirect(URL(c="administradores", f="confirmacion_solicitud_instalacion", args=(tipo_conf, id_solicitud_editada)))
     else:
         ret = ""
         criterios = db.solicitudes_instalacion.localidad == db.localidades.id
@@ -227,9 +233,9 @@ def actualizar_coords():
             lat, lon , url = coords_by_address(dom)
             db(db.solicitudes_instalacion.id==reg.solicitudes_instalacion.id).update(latitud=lat, longitud=lon)
             ret += "solicitante: %s coords= %s,%s url: %s\n\r" % (reg.solicitudes_instalacion.id, lat, lon, url)
+            tipo_conf = 2
             id_solicitud = db().select(db.solicitudes_instalacion.id).last().id
-            mensaje = "Solicitud de instalacion numero " + id_solicitud + " agregada correctamente"
-            redirect(URL(c="administradores", f="confirmacion", args=(mensaje, id_solicitud)))
+        redirect(URL(c="administradores", f="confirmacion_solicitud_intalacion", args=(tipo_conf, id_solicitud)))
 
 def geolocalizacionClientes():
     rows=db((db.clientes.id>0)&(db.clientes.localidad==db.localidades.id)).select(

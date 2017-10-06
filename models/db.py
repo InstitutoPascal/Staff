@@ -287,6 +287,7 @@ db.define_table('instalaciones',
                  db.Field('direccion_ip','string'),
                  db.Field('fecha_alta','date'))
 
+db.instalaciones.fecha_alta.requires=IS_DATE(str(T('%Y-%m-%d')))
 db.instalaciones.panel.requires=IS_IN_DB(db,db.paneles.id, '%(nombre)s',zero=T('Seleccione panel'), error_message= 'Campo obligatorio')
 
 #############################################################################################
@@ -313,14 +314,14 @@ db.define_table('clientes',
 db.define_table('solicitudes_soporte',
                  db.Field('cliente', db.clientes, readable=False, writable=False),
                  db.Field('problematica','string'),
-                 db.Field('tecnico_asignado', db.tecnicos),
+                 db.Field('tecnico', db.auth_user),
                  db.Field('fecha_estimada','date'),
                  db.Field('estado', 'string', readable=False, writable=False))
 
-db.solicitudes_soporte.tecnico_asignado.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
-db.solicitudes_soporte.fecha_estimada.requires=IS_EMPTY_OR(IS_DATE('%d/%M/%Y'))
+db.solicitudes_soporte.tecnico.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id_usuario,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
+db.solicitudes_soporte.fecha_estimada.requires=IS_EMPTY_OR(IS_DATE(str(T('%Y-%m-%d'))))
 db.solicitudes_soporte.estado.default='Pendiente'
-db.solicitudes_soporte.tecnico_asignado.default=None
+db.solicitudes_soporte.tecnico.default=None
 db.solicitudes_soporte.fecha_estimada.default=None
 
 #############################################################################################
