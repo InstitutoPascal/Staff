@@ -123,17 +123,25 @@ db.define_table('auth_user',
                 db.Field('first_name',length=128, label=T('First name')),
                 db.Field('last_name',length=128, label=T('Last name')),
                 db.Field('dni', 'integer'),
-                db.Field('email',length=128, label=T('E-mail')),
-                db.Field('telefono', 'integer'),
-                db.Field('localidad', db.localidades),
                 db.Field('direccion', 'string'),
-                db.Field('numero_de_calle', 'string'),
+                db.Field('numero_de_calle', 'integer'),
+                db.Field('localidad', db.localidades),
+                db.Field('telefono', 'integer'),
+                db.Field('email',length=128, label=T('E-mail')),
                 db.Field('password','password',default='',label=T('Password'),readable=False),
                 db.Field('registration_key',length=64,default='',readable=False,writable=False),
                 db.Field('reset_password_key',length=64,default='',readable=False,writable=False),
                 db.Field('registration_id', length=512, writable=False, readable=False, default=''))
 
+db.auth_user.first_name.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
+db.auth_user.last_name.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
+db.auth_user.dni.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_NOT_IN_DB(db, db.auth_user.dni, error_message = 'El DNI ya se encuentra registrado'),IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
+db.auth_user.direccion.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
+db.auth_user.numero_de_calle.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
 db.auth_user.localidad.requires=IS_IN_DB(db,db.localidades.id,'%(localidad)s',zero=T('Seleccione localidad'), error_message= 'Campo obligatorio')
+db.auth_user.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
+db.auth_user.email.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_EMAIL(error_message='El correo electrónico no es válido')
+db.auth_user.password.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
 auth=Auth(globals(),db)
 auth.define_tables(username=False, signature=False)
 
@@ -149,8 +157,8 @@ db.define_table('gerentes',
 
 db.gerentes.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(12, error_message='Solo hasta 12 caracteres')
 db.gerentes.apellido.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(12, error_message='Solo hasta 12 caracteres')
-db.gerentes.dni.requires=IS_NOT_IN_DB(db, db.gerentes.dni, error_message = 'El DNI ingresado  ya se encuentra registrado') ,IS_NOT_EMPTY(error_message= 'Campo obligatorio') ,IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
-db.gerentes.correo_electronico.requires=IS_EMAIL(error_message='El correo electronico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres'),IS_NOT_EMPTY(error_message= 'Campo obligatorio')
+db.gerentes.dni.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_NOT_IN_DB(db, db.gerentes.dni, error_message = 'El DNI ya se encuentra registrado'),IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
+db.gerentes.correo_electronico.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_EMAIL(error_message='El correo electrónico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres')
 db.gerentes.clave.requires = CRYPT(key=auth.settings.hmac_key, error_message= 'Campo obligatorio')
 db.gerentes.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(15, error_message='Solo hasta 15 caracteres')
 
@@ -262,14 +270,14 @@ db.define_table('solicitudes_instalacion',
 
 db.solicitudes_instalacion.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
 db.solicitudes_instalacion.apellido.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
-db.solicitudes_instalacion.dni.requires=IS_NOT_IN_DB(db, db.solicitudes_instalacion.dni, error_message = 'El DNI ingresado  ya se encuentra registrado') ,IS_NOT_EMPTY(error_message= 'Campo obligatorio') ,IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
+db.solicitudes_instalacion.dni.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_NOT_IN_DB(db, db.solicitudes_instalacion.dni, error_message = 'El DNI ya se encuentra registrado'),IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
 db.solicitudes_instalacion.direccion.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(20, error_message='Solo hasta 20 caracteres')
 db.solicitudes_instalacion.numero_de_calle.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(4, error_message='Solo hasta 4 caracteres')
 db.solicitudes_instalacion.entre_calle_1.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(20, error_message='Solo hasta 20 caracteres')
 db.solicitudes_instalacion.entre_calle_2.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(20, error_message='Solo hasta 20 caracteres')
 db.solicitudes_instalacion.localidad.requires=IS_IN_DB(db,db.localidades.id,'%(localidad)s',zero=T('Seleccione localidad'), error_message= 'Campo obligatorio')
 db.solicitudes_instalacion.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
-db.solicitudes_instalacion.correo_electronico.requires=IS_EMAIL(error_message='El correo electronico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres'),IS_NOT_EMPTY(error_message= 'Campo obligatorio')
+db.solicitudes_instalacion.correo_electronico.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_EMAIL(error_message='El correo electrónico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres')
 db.solicitudes_instalacion.tipo_de_plan.requires=IS_IN_DB(db,db.planes.id,'%(velocidad_de_bajada)s' + ' ' + '%(unidad_de_bajada)s',zero=T('Seleccione plan'), error_message= 'Campo obligatorio')
 db.solicitudes_instalacion.costo_de_instalacion.requires=IS_IN_DB(db,db.costos_instalaciones.id,'$ ' + '%(precio)s' + ' ( ' + '%(descripcion)s' + ' )',zero=T('Seleccione costo'), error_message= 'Campo obligatorio')
 
