@@ -16,7 +16,10 @@ def listadoPlanes():
     return dict (datos=datosPlanes, cantidad=i)
 
 def cobertura():
-    return dict()
+    response.view ="generic.html"
+    if request.vars.localidad:
+        direccion="request.vars.localidad" + "request.vars.calle" + "request.vars.altura"
+    return {}
 
 def mensaje():
     d = 4
