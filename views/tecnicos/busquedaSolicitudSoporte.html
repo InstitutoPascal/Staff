@@ -1,15 +1,16 @@
 {{extend 'layout_tecnicos.html'}}
-
-<title>Búsqueda</title>
-
 <br>
+
+<head>
+    <title>Busqueda Soporte</title>
+</head>
 
 <div class="container">
 
     <div id="loginbox" class="mainbox col-md-6 col-sm-6 col-sm-offset-3"> 
         <div class="panel panel-danger">
             <div class="panel-heading">
-                <div class="panel-title text-center">Búsqueda de solicitud de instalacion</div>
+                <div class="panel-title text-center">Búsqueda de solicitud de soporte</div>
             </div>
 
             <div class="panel-body" >
@@ -49,9 +50,9 @@
 {{else:}}
 
 <table class="table table-hover" border="3px" >
-    <thead bgcolor= "#BC4141" span style="color:#FFFFFF"><tr><th><center>Solicitante</center></th><th><center>Dirección</center></th><th><center>Localidad</center></th><th><center>Fecha</center></th><th><center>Ver ubicación</center></th><th><center>Ver detalles</center></th><th><center>Agregar cliente</center></th></tr></thead>
+    <thead bgcolor= "#BC4141" span style="color:#FFFFFF"><tr><th><center>Solicitante</center></th><th><center>Dirección</center></th><th><center>Localidad</center></th><th><center>Fecha</center></th><th><center>Ver ubicacion</center></th><th><center>Ver detalles</center></th><th><center>Agregar soporte</center></th></tr></thead>
         {{for x in datos: }}
-    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.solicitudes_instalacion.nombre}} {{=x.solicitudes_instalacion.apellido}}</center></td><td><center>{{=x.solicitudes_instalacion.direccion}} {{=x.solicitudes_instalacion.numero_de_calle}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.solicitudes_instalacion.fecha_estimada}}</center></td><td><center><A href="{{=URL(c='tecnicos', f='ubicacionSolicitanteInstalacion', args=(x.solicitudes_instalacion.id, ))}}" target="_blank"><i class="glyphicon glyphicon-map-marker"></i></A></center></td><td><center><A href="{{=URL(c='tecnicos', f='solicitudesInstalacionDetalles', args=(x.solicitudes_instalacion.id, ))}}" target="_blank"><i class="glyphicon glyphicon-th-list"></i></A></center></td><td><center><A href="{{=URL(c='tecnicos', f='alta_instalacion', args=(x.solicitudes_instalacion.id, ))}}"><i class="glyphicon glyphicon-user"></i></A></center></td></tr></tbody>{{pass}}</table>
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.clientes.nombre}} {{=x.clientes.apellido}}</center></td><td><center>{{=x.clientes.direccion}} {{=x.clientes.numero_de_calle}}</center></td><td><center>{{=x.localidades.localidad}}</center></td><td><center>{{=x.solicitudes_soporte.fecha_estimada}}</center></td><td><center><A href="{{=URL(c='tecnicos', f='ubicacionSolicitanteSoporte', args=(x.clientes.id, ))}}" target="_blank"><i class="glyphicon glyphicon-map-marker"></i></A></center></td><td><center><A href="{{=URL(c='tecnicos', f='solicitudesSoporteDetalles', args=(x.solicitudes_soporte.id, ))}}" target="_blank"><i class="glyphicon glyphicon-th-list"></i></A></center></td><td><center><A href="{{=URL(c='tecnicos', f='alta_soporte', args=(x.solicitudes_soporte.id, ))}}"><i class="glyphicon glyphicon-wrench"></i></A></center></td></tr></tbody>{{pass}}</table>
 
 {{pass}}
 {{pass}}
