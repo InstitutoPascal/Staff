@@ -96,10 +96,9 @@ def cambiar_estado_solicitudInstalacion():
 def confirmacionNuevoCliente():
     nombre = request.args[0]
     apellido = request.args[1]
-    mensaje = "Nuevo cliente agregado: " + nombre + " " + apellido
-    return dict(mensaje=mensaje)
+    return dict(nombre=nombre, apellido=apellido)
 
-def ubicacionSolicitante():
+def ubicacionSolicitanteInstalacion():
     id_solicitud = request.args[0]
     rows=db((db.solicitudes_instalacion.id == id_solicitud)&(db.solicitudes_instalacion.localidad==db.localidades.id)).select(
             db.solicitudes_instalacion.nombre,
@@ -116,20 +115,50 @@ def ubicacionSolicitante():
 ######################################### SOLICITUDES DE SOPORTE #########################################
 
 def solicitudesSoporteDiaActual():
-    #La siguiente busqueda debe tener filtro de dia actual
-    resultado = db((db.solicitudes_soporte.cliente == db.clientes.id)&(db.clientes.localidad == db.localidades.id)&(db.solicitudes_soporte.estado == 'Pendiente')).select(db.localidades.ALL, db.solicitudes_soporte.ALL, db.clientes.ALL)
+    import datetime
+    fecha_hoy = datetime.datetime.now().strftime("%Y-%m-%d")
+    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
+    resultado = db((db.solicitudes_soporte.tecnico == tecnico_logueado)&(db.solicitudes_soporte.fecha_estimada == fecha_hoy)&(db.solicitudes_soporte.cliente == db.clientes.id)&(db.clientes.localidad == db.localidades.id)&(db.solicitudes_soporte.estado == 'Pendiente')).select(db.localidades.ALL, db.solicitudes_soporte.ALL, db.clientes.ALL)
     i=0
     for x in resultado:
          i=i+1
     return dict(datos=resultado, cantidad=i)
 
-def busquedaSoporte():
-    d = 4
-    return dict(datos=d)
+def solicitudesSoporteTodas():
+    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
+    resultado = db((db.solicitudes_soporte.tecnico == tecnico_logueado)&(db.solicitudes_soporte.cliente == db.clientes.id)&(db.clientes.localidad == db.localidades.id)&(db.solicitudes_soporte.fecha_estimada != None)&(db.solicitudes_soporte.estado == 'Pendiente')).select(db.localidades.ALL, db.solicitudes_soporte.ALL, db.clientes.ALL)
+    i=0
+    for x in resultado:
+         i=i+1
+    return dict(datos=resultado, cantidad=i)
 
-def soportesTodas():
-    d = 4
-    return dict(datos=d)
+def busquedaSolicitudSoporte():
+    dni_recibido=request.vars.dni
+    tecnico_logueado = db(db.auth_user.id == auth.user_id).select(db.auth_user.id)[0].id
+    resultado = db((db.solicitudes_soporte.tecnico == tecnico_logueado)&(db.solicitudes_soporte.fecha_estimada != None)&(db.solicitudes_soporte.cliente == db.clientes.id)&(db.clientes.dni == dni_recibido)&(db.clientes.localidad == db.localidades.id)&(db.solicitudes_soporte.estado == 'Pendiente')).select(db.localidades.ALL, db.solicitudes_soporte.ALL, db.clientes.ALL)
+    if resultado:
+        return dict(datos= resultado)
+    else:
+        return dict(datos=0)
+
+def solicitudesSoporteDetalles():
+    id_solicitud = request.args[0]
+    resultado = db((db.solicitudes_soporte.id == id_solicitud)&(db.solicitudes_soporte.cliente == db.clientes.id)&(db.clientes.tipo_de_plan == db.planes.id)&(db.clientes.localidad == db.localidades.id)).select(db.clientes.ALL, db.localidades.ALL, db.planes.ALL, db.solicitudes_soporte.ALL)
+    return dict(datos=resultado)
+
+def ubicacionSolicitanteSoporte():
+    id_solicitud = request.args[0]
+    rows=db((db.clientes.id == id_solicitud)&(db.clientes.localidad==db.localidades.id)).select(
+            db.clientes.nombre,
+            db.clientes.apellido,
+            db.clientes.direccion,
+            db.clientes.numero_de_calle,
+            db.localidades.localidad,
+            db.clientes.latitud,
+            db.clientes.longitud)
+    x0,y0= COORDS_INICIO_MAPA
+    d = dict(x0=x0,y0=y0,rows=rows)
+    return response.render(d)
 
 def alta_soporte():
     id_solicitud = request.args[0]
@@ -152,6 +181,11 @@ def cambiar_estado_solicitudSoporte():
     apellido = request.args[2]
     db(db.solicitudes_soporte.id == id_solicitud).update(estado='Finalizado')
     redirect(URL(c="tecnicos", f="confirmacionNuevoSoporte", args=(nombre, apellido)))
+
+def confirmacionNuevoSoporte():
+    nombre= request.args[0]
+    apellido= request.args[1]
+    return dict(nombre=nombre, apellido=apellido)
 
 ######################################### MANTENIMIENTOS #########################################
 
