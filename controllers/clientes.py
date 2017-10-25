@@ -52,8 +52,7 @@ def modificarFormulario():
     planes = db(db.planes.id>0).select()
     localidades = db(db.localidades.id>0).select()
     if reg:
-        redirect(URL(c="clientes",f="modificarFormulario"))
-        session.flash="el dni ya esta ingresado"
+        redirect(URL(c="clientes",f="mensaje_dni_modformulario"))
     if request.vars:
         session.plan_id = request.vars.plan
         session.costo = request.vars.costo
