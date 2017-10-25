@@ -1,0 +1,177 @@
+{{extend 'layout_clientes.html'}}
+<style type="text/css">
+.form-style-5{
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+.form-style-5 fieldset{
+    border: none;
+}
+.form-style-5 legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+.form-style-5 label {
+    display: block;
+    margin-bottom: 8px;
+}
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 textarea,
+.form-style-5 select {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0;
+    outline: 0;
+    padding: 7px;
+    width: 100%;
+    box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    background-color: #e8eeef;
+    color:#f15c3e;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px;
+    
+}
+.form-style-5 input[type="text"]:focus,
+.form-style-5 input[type="date"]:focus,
+.form-style-5 input[type="datetime"]:focus,
+.form-style-5 input[type="email"]:focus,
+.form-style-5 input[type="number"]:focus,
+.form-style-5 input[type="search"]:focus,
+.form-style-5 input[type="time"]:focus,
+.form-style-5 input[type="url"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+    background: #d2d9dd;
+}
+.form-style-5 select{
+    -webkit-appearance: menulist-button;
+    height:35px;
+}
+.form-style-5 .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+.form-style-5 input[type="submit"],
+.form-style-5 input[type="button"],
+.form-style-5 button[type="submit"],
+.form-style-5 a[role="button"]
+
+
+{
+    position: relative;
+    display: block;
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    margin: 0 auto;
+    background: #1abc9c; 
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    width: 80%;
+    border: 1px solid #16a085;
+    border-width: 1px 1px 3px;
+    margin-bottom: 10px;
+}
+.form-style-5 input[type="submit"]:hover,
+.form-style-5 input[type="button"]:hover,
+.form-style-5 a[role="button"]:hover,
+{
+    background: #109177;
+}
+</style>
+
+<body>
+    </br>
+<div class="form-style-5">
+<center><img src="{{=URL('static','images/contacto.png')}}" width="200" height="200" alt="logo" /></center>
+<form method="POST">
+<fieldset>
+<legend><span class="number"></span>Modifique</legend>
+<table>
+<tr>
+
+<td><strong>Costo de instalación<select id="job" name="costo" method="POST">
+ <optgroup>
+    {{for reg in precio:}}
+    <option value="{{=reg.id}}" {{if int(session.costo) == reg.id:}}selected{{pass}}>{{=reg.precio}} {{=reg.descripcion}}</option>
+    {{pass}}
+</select>
+         </td>
+    </strong>
+
+<td><strong>Tipo de plan<select id="job" name="plan" method="POST">
+ <optgroup>
+    {{for reg in planes:}}
+    <option value="{{=reg.id}}" {{if int(session.plan_id) == reg.id:}}selected{{pass}}>{{=reg.velocidad_de_bajada}} {{=reg.unidad_de_bajada}}</option>
+    {{pass}}
+</select>
+         </td>
+    </strong>
+
+</tr>
+    <tr>
+  <td><strong>Nombre<input type="text" name="nombre" value="{{=session.nombre}}"  </strong></td>
+  <td><strong>Apellido<input type="text" name="apellido" value="{{=session.apellido}}"</strong></td>
+        </tr>
+      <tr>
+  <td><strong>Dni<input type="text" name="dni" value="{{=session.dni}}"  </strong></td>
+          </tr>
+
+        <tr>
+<strong>Localidad<select id="job" name="localidad" method="POST">
+ <optgroup>
+    {{for reg in localidades:}}
+    <option value="{{=reg.id}}" {{if int(session.localidad) == reg.id:}}selected{{pass}}>{{=reg.localidad}}</option>
+     {{pass}}
+</select>
+    </strong>
+    </tr>
+
+        <tr>
+  <td><strong>Direccion<input type="text" name="direccion" value="{{=session.direccion}}" </strong></td>
+   <td><strong>Numero de calle<input type="text" name="num_calle" value="{{=session.num_calle}}" </strong></td>
+        </tr>
+            <tr>
+  <td><strong>Entre calle 1<input type="text" name="calle1" value="{{=session.calle1}}" </strong></td>
+   <td><strong>Entre calle 2<input type="text" name="calle2" value="{{=session.calle2}}" </strong></td>
+        </tr>
+            <tr>
+  <td><strong>Telefono<input type="text" name="tel1" value="{{=session.tel}}" </strong></td>
+   <td><strong>Telefono alternativo<input type="text" name="tel2" value="{{=session.tel2}}" </strong></td>
+        </tr>
+ </table>
+    <strong>Correo electronico<input type="text" name="email" value="{{=session.email}}" </strong>
+<input type="submit" value="confirmar">
+</form>
+</div>
+</body>
+</html>
