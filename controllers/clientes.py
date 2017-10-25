@@ -22,8 +22,10 @@ def cobertura():
     return {}
 
 def mensaje():
-    d = 4
-    return dict(datos=d)
+    return {}
+
+def mensaje_dni_modformulario():
+    return {}
 
 def tipoInstalacion():
     if request.args:
