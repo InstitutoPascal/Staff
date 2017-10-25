@@ -144,8 +144,10 @@
    <td><strong>Telefono alternativo<input type="text" name="tel2" value="{{=session.tel2}}" readonly = "readonly" </strong></td>
         </tr>
  </table>
-    <strong>Correo electronico<input type="text" name="tel2" value="{{=session.email}}" readonly = "readonly" </strong>
-<input type="submit" value="Siguiente">
+    <strong>Correo electronico<input type="text" name="email" value="{{=session.email}}" readonly = "readonly" </strong>
+<input type="submit" value="Enviar datos">
+<a href="{{=URL(c="clientes",f="inicio")}}" role="button">Ir a inicio</a>
+<a href="{{=URL(c="clientes",f="modificarFormulario")}}" role="button">Modificar formulario</a>
 </form>
 </div>
 </body>
