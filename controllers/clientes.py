@@ -3,10 +3,7 @@
 def index(): return dict(message="hello from clientes.py")
 
 def inicio():
-    d = 4
-    return dict(datos=d)
-
-
+    return {}
 
 def listadoPlanes():
     datosPlanes = db().select(db.planes.ALL)
@@ -16,9 +13,6 @@ def listadoPlanes():
     return dict (datos=datosPlanes, cantidad=i)
 
 def cobertura():
-    response.view ="generic.html"
-    if request.vars.localidad:
-        direccion="request.vars.localidad" + "request.vars.calle" + "request.vars.altura"
     return {}
 
 def mensaje():
