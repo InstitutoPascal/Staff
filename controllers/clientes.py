@@ -41,6 +41,36 @@ def vistaFormulario():
         redirect(URL(c="clientes",f="cierreFormulario"))
     return dict (costo=costo,plan=plan,localidad=localidad)
 
+def modificarFormulario():
+    costo= db(db.costos_instalaciones.id == session.costo).select(db.costos_instalaciones.precio).first()
+    plan= db(db.planes.id == session.plan_id).select(db.planes.velocidad_de_bajada).first()
+    localidad= db(db.localidades.id == session.localidad).select(db.localidades.localidad).first()
+    reg = db(db.solicitudes_instalacion.dni == request.vars.dni).select(db.solicitudes_instalacion.id).first()
+    precio = db(db.costos_instalaciones.id>0).select()
+    planes = db(db.planes.id>0).select()
+    localidades = db(db.localidades.id>0).select()
+    if reg:
+        redirect(URL(c="clientes",f="modificarFormulario"))
+        session.flash="el dni ya esta ingresado"
+    if request.vars:
+        session.plan_id = request.vars.plan
+        session.costo = request.vars.costo
+        session.localidad = request.vars.localidad
+        session.dni = request.vars.dni
+        session.nombre = request.vars.nombre
+        session.apellido = request.vars.apellido
+        session.localidad = request.vars.localidad
+        session.direccion = request.vars.direccion
+        session.num_calle = request.vars.num_calle
+        session.calle1 = request.vars.calle1
+        session.calle2 = request.vars.calle2
+        session.tel = request.vars.tel
+        session.tel2 = request.vars.tel2
+        session.email = request.vars.email
+        redirect(URL(c="clientes",f="cierreFormulario"))
+    return dict (costo=costo,plan=plan,localidad=localidad, precio=precio , planes=planes , localidades=localidades)
+
+
 def datosUbicacion():
     if request.vars.localidad:
         session.localidad = request.vars.localidad
