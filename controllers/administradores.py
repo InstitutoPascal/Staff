@@ -43,31 +43,35 @@ def listadoPaneles():
 def alta_solicitud_instalacion():
     form = SQLFORM(db.solicitudes_instalacion)
     if form.accepts(request.vars, session):
-        redirect(URL(c="administradores", f="actualizar_coords"))
-        response.flash = 'Formulario aceptado'
+        tipo = 1
+        id_solicitud = db().select(db.solicitudes_instalacion.id).last().id
+        redirect(URL(c="administradores", f="confirmacion_solicitud_instalacion", args=(tipo, id_solicitud)))
     elif form.errors:
         response.flash = 'El formulario tiene errores'
     else:
         response.flash = 'Complete el formulario'
     return dict(f=form)
 
+
 def confirmacion_solicitud_instalacion():
-    tipo_conf = request.args[0]
+    tipo = request.args[0]
     id_solicitud = request.args[1]
-    return dict(tipo_conf=tipo_conf, id_solicitud=id_solicitud)
+    return dict(tipo=tipo, id_solicitud=id_solicitud)
 
 def editar_solicitud_instalacion():
     id_solicitud = request.args[0]
+    tipo = 2
     solicitud =  db(db.solicitudes_instalacion.id == id_solicitud).select().first()
     form=SQLFORM(db.solicitudes_instalacion, solicitud)
     if form.accepts(request.vars, session):
         session.flash = 'Formulario correctamente cargado'
-        redirect(URL(c="administradores", f="actualizar_coords", args=(id_solicitud)))
+        redirect(URL(c="administradores", f="confirmacion_solicitud_instalacion", args=(tipo, id_solicitud)))
     elif form.errors:
-		response.flash = 'Su formulario contiene errores, porfavor modifiquelo'
-    else: 
-		response.flash = 'Por favor rellene el formulario'
+        response.flash = 'Su formulario contiene errores, porfavor modifiquelo'
+    else:
+        response.flash = 'Por favor rellene el formulario'
     return dict(f=form)
+
 
 def listadoSolicitudes_instalacion():
     solicitudesConTecnico = db((db.solicitudes_instalacion.localidad == db.localidades.id)&(db.solicitudes_instalacion.tipo_de_plan == db.planes.id)&(db.solicitudes_instalacion.costo_de_instalacion==db.costos_instalaciones.id)&(db.solicitudes_instalacion.tecnico == db.auth_user.id)).select(db.solicitudes_instalacion.ALL, db.localidades.ALL, db.planes.ALL, db.costos_instalaciones.ALL, db.auth_user.ALL)
@@ -221,29 +225,24 @@ def coords_by_address(direccion):
 
 def actualizar_coords():
     if request.args:
-        id_solicitud_editada = request.args[0]
-        tipo_conf = 1
+        id_solicitud = request.args[0]
         ret = ""
-        criterios = db.solicitudes_instalacion.localidad == db.localidades.id
-        #criterios &= db.clientes.latitud == 0
-        for reg in db(criterios).select(db.solicitudes_instalacion.id, db.solicitudes_instalacion.direccion, db.solicitudes_instalacion.numero_de_calle, db.localidades.localidad, db.localidades.codigo_postal):
+        for reg in db((db.solicitudes_instalacion.localidad == db.localidades.id)&(id_solicitud == db.solicitudes_instalacion.id)).select(db.solicitudes_instalacion.id, db.solicitudes_instalacion.direccion, db.solicitudes_instalacion.numero_de_calle, db.localidades.localidad, db.localidades.codigo_postal):
             dom = "%s %s, %s, %s, %s" % (reg.solicitudes_instalacion.direccion, reg.solicitudes_instalacion.numero_de_calle, reg.localidades.localidad,"buenos aires","argentina")
             lat, lon , url = coords_by_address(dom)
             db(db.solicitudes_instalacion.id==reg.solicitudes_instalacion.id).update(latitud=lat, longitud=lon)
             ret += "solicitante: %s coords= %s,%s url: %s\n\r" % (reg.solicitudes_instalacion.id, lat, lon, url)
-        redirect(URL(c="administradores", f="confirmacion_solicitud_instalacion", args=(tipo_conf, id_solicitud_editada)))
+            mensaje = "¡Se ha actualizado la ubicación!"
+        return dict (mensaje = mensaje)
     else:
         ret = ""
-        criterios = db.solicitudes_instalacion.localidad == db.localidades.id
-        #criterios &= db.clientes.latitud == 0
-        for reg in db(criterios).select(db.solicitudes_instalacion.id, db.solicitudes_instalacion.direccion, db.solicitudes_instalacion.numero_de_calle, db.localidades.localidad, db.localidades.codigo_postal):
+        for reg in db(db.solicitudes_instalacion.localidad == db.localidades.id).select(db.solicitudes_instalacion.id, db.solicitudes_instalacion.direccion, db.solicitudes_instalacion.numero_de_calle, db.localidades.localidad, db.localidades.codigo_postal):
             dom = "%s %s, %s, %s, %s" % (reg.solicitudes_instalacion.direccion, reg.solicitudes_instalacion.numero_de_calle, reg.localidades.localidad,"buenos aires","argentina")
             lat, lon , url = coords_by_address(dom)
             db(db.solicitudes_instalacion.id==reg.solicitudes_instalacion.id).update(latitud=lat, longitud=lon)
             ret += "solicitante: %s coords= %s,%s url: %s\n\r" % (reg.solicitudes_instalacion.id, lat, lon, url)
-            tipo_conf = 2
-            id_solicitud = db().select(db.solicitudes_instalacion.id).last().id
-        redirect(URL(c="administradores", f="confirmacion_solicitud_intalacion", args=(tipo_conf, id_solicitud)))
+            mensaje = "¡Se han actualizado todas las ubicaciones!"
+        return dict (mensaje = mensaje)
 
 def geolocalizacionClientes():
     rows=db((db.clientes.id>0)&(db.clientes.localidad==db.localidades.id)).select(
@@ -520,6 +519,6 @@ def generar_pdf():
     salida = "/tmp/factura.pdf"
     fepdf.GenerarPDF(archivo=salida)
     ##fepdf.MostrarPDF(archivo=salida,imprimir=False)
-    
+
     response.headers['Content-Type'] = "application/pdf"
     return open(salida, "rb")
