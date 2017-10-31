@@ -7,10 +7,7 @@ def inicio():
 
 def listadoPlanes():
     datosPlanes = db().select(db.planes.ALL)
-    i=0
-    for x in datosPlanes:
-         i=i+1
-    return dict (datos=datosPlanes, cantidad=i)
+    return dict (datos=datosPlanes)
 
 def cobertura():
     return {}
