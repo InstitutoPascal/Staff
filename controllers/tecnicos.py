@@ -39,12 +39,11 @@ def solicitudesInstalacionDetalles():
 
 def alta_instalacion():
     id_solicitud = request.args[0]
-    nombre = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.nombre)[0].nombre
-    apellido = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.apellido)[0].apellido
+    nombre = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.nombre).first().nombre
+    apellido = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.apellido).first().apellido
     form = SQLFORM(db.instalaciones)
     form.vars.numero_de_solicitud = id_solicitud
     if form.accepts(request.vars, session):
-        response.flash = 'Formulario aceptado'
         redirect(URL(c="tecnicos", f="agregar_cliente", args=(id_solicitud,)))
     elif form.errors:
         response.flash = 'El formulario tiene errores'
@@ -55,47 +54,33 @@ def alta_instalacion():
 def agregar_cliente():
     id_solicitud = request.args[0]
     id_instalacion = db().select(db.instalaciones.id).last().id
-    dni = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.dni)[0].dni
-    nom = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.nombre)[0].nombre
-    ape = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.apellido)[0].apellido
-    localidad = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.localidad)[0].localidad
-    direccion = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.direccion)[0].direccion
-    numero_de_calle = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.numero_de_calle)[0].numero_de_calle
-    latitud = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.latitud)[0].latitud
-    longitud = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.longitud)[0].longitud
-    entre_calle_1 = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.entre_calle_1)[0].entre_calle_1
-    entre_calle_2 = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.entre_calle_2)[0].entre_calle_2
-    plan = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.tipo_de_plan)[0].tipo_de_plan
-    telefono = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.telefono)[0].telefono
-    telefono_alternativo = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.telefono_alternativo)[0].telefono_alternativo
-    correo = db(id_solicitud == db.solicitudes_instalacion.id).select(db.solicitudes_instalacion.correo_electronico)[0].correo_electronico
+    datos_solicitud = db(db.solicitudes_instalacion.id == id_solicitud).select().first()
     db.clientes.insert(numero_de_instalacion=id_instalacion,
-                       nombre=nom,
-                       apellido=ape,
-                       dni=dni,
-                       direccion=direccion,
-                       numero_de_calle = numero_de_calle,
-                       latitud = latitud,
-                       longitud = longitud,
-                       entre_calle_1 = entre_calle_1,
-                       entre_calle_2 = entre_calle_2,
-                       localidad = localidad,
-                       telefono = telefono,
-                       telefono_alternativo = telefono_alternativo,
-                       correo_electronico = correo,
-                       tipo_de_plan = plan)
-    redirect(URL(c="tecnicos", f="cambiar_estado_solicitudInstalacion", args=(id_solicitud, nom, ape)))
+                       nombre= datos_solicitud.nombre,
+                       apellido= datos_solicitud.apellido,
+                       dni= datos_solicitud.dni,
+                       direccion= datos_solicitud.direccion,
+                       numero_de_calle= datos_solicitud.numero_de_calle,
+                       latitud = datos_solicitud.latitud,
+                       longitud = datos_solicitud.longitud,
+                       entre_calle_1 = datos_solicitud.entre_calle_1,
+                       entre_calle_2 = datos_solicitud.entre_calle_2,
+                       localidad = datos_solicitud.localidad,
+                       telefono = datos_solicitud.telefono,
+                       telefono_alternativo = datos_solicitud.telefono_alternativo,
+                       correo_electronico = datos_solicitud.correo_electronico,
+                       tipo_de_plan = datos_solicitud.tipo_de_plan)
+    redirect(URL(c="tecnicos", f="cambiar_estado_solicitudInstalacion", args=(id_solicitud)))
 
 def cambiar_estado_solicitudInstalacion():
     id_solicitud = request.args[0]
-    nombre = request.args[1]
-    apellido = request.args[2]
     db(db.solicitudes_instalacion.id == id_solicitud).update(estado='Finalizado')
-    redirect(URL(c="tecnicos", f="confirmacionNuevoCliente", args=(nombre, apellido)))
+    redirect(URL(c="tecnicos", f="confirmacionNuevoCliente", args=(id_solicitud)))
 
 def confirmacionNuevoCliente():
-    nombre = request.args[0]
-    apellido = request.args[1]
+    id_solicitud = request.args[0]
+    nombre = db(db.solicitudes_instalacion.id == id_solicitud).select(db.solicitudes_instalacion.nombre).first().nombre
+    apellido = db(db.solicitudes_instalacion.id == id_solicitud).select(db.solicitudes_instalacion.apellido).first().apellido
     return dict(nombre=nombre, apellido=apellido)
 
 def ubicacionSolicitanteInstalacion():
