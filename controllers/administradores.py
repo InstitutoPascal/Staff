@@ -208,9 +208,14 @@ def coords_by_address(direccion):
         key = KEY_API_GOOGLE_MAP
         url='https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s' % (address, key)
 
-        response = urllib.urlopen(url).read()
+        ##response = urllib.urlopen(url).read()
+        
+        ##import pdb; pdb.set_trace()
+        import urllib2
+        response = urllib2.urlopen(url)
+        data = response.read()
         import json
-        ret = json.loads(response)
+        ret = json.loads(data)
         #item=re.compile('\<coordinates\>(?P<la>[^,]),(?P<lo>[^,]).*?\</coordinates\>').search(t)
         #la,lo=float(item.group('la')),float(item.group('lo'))
         la = ret["results"][0]["geometry"]["location"]["lat"]
@@ -219,7 +224,9 @@ def coords_by_address(direccion):
     except Exception, e: 
         #raise RuntimeError(str(e))
         pass
-        raise
+        print url
+        print str(e)
+        #raise
     #raise RuntimeError(str("%s = %s" % (address, t)))
     return 0.0,0.0,url
 
@@ -227,7 +234,11 @@ def actualizar_coords():
     if request.args:
         id_solicitud = request.args[0]
         ret = ""
-        for reg in db((db.solicitudes_instalacion.localidad == db.localidades.id)&(id_solicitud == db.solicitudes_instalacion.id)).select(db.solicitudes_instalacion.id, db.solicitudes_instalacion.direccion, db.solicitudes_instalacion.numero_de_calle, db.localidades.localidad, db.localidades.codigo_postal):
+        q = (db.solicitudes_instalacion.localidad == db.localidades.id)
+        q &= (id_solicitud == db.solicitudes_instalacion.id)
+        for reg in db(q).select(db.solicitudes_instalacion.id, db.solicitudes_instalacion.direccion, 
+                                db.solicitudes_instalacion.numero_de_calle, db.localidades.localidad, 
+                                db.localidades.codigo_postal):
             dom = "%s %s, %s, %s, %s" % (reg.solicitudes_instalacion.direccion, reg.solicitudes_instalacion.numero_de_calle, reg.localidades.localidad,"buenos aires","argentina")
             lat, lon , url = coords_by_address(dom)
             db(db.solicitudes_instalacion.id==reg.solicitudes_instalacion.id).update(latitud=lat, longitud=lon)
