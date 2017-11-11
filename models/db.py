@@ -95,10 +95,10 @@ from gluon.tools import Auth, Service, PluginManager
 # -------------------------------------------------------------------------
 # configure email
 # -------------------------------------------------------------------------
-#mail = auth.settings.mailer
-#mail.settings.server = 'logging' if request.is_local else myconf.get('smtp.server')
-#mail.settings.sender = myconf.get('smtp.sender')
-#mail.settings.login = myconf.get('smtp.login')
+mail = auth.settings.mailer
+mail.settings.server = 'smtp.gmail.com:587'
+mail.settings.sender = 'staff.technology.internet@gmail.com'
+mail.settings.login = 'staff.technology.internet@gmail.com:naruto87'
 #mail.settings.tls = myconf.get('smtp.tls') or False
 #mail.settings.ssl = myconf.get('smtp.ssl') or False
 
