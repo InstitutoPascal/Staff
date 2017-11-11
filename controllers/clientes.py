@@ -10,8 +10,19 @@ def listadoPlanes():
     return dict (datos=datosPlanes)
 
 def cobertura():
-    return {}
-
+    if request.vars:
+        response.view ="generic.html"
+        direccion=request.vars.calle + " " + request.vars.altura + ", " + request.vars.localidad
+        #direccion = "Puerto Argentino 4243, Gonzalez Catan, Buenos Aires, Argentina"
+        lat, lon, url = coords_by_address(direccion)
+        session.lat=lat
+        session.lon=lon
+        redirect(URL(c="clientes",f="mapaCliente"))
+        #return {"lat": lat, "lon": lon, "direccion": direccion}
+   
+    else:
+        # no completo el form
+        return {}
 def coords_by_address(direccion):
     import re, urllib
     try:
