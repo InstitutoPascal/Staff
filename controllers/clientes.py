@@ -12,6 +12,30 @@ def listadoPlanes():
 def cobertura():
     return {}
 
+def coords_by_address(direccion):
+    import re, urllib
+    try:
+        address=urllib.quote(direccion)
+        #url='http://maps.google.com/maps/geo?q=%s&output=xml'%address
+        key = KEY_API_GOOGLE_MAP
+        url='https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s' % (address, key)
+
+        response = urllib.urlopen(url).read()
+        import json
+        ret = json.loads(response)
+        #item=re.compile('\<coordinates\>(?P<la>[^,]),(?P<lo>[^,]).*?\</coordinates\>').search(t)
+        #la,lo=float(item.group('la')),float(item.group('lo'))
+        la = ret["results"][0]["geometry"]["location"]["lat"]
+        lo = ret["results"][0]["geometry"]["location"]["lng"]
+        return la,lo,url
+    except Exception, e: 
+        #raise RuntimeError(str(e))
+        pass
+        raise
+    #raise RuntimeError(str("%s = %s" % (address, t)))
+    return 0.0,0.0,url
+
+
 def mensaje():
     return {}
 
