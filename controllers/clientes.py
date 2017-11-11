@@ -188,3 +188,6 @@ def consulta():
              response.flash = 'Fallo el envio del email'
 
     return {}
+
+def mapaCliente():
+    return{}
