@@ -83,22 +83,22 @@ response.form_label_separator = myconf.get('forms.separator') or ''
 from gluon.tools import Auth, Service, PluginManager
 
 # host names must be a list of allowed host names (glob syntax allowed)
-auth = Auth(db, host_names=myconf.get('host.names'))
-service = Service()
-plugins = PluginManager()
+#auth = Auth(db, host_names=myconf.get('host.names'))
+#service = Service()
+#plugins = PluginManager()
 
 # -------------------------------------------------------------------------
 # create all tables needed by auth if not custom tables
 # -------------------------------------------------------------------------
-auth.define_tables(username=False, signature=False)
+#auth.define_tables(username=False, signature=False)
 
 # -------------------------------------------------------------------------
 # configure email
 # -------------------------------------------------------------------------
-mail = auth.settings.mailer
-mail.settings.server = 'smtp.gmail.com:587'
-mail.settings.sender = 'staff.technology.internet@gmail.com'
-mail.settings.login = 'staff.technology.internet@gmail.com:naruto87'
+#mail = auth.settings.mailer
+#mail.settings.server = 'smtp.gmail.com:587'
+#mail.settings.sender = 'staff.technology.internet@gmail.com'
+#mail.settings.login = 'staff.technology.internet@gmail.com:naruto87'
 #mail.settings.tls = myconf.get('smtp.tls') or False
 #mail.settings.ssl = myconf.get('smtp.ssl') or False
 
