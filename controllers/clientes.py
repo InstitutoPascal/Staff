@@ -150,6 +150,11 @@ def cierreFormulario():
     return {}
 
 def consulta():
+    from gluon.tools import Mail
+    mail = Mail()
+    mail.settings.server = 'smtp.gmail.com:587'
+    mail.settings.sender = 'staff.technology.internet@gmail.com'
+    mail.settings.login = 'staff.technology.internet@gmail.com:naruto87'
     form_cons = db(db.clientes.dni == request.vars.dni_soporte).select(db.clientes.id).first()
     form_sop=db(db.clientes.dni == request.vars.dni_cliente).select(db.clientes.id).first()
     if form_cons:
