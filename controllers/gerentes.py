@@ -60,6 +60,9 @@ def alta_planes():
 def alta_nodos():
     form = SQLFORM(db.nodos)
     if form.accepts(request.vars, session):
+        tipo = 1
+        id_solicitud = db().select(db.nodos.id).last().id
+        redirect(URL(c="clientes", f="confirmacion_nodo", args=(tipo, id_solicitud)))
         response.flash = 'Formulario aceptado'
     elif form.errors:
         response.flash = 'El formulario tiene errores'
