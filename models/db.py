@@ -214,7 +214,12 @@ db.planes.precio.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LE
 db.define_table('nodos',
                  db.Field('nombre','string'),
                  db.Field('subred','string'),
-                 db.Field('localidad',db.localidades))
+                 db.Field('localidad',db.localidades),
+                 db.Field('direccion','string'),
+                 db.Field('numero_de_calle','integer'),
+                 db.Field('rango_km','integer'),
+                 db.Field('latitud','double',default=0.0,readable=False,writable=False),
+                 db.Field('longitud','double',default=0.0,readable=False,writable=False))
 
 db.nodos.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(10, error_message='Solo hasta 10 caracteres')
 db.nodos.subred.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(17, error_message='Solo hasta 3 caracteres')
