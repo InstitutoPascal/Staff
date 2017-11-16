@@ -139,11 +139,11 @@
 
 </tr>
     <tr>
-  <td><strong>Nombre<input type="text" name="nombre" value="{{=session.nombre}}"  </strong></td>
-  <td><strong>Apellido<input type="text" name="apellido" value="{{=session.apellido}}"</strong></td>
+  <td><strong>Nombre<input type="text" name="nombre" value="{{=session.nombre}}"  required</strong></td>
+  <td><strong>Apellido<input type="text" name="apellido" value="{{=session.apellido}}"required</strong></td>
         </tr>
       <tr>
-  <td><strong>Dni<input type="text" name="dni" value="{{=session.dni}}"  </strong></td>
+  <td><strong>Dni<input type="number" name="dni" value="{{=session.dni}}" required </strong></td>
           </tr>
 
         <tr>
@@ -157,19 +157,19 @@
     </tr>
 
         <tr>
-  <td><strong>Direccion<input type="text" name="direccion" value="{{=session.direccion}}" </strong></td>
-   <td><strong>Numero de calle<input type="text" name="num_calle" value="{{=session.num_calle}}" </strong></td>
+  <td><strong>Direccion<input type="text" name="direccion" value="{{=session.direccion}}"required </strong></td>
+   <td><strong>Numero de calle<input type="number" name="num_calle" value="{{=session.num_calle}}" required</strong></td>
         </tr>
             <tr>
   <td><strong>Entre calle 1<input type="text" name="calle1" value="{{=session.calle1}}" </strong></td>
    <td><strong>Entre calle 2<input type="text" name="calle2" value="{{=session.calle2}}" </strong></td>
         </tr>
             <tr>
-  <td><strong>Telefono<input type="text" name="tel" value="{{=session.tel}}" </strong></td>
+  <td><strong>Telefono<input type="number" name="tel" value="{{=session.tel}}"required </strong></td>
    <td><strong>Telefono alternativo<input type="text" name="tel2" value="{{=session.tel2}}" </strong></td>
         </tr>
  </table>
-    <strong>Correo electronico<input type="text" name="email" value="{{=session.email}}" </strong>
+    <strong>Correo electronico<input type="email" name="email" value="{{=session.email}}"required </strong>
 <input type="submit" value="confirmar">
 </form>
 </div>
