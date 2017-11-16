@@ -123,8 +123,8 @@
   {{for reg in localidades:}}
       <option value="{{=reg.id}}">{{=reg.localidad}}</option>
   {{pass}}
-<input type="text" name="direccion" placeholder="Direccion">
-<input type="text" name="num_calle" placeholder="Numero de calle">
+<input type="text" name="direccion" placeholder="Direccion" required>
+<input type="number" name="num_calle" placeholder="Numero de calle" required>
 <input type="text" name="calle1" placeholder="Entre calle 1">
 <input type="text" name="calle2" placeholder="Entre calle 2">
 </select>
