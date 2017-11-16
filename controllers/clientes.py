@@ -3,7 +3,8 @@
 def index(): return dict(message="hello from clientes.py")
 
 def inicio():
-    return {}
+    datosPlanes = db().select(db.planes.ALL)
+    return dict (datos=datosPlanes)
 
 def listadoPlanes():
     datosPlanes = db().select(db.planes.ALL)
