@@ -1,6 +1,6 @@
 {{extend 'layout_clientes.html'}}
 {{import urllib}}
- </br>
+</br>
  </br>
 <div class="frame">
      <script async defer
@@ -55,5 +55,12 @@
     </script>
 <center>
     <div id="map" style="width: 1000px; height: 550px"></div>
+    </br>
+ </br>
+ <div class="form-style-5">
+<form method="POST">
+<a href="{{=URL(c="clientes",f="listadoPlanes")}}" role="button">Ver planes</a>
+<a href="{{=URL(c="clientes",f="cobertura")}}" role="button">Realizar otra busqueda</a>
+ </form>
 </center>
 </div>
