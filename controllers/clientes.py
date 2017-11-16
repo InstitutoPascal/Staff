@@ -57,7 +57,7 @@ def mensaje_dni_modformulario():
 def tipoInstalacion():
     if request.args:
         session.plan_id = request.args[0]
-    if request.vars.costo:
+    if request.vars:
         session.costo = request.vars.costo
         redirect(URL(c="clientes",f="datosUbicacion"))
     return {"precio": db(db.costos_instalaciones.id>0).select()}
@@ -100,7 +100,7 @@ def modificarFormulario():
 
 
 def datosUbicacion():
-    if request.vars.localidad:
+    if request.vars:
         session.localidad = request.vars.localidad
         session.direccion = request.vars.direccion
         session.num_calle = request.vars.num_calle
@@ -110,7 +110,7 @@ def datosUbicacion():
     return {"localidades": db(db.localidades.id>0).select()}
 
 def datosPersonales():
-    if request.vars.dni:
+    if request.vars:
         reg = db(db.solicitudes_instalacion.dni == request.vars.dni).select(db.solicitudes_instalacion.id).first()
         if reg:
             redirect(URL(c="clientes",f="mensaje"))
@@ -124,7 +124,7 @@ def datosPersonales():
 
 
 def datosContacto():
-    if request.vars.tel:
+    if request.vars:
         session.tel = request.vars.tel
         session.tel2 = request.vars.tel2
         session.email = request.vars.email
