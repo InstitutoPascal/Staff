@@ -187,12 +187,12 @@ function mostrar2(id) {
 <div class="form-style-6" id="no" style="display: none;">
 <h1>Contacto</h1>
 <form >
-<input type="text" name="nom_consulta" placeholder="Nombre"/>
-<input type="text" name="ape_consulta" placeholder="Apellido" />
-<input type="text" name="dni_consulta" placeholder="Dni" />
-<input type="email" name="email_consulta" placeholder="Email" />
-<input type="text" name="tel_consulta" placeholder="Telefono" />
-<textarea name="mens_consulta" placeholder="Escribe tu mensaje"></textarea>
+<input type="text" name="nom_consulta" placeholder="Nombre" required/>
+<input type="text" name="ape_consulta" placeholder="Apellido" required/>
+<input type="number" name="dni_consulta" placeholder="Dni" required/>
+<input type="email" name="email_consulta" placeholder="Email"required />
+<input type="number" name="tel_consulta" placeholder="Telefono" required/>
+<textarea name="mens_consulta" placeholder="Escribe tu mensaje" required></textarea>
 <input type="submit" value="Enviar" />
     </form>
     </div>
@@ -201,9 +201,9 @@ function mostrar2(id) {
 </form>
 <h1>Contacto</h1>
 <form >
-<input type="text" name="dni_cliente" placeholder="Dni"/>
-<input type="email" name="email_cliente" placeholder="Email" />
-<textarea name="mens_cliente" placeholder="Escribe tu consulta"></textarea>
+<input type="number" name="dni_cliente" placeholder="Dni" required/>
+<input type="email" name="email_cliente" placeholder="Email" required />
+<textarea name="mens_cliente" placeholder="Escribe tu consulta" required></textarea>
 <input type="submit" value="Enviar" />
 </form>
 </div>
@@ -211,9 +211,9 @@ function mostrar2(id) {
      <div class="form-style-6" id="soporte" style="display: none;">
 <h1>Soporte tecnico</h1>
 <form >
-<input type="text" name="dni_soporte" placeholder="Dni" />
-<input type="email" name="email_soporte" placeholder="Email" />
-<textarea name="comentario_soporte" placeholder="Escribe tu mensaje"></textarea>
+<input type="number" name="dni_soporte" placeholder="Dni"required />
+<input type="email" name="email_soporte" placeholder="Email" required/>
+<textarea name="comentario_soporte" placeholder="Escribe tu mensaje" required></textarea>
 <input type="submit" value="Enviar" />
 </form>
 </div>
