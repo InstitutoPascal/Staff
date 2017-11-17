@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="{{=URL('static','css/bootstrap.min.css')}}"/>
+<link rel="stylesheet" href="{{=URL('static','css/web2py-bootstrap3.css')}}"/>
+
+<title>Sin Autorización</title>
+
+<div class=" col-md-4 col-md-offset-4">
+<body style="background-color:#E7E6EE;">
+<div class="jumbotron ">
+  <div class="container">
+      <center><h3><font color="red">¡SIN AUTORIZACIÓN!</font></h3></center>
+      <br><br>
+    <center><p> Su cuenta de usuario no posee de permisos para ingresar a la página.</p></center>
+     <br><br>
+      <center><p><a href="{{=URL('default','user/logout')}}" class="btn btn-primary btn-md" role="button"><i class="glyphicon glyphicon-off"></i> Cerrar Sesión</a></p></center>
+  </div>
+ </div>
+</div>
+</body>
