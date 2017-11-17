@@ -142,39 +142,27 @@ db.auth_user.localidad.requires=IS_IN_DB(db,db.localidades.id,'%(localidad)s',ze
 db.auth_user.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
 db.auth_user.email.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_EMAIL(error_message='El correo electrónico no es válido')
 db.auth_user.password.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
-auth=Auth(globals(),db)
+
+#############################################################################################
+
+db.define_table('auth_group',
+                db.Field('role',length=128, label=T('Role')),
+                db.Field('description',length=128, label=T('Description')))
+
+#############################################################################################
+
+db.define_table('auth_membership',
+                db.Field('user_id',db.auth_user, label=T('User ID')),
+                db.Field('group_id',db.auth_group, label=T('Group ID')),
+                db.Field('nombre','string'),
+                db.Field('apellido','string'))
+
+db.auth_membership.user_id.requires=IS_IN_DB(db,db.auth_user.id,'%(first_name)s' + ' ' + '%(last_name)s',zero=T('Seleccione usuario'), error_message= 'Campo obligatorio')
+db.auth_membership.group_id.requires=IS_IN_DB(db,db.auth_group.id,'%(role)s',zero=T('Seleccione grupo'), error_message= 'Campo obligatorio')
+auth = Auth(db)
 auth.define_tables(username=False, signature=False)
-
-#############################################################################################
-
-db.define_table('gerentes',
-                 db.Field('nombre','string'),
-                 db.Field('apellido','string'),
-                 db.Field('dni','integer'),
-                 db.Field('correo_electronico' ,'string'),
-                 db.Field('telefono', 'integer'),
-                 db.Field('clave', 'password'))
-
-db.gerentes.nombre.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(12, error_message='Solo hasta 12 caracteres')
-db.gerentes.apellido.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(12, error_message='Solo hasta 12 caracteres')
-db.gerentes.dni.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_NOT_IN_DB(db, db.gerentes.dni, error_message = 'El DNI ya se encuentra registrado'),IS_INT_IN_RANGE(2500000,100000000, error_message= 'Ingrese un DNI entre 2.500.000 y 100.000.000')
-db.gerentes.correo_electronico.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_EMAIL(error_message='El correo electrónico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres')
-db.gerentes.clave.requires = CRYPT(key=auth.settings.hmac_key, error_message= 'Campo obligatorio')
-db.gerentes.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_LENGTH(15, error_message='Solo hasta 15 caracteres')
-
-#############################################################################################
-
-db.define_table('administradores',
-                db.Field('id_usuario', db.auth_user),
-                 db.Field('nombre','string'),
-                 db.Field('apellido','string'))
-
-#############################################################################################
-
-db.define_table('tecnicos',
-                 db.Field('id_usuario', db.auth_user),
-                 db.Field('nombre','string'),
-                 db.Field('apellido','string'))
+auth.settings.on_failed_authorization=URL(c='default',f='sin_autorizacion')
+auth.settings.logout_next=URL(c='default',f='index')
 
 #############################################################################################
 
@@ -285,8 +273,7 @@ db.solicitudes_instalacion.telefono.requires=IS_NOT_EMPTY(error_message= 'Campo 
 db.solicitudes_instalacion.correo_electronico.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio'),IS_EMAIL(error_message='El correo electrónico no es válido'),IS_LENGTH(30, error_message='Solo hasta 30 caracteres')
 db.solicitudes_instalacion.tipo_de_plan.requires=IS_IN_DB(db,db.planes.id,'%(velocidad_de_bajada)s' + ' ' + '%(unidad_de_bajada)s',zero=T('Seleccione plan'), error_message= 'Campo obligatorio')
 db.solicitudes_instalacion.costo_de_instalacion.requires=IS_IN_DB(db,db.costos_instalaciones.id,'$ ' + '%(precio)s' + ' ( ' + '%(descripcion)s' + ' )',zero=T('Seleccione costo'), error_message= 'Campo obligatorio')
-
-db.solicitudes_instalacion.tecnico.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id_usuario,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
+db.solicitudes_instalacion.tecnico.requires = IS_EMPTY_OR(IS_IN_DB(db((db.auth_group.role == 'Tecnicos') & (db.auth_group.id == db.auth_membership.group_id)), 'auth_membership.user_id', '%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
 db.solicitudes_instalacion.fecha_estimada.requires=IS_EMPTY_OR(IS_DATE(str(T('%Y-%m-%d'))))
 db.solicitudes_instalacion.estado.default='Pendiente'
 db.solicitudes_instalacion.tecnico.default=None
@@ -331,7 +318,7 @@ db.define_table('solicitudes_soporte',
                  db.Field('fecha_estimada','date'),
                  db.Field('estado', 'string', readable=False, writable=False))
 
-db.solicitudes_soporte.tecnico.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id_usuario,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
+db.solicitudes_soporte.tecnico.requires = IS_EMPTY_OR(IS_IN_DB(db((db.auth_group.role == 'Tecnicos') & (db.auth_group.id == db.auth_membership.group_id)), 'auth_membership.user_id', '%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
 db.solicitudes_soporte.fecha_estimada.requires=IS_EMPTY_OR(IS_DATE(str(T('%Y-%m-%d'))))
 db.solicitudes_soporte.estado.default='Pendiente'
 db.solicitudes_soporte.tecnico.default=None
@@ -349,14 +336,14 @@ db.soportes.costo_de_soporte.requires=IS_IN_DB(db,db.costos_soportes.id,'%(preci
 #############################################################################################
 
 db.define_table('mantenimientos',
-                 db.Field('tecnico_principal',db.tecnicos),
-                 db.Field('tecnico_secundario',db.tecnicos),
+                 db.Field('tecnico_principal',db.auth_user),
+                 db.Field('tecnico_secundario',db.auth_user),
                  db.Field('nodo',db.nodos),
                  db.Field('fecha','date'),
                  db.Field('descripcion','string'))
 
-db.mantenimientos.tecnico_principal.requires=IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico'), error_message= 'Campo obligatorio')
-db.mantenimientos.tecnico_secundario.requires=IS_EMPTY_OR(IS_IN_DB(db,db.tecnicos.id,'%(nombre)s' + ' ' + '%(apellido)s',zero=T('Seleccione tecnico')))
+db.mantenimientos.tecnico_principal.requires = IS_IN_DB(db((db.auth_group.role == 'Tecnicos') & (db.auth_group.id == db.auth_membership.group_id)), 'auth_membership.user_id', '%(nombre)s')
+db.mantenimientos.tecnico_secundario.requires = IS_IN_DB(db((db.auth_group.role == 'Tecnicos') & (db.auth_group.id == db.auth_membership.group_id)), 'auth_membership.user_id', '%(nombre)s')
 db.mantenimientos.nodo.requires=IS_IN_DB(db,db.nodos.id,'%(nombre)s',zero=T('Seleccione nodo'), error_message= 'Campo obligatorio')
 db.mantenimientos.fecha.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
 db.mantenimientos.descripcion.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
