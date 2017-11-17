@@ -53,6 +53,13 @@
                                <li><a href="{{=URL(c="tecnicos",f="mantenimientosRealizados")}}"><span>Realizados</span></a></li>
                            </ul>
                        </li>
+                        {{tecnico_log = db(db.auth_user.id == auth.user_id).select().first()}}
+                        {{nombre_tecnico = tecnico_log.first_name}}
+                        {{apellido_tecnico = tecnico_log.last_name}}
+                      <li class = "pull-right"><a href="#"><i class="glyphicon glyphicon-user"></i><span> {{=nombre_tecnico}}  {{=apellido_tecnico}}</span></a>
+                         <ul>
+                             <li><a href="{{=URL('default','user/logout')}}"><i class="glyphicon glyphicon-off"></i> Cerrar Sesión</a></li>
+                         </ul>
                     </ul>
                 </div>
             </body>

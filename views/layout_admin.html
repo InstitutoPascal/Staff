@@ -51,6 +51,7 @@
                            <ul>
                                <li><a href="{{=URL(c="administradores",f="alta_solicitud_instalacion")}}"><span>Nueva solicitud</span></a></li>
                                <li><a href="{{=URL(c="administradores",f="listadoSolicitudes_instalacion")}}"><span>Listado</span></a></li>
+                               <li><a href="{{=URL(c="administradores",f="actualizar_coords")}}"><span>Actualizar ubicaciones</span></a></li>
                            </ul>
                        </li>
                        <li><a href='#'><span>Solicitudes de soporte</span></a>
@@ -74,6 +75,13 @@
                                        <li><a href="{{=URL(c="administradores",f="geolocalizacionClientes")}}"><span>Clientes</span></a></li>
                            </ul>
                        </li>
+                        {{admin_log = db(db.auth_user.id == auth.user_id).select().first()}}
+                        {{nombre_admin = admin_log.first_name}}
+                        {{apellido_admin = admin_log.last_name}}
+                      <li class = "pull-right"><a href="#"><i class="glyphicon glyphicon-user"></i><span> {{=nombre_admin}}  {{=apellido_admin}}</span></a>
+                           <ul>
+                                 <li><a href="{{=URL('default','user/logout')}}"><i class="glyphicon glyphicon-off"></i> Cerrar Sesión</a></li>
+                           </ul>
                      </ul>
                  </div>
             </body>
