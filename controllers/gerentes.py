@@ -1,24 +1,27 @@
 # -*- coding: utf-8 -*-
+@auth.requires_membership(role="Gerentes")
 def inicio(): return dict(message="hello from gerentes.py")
 
 ######################################### AÑADIR DATOS #########################################
 
 def alta_usuarios():
     tipo_usuario = request.args[0]
-    if (tipo_usuario == "administrador") | (tipo_usuario == "tecnico"):
+    if (tipo_usuario == "Administradores") | (tipo_usuario == "Tecnicos"):
         form = SQLFORM(db.auth_user)
         if form.accepts(request.vars, session):
             response.flash = 'Formulario aceptado'
-            if tipo_usuario == "administrador":
+            if tipo_usuario == "Administradores":
                 id_usuario = db().select(db.auth_user.id).last().id
-                nom = db(id_usuario == db.auth_user.id).select(db.auth_user.first_name)[0].first_name
-                ape = db(id_usuario == db.auth_user.id).select(db.auth_user.last_name)[0].last_name
-                db.administradores.insert(id_usuario=id_usuario, nombre=nom, apellido=ape)
-            elif tipo_usuario == "tecnico":
+                id_grupo = db(db.auth_group.role == tipo_usuario).select(db.auth_group.id).first().id
+                nom = db().select(db.auth_user.first_name).last().first_name
+                ape = db().select(db.auth_user.last_name).last().last_name
+                db.auth_membership.insert(user_id=id_usuario, group_id=id_grupo, nombre=nom, apellido=ape)
+            elif tipo_usuario == "Tecnicos":
                 id_usuario = db().select(db.auth_user.id).last().id
-                nom = db(id_usuario == db.auth_user.id).select(db.auth_user.first_name)[0].first_name
-                ape = db(id_usuario == db.auth_user.id).select(db.auth_user.last_name)[0].last_name
-                db.tecnicos.insert(id_usuario=id_usuario, nombre=nom, apellido=ape)
+                id_grupo = db(db.auth_group.role == tipo_usuario).select(db.auth_group.id).first().id
+                nom = db().select(db.auth_user.first_name).last().first_name
+                ape = db().select(db.auth_user.last_name).last().last_name
+                db.auth_membership.insert(user_id=id_usuario, group_id=id_grupo, nombre=nom, apellido=ape)
         elif form.errors:
             response.flash = 'El formulario tiene errores'
         else:

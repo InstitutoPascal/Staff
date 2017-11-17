@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+@auth.requires_membership(role="Tecnicos")
 def inicio(): return dict(message="hello from tecnicos.py")
 
 ######################################### SOLICITUDES DE INSTALACION #########################################

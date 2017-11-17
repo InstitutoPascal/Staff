@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+@auth.requires_membership(role="Administradores")
 def inicio(): return dict(message="Hola desde administradores.py")
 
 ######################################### REGISTROS COMPLETOS #########################################
