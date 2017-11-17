@@ -36,9 +36,9 @@
                                 <ul>
                                     <li><a href="#"><span>Usuarios</span></a>
                                         <ul>
-                                            {{tipo_usuario= "administrador"}}
+                                            {{tipo_usuario= "Administradores"}}
                                             <li><a href="{{=URL(c='gerentes',f='alta_usuarios', args=(tipo_usuario, ))}}"><span>Administradores</span></a></li>
-                                            {{tipo_usuario= "tecnico"}}
+                                            {{tipo_usuario= "Tecnicos"}}
                                             <li><a href="{{=URL(c='gerentes',f='alta_usuarios', args=(tipo_usuario, ))}}"><span>Técnicos</span></a></li>
                                         </ul>
                                     </li>
@@ -82,6 +82,15 @@
                                 </ul>
                            </li>
                            <li><a href="{{=URL(c="gerentes",f="estadisticas")}}"><span>Estadísticas</span></a></li>
+                            {{gerente_log = db(db.auth_user.id == auth.user_id).select().first()}}
+                            {{nombre_gerente = gerente_log.first_name}}
+                            {{apellido_gerente = gerente_log.last_name}}
+                           <li class = "pull-right"><a href="#"><i class="glyphicon glyphicon-user"></i><span> {{=nombre_gerente}}  {{=apellido_gerente}}</span></a>
+                               <ul>
+                                   <li><a href="{{=URL('default','user/profile')}}"><i class="glyphicon glyphicon-off"></i> Perfil</a></li>
+                                   <li><a href="{{=URL('default','user/change_password')}}"><i class="glyphicon glyphicon-off"></i> Contraseña</a></li>
+                                   <li><a href="{{=URL('default','user/logout')}}"><i class="glyphicon glyphicon-off"></i> Cerrar Sesión</a></li>
+                               </ul>
                          </ul>
                      </div>
                 </body>
