@@ -157,43 +157,54 @@ def consulta():
     mail.settings.sender = 'staff.technology.internet@gmail.com'
     mail.settings.login = 'staff.technology.internet@gmail.com:naruto87'
     form_cons = db(db.clientes.dni == request.vars.dni_soporte).select(db.clientes.id).first()
-    form_sop=db(db.clientes.dni == request.vars.dni_cliente).select(db.clientes.id).first()
-    if form_cons:
-            session.dni_soporte = request.vars.dni_soporte
-            session.email_soporte = request.vars.email_soporte
-            session.comentario_soporte = request.vars.comentario_soporte
-            db.solicitudes_soporte.insert(
-            cliente=reg,
-            problematica=session.comentario_soporte)
-    elif form_sop:
-            session.dni_cliente=request.vars.dni_cliente
-            session.email_cliente=request.vars.email_cliente
-            session.mens_cliente=request.vars.mens_cliente
-            x=mail.send(to=['staff.technology.internet@gmail.com'],
-                subject='consulta',
-                message= "Consulta de usuario que es cliente \nDNI: "+ session.dni_cliente +"\nEmail:" + session.email_cliente +"\nMensaje : "+ session.mens_cliente +".\n ")
-            if x == True:
-                 response.flash = 'El email fue enviado correctamente'
-            else:
-                 response.flash = 'Fallo el envio del email'
+    form_sop = db(db.clientes.dni == request.vars.dni_cliente).select(db.clientes.id).first()
+    bandera=0
+    if request.vars:
+        if request.vars.dni_soporte:
+                if form_cons:
+                        session.dni_soporte = request.vars.dni_soporte
+                        session.email_soporte = request.vars.email_soporte
+                        session.comentario_soporte = request.vars.comentario_soporte
+                        db.solicitudes_soporte.insert(
+                        cliente=form_cons.id,
+                        problematica=session.comentario_soporte)
+                        bandera=bandera+2
+                        redirect(URL(c="clientes",f="confimacionConsulta",args=[bandera]))
+                else:
+                    bandera=bandera+3
+                    redirect(URL(c="clientes",f="confimacionConsulta",args=[bandera]))
 
-    else:
-            response.flash='El dni ingresado no pertence a un cliente nuestro'
-    if request.vars.dni_consulta:
-        session.nom_cons = request.vars.nom_consulta
-        session.ape_cons = request.vars.ape_consulta
-        session.email_cons = request.vars.email_consulta
-        session.tel_cons = request.vars.tel_consulta
-        session.mens_cons = request.vars.mens_consulta
-        x=mail.send(to=['staff.technology.internet@gmail.com'],
-                subject='Consulta',
-                message= "Consulta de usuario no cliente \nNombre: "+ session.nom_cons +"\nApellido: "+ session.ape_cons +"\nEmail: " + session.email_cons +"\nTelefono: "+session.tel_cons +"\nMensaje: "+session.mens_cons+ ".\n ")
-        if x == True:
-             response.flash = 'El email fue enviado correctamente'
-        else:
-             response.flash = 'Fallo el envio del email'
+        if request.vars.dni_cliente:
+                if form_sop:
+                    session.dni_cliente=request.vars.dni_cliente
+                    session.email_cliente=request.vars.email_cliente
+                    session.mens_cliente=request.vars.mens_cliente
+                    x=mail.send(to=['staff.technology.internet@gmail.com'],
+                        subject='consulta',
+                        message= "Consulta de usuario que es cliente \nDNI: "+ session.dni_cliente +"\nEmail:" + session.email_cliente +"\nMensaje : "+ session.mens_cliente +".\n ")
+                    if x == True:
+                        bandera=bandera+1
+                        redirect(URL(c="clientes",f="confimacionConsulta",args=[bandera]))
+                else:
+                    bandera=bandera+3
+                    redirect(URL(c="clientes",f="confimacionConsulta",args=[bandera]))
 
-    return {}
+        if request.vars.dni_consulta:
+                session.nom_cons = request.vars.nom_consulta
+                session.ape_cons = request.vars.ape_consulta
+                session.email_cons = request.vars.email_consulta
+                session.tel_cons = request.vars.tel_consulta
+                session.mens_cons = request.vars.mens_consulta
+                x=mail.send(to=['staff.technology.internet@gmail.com'],
+                        subject='Consulta',
+                        message= "Consulta de usuario no cliente \nNombre: "+ session.nom_cons +"\nApellido: "+ session.ape_cons +"\nEmail: " + session.email_cons +"\nTelefono: "+session.tel_cons +"\nMensaje: "+session.mens_cons+ ".\n ")
+                if x == True:
+                    bandera=bandera+1
+                    redirect(URL(c="clientes",f="confimacionConsulta",args=[bandera]))
+                else:
+                    redirect(URL(c="clientes",f="confimacionConsulta",args=[bandera]))
+
+    return dict (bandera=bandera)
 
 def confimacionConsulta():
     if request.args:
