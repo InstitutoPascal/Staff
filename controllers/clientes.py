@@ -195,5 +195,10 @@ def consulta():
 
     return {}
 
+def confimacionConsulta():
+    if request.args:
+        bandera= request.args[0]
+        return dict(bandera=bandera)
+
 def mapaCliente():
     return{}
