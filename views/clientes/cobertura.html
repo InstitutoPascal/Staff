@@ -119,10 +119,16 @@
     Para saber si en su dirección tenemos cobertura, solo llene el formulario.</p>
 <p>
 Si su ubicación aparece dentro del rango marcado en el mapa hay cobertura en su dirección.</p>
-    </br>
-<input type="text" name="localidad" placeholder="Localidad">
-<input type="text" name="calle" placeholder="Calle">
-<input type="text" name="altura" placeholder="Altura">
+</br>
+    <strong>Localidad<select id="job" name="cob_localidad" method="POST">
+ <optgroup>
+    {{for reg in localidad:}}
+    <option value="{{=reg.id}}">{{=reg.localidad}}</option>
+     {{pass}}
+</select>
+    </strong>
+<input type="text" name="calle" placeholder="Calle" required>
+<input type="number" name="altura" placeholder="Altura" required>
 </select>
 </fieldset>
     <input type="submit" value="Enviar"/>
