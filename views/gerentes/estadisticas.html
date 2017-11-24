@@ -6,23 +6,67 @@
 <center>
 <html>
   <head>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable({{=data}});
-        var options = {
-          title: '{{=title}}',
-          is3D: true,
-        };
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+
+      google.charts.load('current', {'packages':['corechart']});
+
+      google.charts.setOnLoadCallback(drawInstalaciones);
+
+      google.charts.setOnLoadCallback(drawSoportes);
+
+      function drawInstalaciones() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Solicitudes');
+        data.addColumn('number', 'Cantidad');
+        data.addRows([
+          ['Finalizadas', {{=instalacionFinalizada}}],
+          ['Pendientes', {{=instalacionPendiente}}]
+        ]);
+
+
+        var options = {title:'SOLICITUDES DE INSTALACIONES',
+                       is3D: true,
+                       width:600,
+                       height:400,
+                       backgroundColor:'#FFFFFF'};
+
+
+        var chart = new google.visualization.PieChart(document.getElementById('solicitudes_de_instalacion_div'));
+        chart.draw(data, options);
+      }
+
+
+      function drawSoportes() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Solicitudes');
+        data.addColumn('number', 'Cantidad');
+        data.addRows([
+          ['Finalizados', {{=soporteFinalizado}}],
+          ['Pendientes', {{=soportePendiente}}]
+        ]);
+
+        var options = {title:'SOLICITUDES DE SOPORTES',
+                       is3D: true,
+                       width:600,
+                       height:400,
+                       backgroundColor:'#FFFFFF'};
+
+        var chart = new google.visualization.PieChart(document.getElementById('solicitudes_de_soporte_div'));
         chart.draw(data, options);
       }
     </script>
   </head>
   <body>
-    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
+    <table class="columns">
+      <tr>
+        <td><div id="solicitudes_de_instalacion_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="solicitudes_de_soporte_div" style="border: 1px solid #ccc"></div></td>
+      </tr>
+    </table>
   </body>
 </html>
 

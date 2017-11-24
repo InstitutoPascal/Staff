@@ -31,7 +31,7 @@
                 <body style="background-color:#E7E6EE;">
                     <div id='cssmenu'>
                         <ul>
-                           <li class='active'><a href="{{=URL(c="gerentes",f="inicio")}}"><span>SESION</span></a></li>
+                           <li class='active'><a href="{{=URL(c="gerentes",f="inicio")}}"><span>SESIÓN</span></a></li>
                            <li><a href='#'><span>Altas</span></a>
                                 <ul>
                                     <li><a href="#"><span>Usuarios</span></a>
@@ -87,8 +87,8 @@
                             {{apellido_gerente = gerente_log.last_name}}
                            <li class = "pull-right"><a href="#"><i class="glyphicon glyphicon-user"></i><span> {{=nombre_gerente}}  {{=apellido_gerente}}</span></a>
                                <ul>
-                                   <li><a href="{{=URL('default','user/profile')}}"><i class="glyphicon glyphicon-off"></i> Perfil</a></li>
-                                   <li><a href="{{=URL('default','user/change_password')}}"><i class="glyphicon glyphicon-off"></i> Contraseña</a></li>
+                                   <li><a href="{{=URL('default','user/profile')}}"><i class="glyphicon glyphicon-pencil"></i> Perfil</a></li>
+                                   <li><a href="{{=URL('default','user/change_password')}}"><i class="glyphicon glyphicon-lock"></i> Contraseña</a></li>
                                    <li><a href="{{=URL('default','user/logout')}}"><i class="glyphicon glyphicon-off"></i> Cerrar Sesión</a></li>
                                </ul>
                          </ul>

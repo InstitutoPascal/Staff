@@ -279,6 +279,11 @@ def listadoStock():
 ######################################### ESTADISTICAS #########################################
 
 def estadisticas():
-    title="Gráfico Informativo"
-    data=XML('[ ["item", "value"], ["Solicitud de instalaciones", 20], ["Cantidad de clientes", 30], ["Solicitud de soportes", 20],["Soportes                       realizados", 15],["Mantenimientos", 14]]') #convert list in string and string in XML
-    return dict(title=title, data=data)
+
+    instalacionPendiente = db(db.solicitudes_instalacion.estado == 'Pendiente').count()
+    instalacionFinalizada = db(db.solicitudes_instalacion.estado == 'Finalizado').count()
+
+    soportePendiente = db(db.solicitudes_soporte.estado == 'Pendiente').count()
+    soporteFinalizado = db(db.solicitudes_soporte.estado == 'Finalizado').count()
+
+    return dict(instalacionPendiente = instalacionPendiente, instalacionFinalizada = instalacionFinalizada, soportePendiente = soportePendiente, soporteFinalizado = soporteFinalizado )
