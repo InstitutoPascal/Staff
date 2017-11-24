@@ -193,14 +193,14 @@ def AgregarStock():
 ######################################### REGISTROS COMPLETOS #########################################
 
 def listadoAdministradores():
-    datosAdministradores = db((db.auth_user.id == db.administradores.id_usuario)&(db.auth_user.localidad == db.localidades.id)).select(db.auth_user.ALL, db.localidades.ALL)
+    datosAdministradores = db((db.auth_membership.group_id == db.auth_group.id)&(db.auth_group.role == 'Administradores')&(db.auth_membership.user_id == db.auth_user.id)&(db.auth_user.localidad == db.localidades.id)).select(db.auth_user.ALL, db.localidades.ALL)
     i=0
     for x in datosAdministradores:
          i=i+1
     return dict (datos=datosAdministradores, cantidad=i)
 
 def listadoTecnicos():
-    datosTecnicos = db((db.auth_user.id == db.tecnicos.id_usuario)&(db.auth_user.localidad == db.localidades.id)).select(db.auth_user.ALL, db.localidades.ALL)
+    datosTecnicos = db((db.auth_membership.group_id == db.auth_group.id)&(db.auth_group.role == 'Tecnicos')&(db.auth_membership.user_id == db.auth_user.id)&(db.auth_user.localidad == db.localidades.id)).select(db.auth_user.ALL, db.localidades.ALL)
     i=0
     for x in datosTecnicos:
          i=i+1
