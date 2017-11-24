@@ -63,9 +63,8 @@ def alta_planes():
 def alta_nodos():
     form = SQLFORM(db.nodos)
     if form.accepts(request.vars, session):
-        tipo = 1
-        id_solicitud = db().select(db.nodos.id).last().id
-        redirect(URL(c="gerentes", f="confirmacion_nodo", args=(tipo, id_solicitud)))
+        id_nodo = db().select(db.nodos.id).last().id
+        redirect(URL(c="gerentes", f="actualizar_ubicacion_nodo", args=(id_nodo)))
         response.flash = 'Formulario aceptado'
     elif form.errors:
         response.flash = 'El formulario tiene errores'
@@ -73,20 +72,17 @@ def alta_nodos():
         response.flash = 'Complete el formulario'
     return dict(f=form)
 
-def confirmacion_nodo():
-    if request.args:
-        id_solicitud = request.args[1]
-        ret = ""
-        q = (db.nodos.localidad == db.localidades.id)
-        q &= (id_solicitud == db.nodos.id)
-        for reg in db(q).select(db.nodos.id, db.nodos.direccion,
-                                db.nodos.numero_de_calle, db.localidades.localidad,
-                                db.localidades.codigo_postal):
-            dom = "%s %s, %s, %s, %s" % (reg.nodos.direccion, reg.nodos.numero_de_calle, reg.localidades.localidad,"buenos aires","argentina")
-            lat, lon , url = coords_by_address(dom)
-            db(db.nodos.id==reg.nodos.id).update(latitud=lat, longitud=lon)
-            ret += "solicitante: %s coords= %s,%s url: %s\n\r" % (reg.nodos.id, lat, lon, url)
-            #mensaje = "¡Se ha actualizado la ubicación!"
+def actualizar_ubicacion_nodo():
+    id_nodo = request.args[0]
+    ret = ""
+    q = (db.nodos.localidad == db.localidades.id)
+    q &= (id_nodo == db.nodos.id)
+    for reg in db(q).select(db.nodos.id, db.nodos.direccion, db.nodos.numero_de_calle, db.localidades.localidad, db.localidades.codigo_postal):
+        dom = "%s %s, %s, %s, %s" % (reg.nodos.direccion, reg.nodos.numero_de_calle, reg.localidades.localidad,"buenos aires","argentina")
+        lat, lon , url = coords_by_address(dom)
+        db(db.nodos.id==reg.nodos.id).update(latitud=lat, longitud=lon)
+        ret += "solicitante: %s coords= %s,%s url: %s\n\r" % (reg.nodos.id, lat, lon, url)
+    redirect(URL(c="gerentes", f="alta_nodos"))
     return {}
 
 def coords_by_address(direccion):
