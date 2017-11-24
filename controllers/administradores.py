@@ -270,8 +270,16 @@ def geolocalizacionClientes():
     return response.render(d)
 
 def geolocalizacionNodos():
-    d = 4
-    return dict(datos=d)
+    rows=db((db.nodos.id>0)&(db.nodos.localidad==db.localidades.id)).select(
+            db.nodos.nombre,
+            db.nodos.direccion,
+            db.nodos.numero_de_calle,
+            db.localidades.localidad,
+            db.nodos.latitud,
+            db.nodos.longitud)
+    x0,y0= COORDS_INICIO_MAPA
+    d = dict(x0=x0,y0=y0,rows=rows)
+    return response.render(d)
 
 ######################################### FACTURACION #########################################
 
