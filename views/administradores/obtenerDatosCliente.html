@@ -1,0 +1,50 @@
+{{extend 'layout_admin.html'}}
+
+
+<title>Facturación</title>
+
+<div class="container">
+<br><br>
+    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+
+        <div class="panel panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title text-center">Cliente</div>
+            </div>
+
+            <div class="panel-body" >
+
+                <form name="form" id="form" class="form-horizontal" action="{{=URL(c="administradores",f="cargarDatos")}}" enctype="multipart/form-data" method="POST">
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                         <select class="form-control" id="campo_cliente" name="id_cliente">
+                   <!------ recorro todos los campos con un for------->
+                   {{for reg_cliente in lista_clientes:}}
+                 <!------ el value permite enviar el id que vamos a usar en sessions------->
+                   <option value="{{=reg_cliente.id}}">{{=reg_cliente.nombre}}  {{=reg_cliente.apellido}} -  DNI {{=reg_cliente.dni}}</option>
+                  {{pass}}
+                   <!------ finalizamos el for------->
+                </select>
+
+                    </div>
+                           <br>
+                        </br>
+
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-md-6,5 ">
+
+                           <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i> Continuar</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
