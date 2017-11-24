@@ -2,7 +2,7 @@
 {{import urllib}}
 <style type="text/css">
 .form-style-5{
-    max-width: 500px;
+    max-width:1000px;
     padding: 10px 20px;
     background: #f4f7f8;
     margin: 10px auto;
@@ -109,8 +109,7 @@
     background: #109177;
 }
 </style>
-</br>
- </br>
+<div class="form-style-5">
 <div class="frame">
      <script async defer
     src="https://maps.googleapis.com/maps/api/js?key={{=KEY_API_GOOGLE_MAP}}&callback=initMap">
@@ -163,10 +162,8 @@
     //]]>
     </script>
 <center>
-    <div id="map" style="width: 1000px; height: 550px"></div>
+    <div id="map" style="width: 900px; height: 550px"></div>
     </br>
- </br>
- <div class="form-style-5">
 <form method="POST">
 <a href="{{=URL(c="clientes",f="listadoPlanes")}}" role="button">Ver planes</a>
 <a href="{{=URL(c="clientes",f="cobertura")}}" role="button">Realizar otra busqueda</a>
