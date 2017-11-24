@@ -32,7 +32,7 @@
             <body style="background-color:#E7E6EE;">
                 <div id='cssmenu'>
                     <ul>
-                       <li class='active'><a href="{{=URL(c="administradores",f="inicio")}}"><span>Sesion</span></a></li>
+                       <li class='active'><a href="{{=URL(c="administradores",f="inicio")}}"><span>Sesión</span></a></li>
                        </li>
                        <li><a href='#'><span>Registros completos</span></a>
                            <ul>
@@ -60,7 +60,8 @@
                                <li><a href="{{=URL(c="administradores",f="listadoSolicitudes_soporte")}}"><span>Listado</span></a></li>
                            </ul>
                        </li>
-                       <li><a href='#'><span>Consultas clientes</span></a>
+                       <li><a href='#'><s
+ pan>Consultas clientes</span></a>
                            <ul>
                                         <li><a href="{{=URL(c="administradores",f="clientes_dni")}}"><span>Por DNI</span></a></li>
                                         <li><a href="{{=URL(c="administradores",f="clientes_nombre_apellido")}}"><span>Por nombre y apellido</span></a></li>
@@ -69,12 +70,18 @@
 
                            </ul>
                        </li>
-                       <li><a href="#"><span>Geolocalizacion</span></a>
+                       <li><a href="#"><span>Herramientas</span></a>
                            <ul>
+                               <li><a href="#"><span>Geolocalización</span></a>
+                               <ul>
+                                      <li><a href="{{=URL(c="administradores",f="geolocalizacionClientes")}}"><span>Clientes</span></a></li>
                                        <li><a href="{{=URL(c="administradores",f="geolocalizacionNodos")}}"><span>Nodos</span></a></li>
-                                       <li><a href="{{=URL(c="administradores",f="geolocalizacionClientes")}}"><span>Clientes</span></a></li>
+                                   </ul>
+                               </li>
+                                      <li><a href="{{=URL(c="administradores",f="obtenerDatosCliente")}}"><span>Facturar</span></a></li>
                            </ul>
                        </li>
+
                         {{admin_log = db(db.auth_user.id == auth.user_id).select().first()}}
                         {{nombre_admin = admin_log.first_name}}
                         {{apellido_admin = admin_log.last_name}}
