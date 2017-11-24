@@ -112,7 +112,7 @@
 {{if bandera == str(1):}}
 </br></br></br>
 <div class="form-style-5">
-    <center><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contacto.png" width="200" height="200" alt="logo" /></center>
+    <center><img src="{{=URL('static','images/contacto.png')}}" width="200" height="200" alt="logo" /></center>
     <h2>
     <center>El email fue enviado correctamente</center>
     </h2>
@@ -124,7 +124,7 @@
 {{if bandera == str(0):}}
 </br></br></br>
 <div class="form-style-5">
-    <center><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contacto.png" width="200" height="200" alt="logo" /></center>
+    <center><img src="{{=URL('static','images/contacto.png')}}" width="200" height="200" alt="logo" /></center>
     <h2>
     <center>Error al enviar el email</center>
     </h2>
@@ -136,7 +136,7 @@
 {{if bandera == str(2):}}
 </br></br></br>
 <div class="form-style-5">
-    <center><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contacto.png" width="200" height="200" alt="logo" /></center>
+    <center><img src="{{=URL('static','images/contacto.png')}}" width="200" height="200" alt="logo" /></center>
     <h2>
     <center>El pedido de soporte se realizo correctamente</center>
     </h2>
@@ -148,7 +148,7 @@
 {{if bandera == str(3):}}
 </br></br></br>
 <div class="form-style-5">
-    <center><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contacto.png" width="200" height="200" alt="logo" /></center>
+    <center><img src="{{=URL('static','images/contacto.png')}}" width="200" height="200" alt="logo" /></center>
     <h2>
     <center>El dni ingresado no pertence a un cliente nuestro</center>
     </h2>
