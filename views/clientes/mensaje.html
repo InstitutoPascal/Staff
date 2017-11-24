@@ -109,6 +109,7 @@
 }
 
 </style>
+{{if bandera == str(1):}}
 </br></br></br>
 <div class="form-style-5">
     <center><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contacto.png" width="200" height="200" alt="logo" /></center>
@@ -118,3 +119,16 @@
     </br></br>
 <a  href="{{=URL(c="clientes",f="datosPersonales")}}" role="button">Atras</a>
 </div>
+{{pass}}
+
+{{if bandera == str(2):}}
+</br></br></br>
+<div class="form-style-5">
+    <center><img src="http://127.0.0.1:8000/Staff/static/_2.14.6/images/contacto.png" width="200" height="200" alt="logo" /></center>
+    <h2>
+    <center>No se encontro la ubicación ingresada!</center>
+    </h2>
+    </br></br>
+<a  href="{{=URL(c="clientes",f="cobertura")}}" role="button">Atras</a>
+</div>
+{{pass}}
