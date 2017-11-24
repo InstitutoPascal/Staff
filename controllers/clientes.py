@@ -55,7 +55,9 @@ def coords_by_address(direccion):
 
 
 def mensaje():
-    return {}
+    if request.args:
+        bandera= request.args[0]
+        return dict(bandera=bandera)
 
 def mensaje_dni_modformulario():
     return {}
