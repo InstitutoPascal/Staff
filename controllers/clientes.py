@@ -224,3 +224,53 @@ def confimacionConsulta():
 
 def mapaCliente():
     return{}
+
+import os, sys
+import mercadopago
+import json
+
+
+def ingresarDni():
+    dni_recibido=request.vars.dni
+    resultado = db((db.clientes.dni == dni_recibido)&(db.clientes.tipo_de_plan==db.planes.id)).select(db.clientes.ALL, db.planes.ALL)
+    if resultado:
+        return dict(datos= resultado)
+    else:
+        return dict(datos=0)
+
+
+def realizarPago():
+    id_cliente = request.args[0]
+
+    precio_plan = db((db.clientes.id == id_cliente)&(db.clientes.tipo_de_plan==db.planes.id)).select(db.planes.precio).first().precio
+    neto =  precio_plan
+    importe_iva = neto * 0.27
+    subtotal = neto + importe_iva
+    imp_total=subtotal
+
+    plan = db((db.clientes.id == id_cliente)&(db.clientes.tipo_de_plan==db.planes.id)).select(db.planes.velocidad_de_bajada).first().velocidad_de_bajada
+
+    mp = mercadopago.MP(myconf.take('mercadopago.client_id'), myconf.take('mercadopago.client_secret'))
+    print(myconf.take('mercadopago.client_id'), myconf.take('mercadopago.client_secret'))
+    # creamos un dict con los datos del pago solicitado:
+    preference = {
+		"items": [
+			{
+				"title": "Internet" + " " + plan + " " + "Mb",
+				"unit_price": imp_total,
+                "quantity": 1,
+                "currency_id": "ARS",
+				"picture_url": "https://www.mercadopago.com/org-img/MP3/home/logomp3.gif"
+			}
+         ],
+        "marketplace_fee": 2.29 # fee to collect
+	}
+    # llamamos a MP para que cree un link...
+    preferenceResult = mp.create_preference(preference)
+    try:
+        url = preferenceResult["response"]["init_point"]
+        redirect(url)
+    except:
+        raise
+        response.view = "generic.html"
+        return {"pref": preferenceResult}
