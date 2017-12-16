@@ -114,6 +114,7 @@
     </br>
 <div class="form-style-5">
 <center><img src="{{=URL('static','images/contacto.png')}}" width="200" height="200" alt="logo" /></center>
+    {{if session.cob_localidad != None:}}
 <form method="POST">
 <fieldset>
 <legend><span class="number">2</span>Ubicacion</legend>
@@ -121,10 +122,10 @@
 <select id="job" name="localidad" method="POST">
   <optgroup label="Localidades">
   {{for reg in localidades:}}
-      <option value="{{=reg.id}}">{{=reg.localidad}}</option>
+      <option value="{{=reg.id}}" {{if session.cob_localidad == reg.localidad:}} selected {{pass}}>{{=reg.localidad}}</option>
   {{pass}}
-<input type="text" name="direccion" placeholder="Direccion" required>
-<input type="number" name="num_calle" placeholder="Numero de calle" required>
+<input value="{{=session.cob_calle}}" type="text" name="direccion" placeholder="Direccion" required>
+<input value="{{=session.cob_altura}}" type="number" name="num_calle" placeholder="Numero de calle" required>
 <input type="text" name="calle1" placeholder="Entre calle 1">
 <input type="text" name="calle2" placeholder="Entre calle 2">
 </select>
@@ -132,5 +133,26 @@
 <input type="submit" value="Siguiente">
 </form>
 </div>
+
+    {{else:}}
+<form method="POST">
+<fieldset>
+<legend><span class="number">2</span>Ubicacion</legend>
+<label for="job">Localidad:</label>
+<select id="job" name="localidad" method="POST">
+  <optgroup label="Localidades">
+   {{for reg in localidades:}}
+      <option value="{{=reg.id}}">{{=reg.localidad}}</option>
+  {{pass}}
+<input  type="text" name="direccion" placeholder="Direccion" required>
+<input  type="number" name="num_calle" placeholder="Numero de calle" required>
+<input type="text" name="calle1" placeholder="Entre calle 1">
+<input type="text" name="calle2" placeholder="Entre calle 2">
+</select>
+</fieldset>
+<input type="submit" value="Siguiente">
+</form>
+</div>
+{{pass}}
 </body>
 </html>
