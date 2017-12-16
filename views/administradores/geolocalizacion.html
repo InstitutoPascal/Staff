@@ -1,0 +1,74 @@
+{{extend 'layout_admin.html'}}
+
+<title>Geolocalización</title>
+
+{{import urllib}}
+
+<div class="frame">
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{=KEY_API_GOOGLE_MAP}}" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    function load() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map"));
+        map.addControl(new GSmallMapControl());
+        map.addControl(new GMapTypeControl());
+        map.setCenter(new GLatLng({{=x0}},{{=y0}}), 2);
+        map.setZoom(12);
+
+        var baseIcon = new GIcon();
+        baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+        baseIcon.iconSize = new GSize(20, 34);
+        baseIcon.shadowSize = new GSize(37, 34);
+        baseIcon.iconAnchor = new GPoint(9, 34);
+        baseIcon.infoWindowAnchor = new GPoint(9, 9);
+        baseIcon.infoShadowAnchor = new GPoint(18, 14);
+        var blueIcon = new GIcon();
+        blueIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
+        blueIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+        blueIcon.iconSize = new GSize(37, 34);
+        blueIcon.shadowSize = new GSize(37, 34);
+        blueIcon.iconAnchor = new GPoint(9, 34);
+        blueIcon.infoWindowAnchor = new GPoint(9, 9);
+        blueIcon.infoShadowAnchor = new GPoint(18, 14);
+
+        var greenIcon = new GIcon();
+        greenIcon.image = src="{{=URL('static','images/imagen_nodo.png')}}";
+        greenIcon.iconSize = new GSize(37, 34);
+        greenIcon.shadowSize = new GSize(37, 34);
+        greenIcon.iconAnchor = new GPoint(9, 34);
+        greenIcon.infoWindowAnchor = new GPoint(9, 9);
+        greenIcon.infoShadowAnchor = new GPoint(18, 14);
+
+
+        function createMarker(point, i, message) {
+
+           if(i==0) markerOptions = { icon:blueIcon };
+           else if(i==1) markerOptions = { icon:greenIcon };
+           else markerOptions= {}
+           var marker = new GMarker(point, markerOptions);
+           GEvent.addListener(marker, "click", function() {
+             marker.openInfoWindowHtml(message);
+           });
+           return marker;
+        }
+        {{for row in datosClientes:}}{{if row.clientes.latitud and row.clientes.longitud:}}
+          var point = new GLatLng({{=row.clientes.latitud}},{{=row.clientes.longitud}});
+          map.addOverlay(createMarker(point, 0, '<strong>{{=str(row.clientes.nombre) + ' ' + str(row.clientes.apellido)}}</strong> <br> {{=str(row.clientes.direccion) + ' ' + str(row.clientes.numero_de_calle)}} <br> {{=str(row.localidades.localidad)}}'));
+        {{pass}}{{pass}}
+
+        {{for row in datosNodos:}}{{if row.nodos.latitud and row.nodos.longitud:}}
+          var point = new GLatLng({{=row.nodos.latitud}},{{=row.nodos.longitud}});
+          map.addOverlay(createMarker(point, 1, '<strong>{{=str(row.nodos.nombre)}}</strong> <br> {{=str(row.nodos.direccion) + ' ' + str(row.nodos.numero_de_calle)}} <br> {{=str(row.localidades.localidad)}}'));
+        {{pass}}{{pass}}
+     }
+    }
+
+
+
+    </script>
+<center>
+    <div id="map" style="width: 1000px; height: 550px"></div>
+    <script>load();</script>
+</center>
+</div>
