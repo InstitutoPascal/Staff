@@ -15,6 +15,9 @@ def cobertura():
     localidad= db(db.localidades.id>0).select()
     if request.vars:
             reg= db(db.localidades.id == request.vars.cob_localidad).select(db.localidades.localidad).first()
+            session.cob_altura = request.vars.cob_altura
+            session.cob_calle = request.vars.cob_calle
+            session.cob_localidad = reg.localidad
             response.view ="generic.html"
             try:
                 direccion=request.vars.calle + " " + request.vars.altura + ", " + reg.localidad
