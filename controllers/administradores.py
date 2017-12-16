@@ -256,30 +256,7 @@ def actualizar_coords():
             mensaje = "¡Se han actualizado todas las ubicaciones!"
         return dict (mensaje = mensaje)
 
-def geolocalizacionClientes():
-    rows=db((db.clientes.id>0)&(db.clientes.localidad==db.localidades.id)).select(
-            db.clientes.nombre,
-            db.clientes.apellido,
-            db.clientes.direccion,
-            db.clientes.numero_de_calle,
-            db.localidades.localidad,
-            db.clientes.latitud,
-            db.clientes.longitud)
-    x0,y0= COORDS_INICIO_MAPA
-    d = dict(x0=x0,y0=y0,rows=rows)
-    return response.render(d)
 
-def geolocalizacionNodos():
-    rows=db((db.nodos.id>0)&(db.nodos.localidad==db.localidades.id)).select(
-            db.nodos.nombre,
-            db.nodos.direccion,
-            db.nodos.numero_de_calle,
-            db.localidades.localidad,
-            db.nodos.latitud,
-            db.nodos.longitud)
-    x0,y0= COORDS_INICIO_MAPA
-    d = dict(x0=x0,y0=y0,rows=rows)
-    return response.render(d)
 
 ######################################### FACTURACION #########################################
 
