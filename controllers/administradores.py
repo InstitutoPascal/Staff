@@ -484,8 +484,8 @@ def facturaRealizada():
     idioma_cbte = 1                     # 1: es, 2: en, 3: pt
 
     # datos adicionales del encabezado:
-    nombre_cliente = reg.nombre_cliente
-    domicilio_cliente = reg.domicilio_cliente
+    nombre_cliente = reg.nombre_cliente.decode('utf-8')
+    domicilio_cliente = reg.domicilio_cliente.decode('utf-8')
     pais_dst_cmp = 212                  # 200: Argentina, ver tabla
     id_impositivo = reg.id_impositivo      # cat. iva (mercado interno)
     forma_pago = reg.forma_pago
@@ -554,28 +554,6 @@ def facturaRealizada():
         fepdf.AgregarDetalleItem(u_mtx, cod_mtx, codigo, ds, qty, umed, 
                 precio, bonif, iva_id, imp_iva, importe, despacho, dato_a)
 
-    # descuento general (a tasa 21%):
-    u_mtx = cod_mtx = codigo = None
-    ds = u"Bonificación/Descuento 10%"
-    qty = precio = bonif = None
-    umed = 99
-    iva_id = 5
-    if tipo_cbte in (1, 2, 3, 4, 5, 34, 39, 51, 52, 53, 54, 60, 64):
-        # discriminar IVA si es clase A / M
-        imp_iva = -2.21
-    else:
-        imp_iva = None
-    importe = -12.10
-    fepdf.AgregarDetalleItem(u_mtx, cod_mtx, codigo, ds, qty, umed, 
-            precio, bonif, iva_id, imp_iva, importe, "")
-
-    # descripción (sin importes ni cantidad):
-    u_mtx = cod_mtx = codigo = None
-    qty = precio = bonif = iva_id = imp_iva = importe = None
-    umed = 0
-    ds = u"Descripción Ejemplo"
-    fepdf.AgregarDetalleItem(u_mtx, cod_mtx, codigo, ds, qty, umed, 
-            precio, bonif, iva_id, imp_iva, importe, "")
 
     # completo campos personalizados de la plantilla:
     fepdf.AgregarDato("custom-nro-cli", "Cod.123")
@@ -598,10 +576,7 @@ def facturaRealizada():
 
     salida = "/tmp/factura.pdf"
     fepdf.GenerarPDF(archivo=salida)
-    ##fepdf.MostrarPDF(archivo=salida,imprimir=False)
 
-    #response.headers['Content-Type'] = "application/pdf"
-    #return open(salida, "rb")
     return dict(email=recibido)
 
 def generarFactura():
