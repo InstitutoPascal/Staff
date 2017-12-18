@@ -25,7 +25,7 @@ def cobertura():
             session.cob_localidad = reg.localidad
             response.view ="generic.html"
             try:
-                direccion=request.vars.calle + " " + request.vars.altura + ", " + reg.localidad
+                direccion=request.vars.cob_calle + " " + request.vars.cob_altura + ", " + reg.localidad
                 #direccion = "Puerto Argentino 4243, Gonzalez Catan, Buenos Aires, Argentina"
                 lat, lon, url = coords_by_address(direccion)
                 session.lat=lat
