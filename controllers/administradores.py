@@ -140,7 +140,7 @@ def editar_solicitud_soporte():
     return dict(f=form)
 
 def listadoSolicitudes_soporte():
-    solicitudesConTecnico = db((db.solicitudes_instalacion.tecnico == db.auth_user.id)&(db.solicitudes_soporte.cliente == db.clientes.id)).select(db.solicitudes_soporte.ALL, db.clientes.ALL, db.auth_user.ALL)
+    solicitudesConTecnico = db((db.solicitudes_soporte.tecnico == db.auth_user.id)&(db.solicitudes_soporte.cliente == db.clientes.id)).select(db.solicitudes_soporte.ALL, db.clientes.ALL, db.auth_user.ALL)
     
     solicitudesSinTecnico = db((db.solicitudes_soporte.tecnico == None)&(db.solicitudes_soporte.cliente == db.clientes.id)).select(db.solicitudes_soporte.ALL, db.clientes.ALL)
     

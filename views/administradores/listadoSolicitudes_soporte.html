@@ -43,9 +43,9 @@ function mostrar(id) {
 <table class="table table-hover" border="3px" >
     <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Cliente</center></th><th><center>Problematica</center></th><th><center>Tecnico</center></th><th><center>Fecha</center></th><th><center>Estado</center></th><th><center>Editar</center></th></tr></thead>
         {{for x in datos: }}
-    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.clientes.nombre}} {{=x.clientes.apellido}}</center></td><td><center>{{=x.solicitudes_soporte.problematica}}</center></td><td><center>{{=x.auth_user.first_name}} {{=x.auth_user.last_name}})</center></td><td><center>{{if x.solicitudes_soporte.fecha_estimada == None:}} A definir... {{else:}} {{=x.solicitudes_soporte.fecha_estimada}} {{pass}}</center></td><td><center>{{=x.solicitudes_soporte.estado}}</center></td><td><center>{{if x.solicitudes_soporte.estado == "Finalizado":}} - {{else:}} <A href="{{=URL(c='administradores', f='editar_solicitud_soporte', args=(x.solicitudes_soporte.id, ))}}"><i class="glyphicon glyphicon-pencil"></i></A> {{pass}}</center></td></tr></tbody>{{pass}}</table>
+    <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.clientes.nombre}} {{=x.clientes.apellido}}</center></td><td><center>{{=x.solicitudes_soporte.problematica}}</center></td><td><center>{{=x.auth_user.first_name}} {{=x.auth_user.last_name}}</center></td><td><center>{{if x.solicitudes_soporte.fecha_estimada == None:}} A definir... {{else:}} {{=x.solicitudes_soporte.fecha_estimada}} {{pass}}</center></td><td><center>{{=x.solicitudes_soporte.estado}}</center></td><td><center>{{if x.solicitudes_soporte.estado == "Finalizado":}} - {{else:}} <A href="{{=URL(c='administradores', f='editar_solicitud_soporte', args=(x.solicitudes_soporte.id, ))}}"><i class="glyphicon glyphicon-pencil"></i></A> {{pass}}</center></td></tr></tbody>{{pass}}</table>
 
-<a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad}} Registro/s</a><br>
+<h3><span class="label label-primary"> {{=cantidad}} Registro/s</span></h3>
 </div>
 
 <div  id="si">
@@ -55,5 +55,6 @@ function mostrar(id) {
     <thead bgcolor=”#7899B0″ span style="color:#FFFFFF"><tr><th><center>Cliente</center></th><th><center>Problematica</center></th><th><center>Tecnico</center></th><th><center>Fecha</center></th><th><center>Estado</center></th><th><center>Editar</center></th></tr></thead>
         {{for x in datos2: }}
     <tbody style="background-color:#FFFFFF;"><tr><td><center>{{=x.clientes.nombre}} {{=x.clientes.apellido}}</center></td><td><center>{{=x.solicitudes_soporte.problematica}}</center></td><td><center>A definir...</center></td><td><center>{{if x.solicitudes_soporte.fecha_estimada == None:}} A definir... {{else:}} {{=x.solicitudes_soporte.fecha_estimada}} {{pass}}</center></td><td><center>{{=x.solicitudes_soporte.estado}}</center></td><td><center><A href="{{=URL(c='administradores', f='editar_solicitud_soporte', args=(x.solicitudes_soporte.id, ))}}"><i class="glyphicon glyphicon-pencil"></i></A></center></td></tr></tbody>{{pass}}</table>
-<a href="#" class="btn btn-primary btn-lg disabled" role="button">{{=cantidad2}} Registro/s</a><br>
+
+<h3><span class="label label-primary"> {{=cantidad2}} Registro/s</span></h3>
 </div>
