@@ -350,62 +350,6 @@ db.mantenimientos.descripcion.requires=IS_NOT_EMPTY(error_message= 'Campo obliga
 
 #############################################################################################
 
-db.define_table('productos',
-                 db.Field('nombre', 'string'),
-                 db.Field('marca', 'string'),
-                 db.Field('descripcion', 'string'))
-
-#############################################################################################
-
-db.define_table('proveedores',
-                 db.Field('empresa','string'),
-                 db.Field('localidad',db.localidades),
-                 db.Field('direccion','string'),
-                 db.Field('numero_de_calle' ,'integer'),
-                 db.Field('correo_electronico', 'string'),
-                 db.Field('telefono', 'integer'),
-                 db.Field('tipo_de_provision', 'string'),
-                 db.Field('condicion_iva', 'string'),
-                 db.Field('numero_de_cuit', 'integer'),
-                 db.Field('ingresos_brutos', 'integer'))
-
-db.proveedores.localidad.requires=IS_IN_DB(db,db.localidades.id,'%(localidad)s',zero=T('Seleccione localidad'), error_message= 'Campo obligatorio')
-db.proveedores.tipo_de_provision.requires=IS_IN_SET(['Producto', 'Servicio'], zero=T('Seleccione tipo de provisión'),error_message= 'Campo obligatorio')
-db.proveedores.condicion_iva.requires=IS_IN_SET(['Monotributista', 'Responsable inscripto'], zero=T('Seleccione condicion'),error_message= 'Campo obligatorio')
-
-#############################################################################################
-
-db.define_table('compras',
-                 db.Field('proveedor', db.proveedores),
-                 db.Field('producto', db.productos),
-                 db.Field('fecha_de_compra','date'),
-                 db.Field('condicion_de_pago','string'),
-                 db.Field('precio_de_compra', 'double'),
-                 db.Field('cantidad', 'integer'),
-                 db.Field('total', 'double', readable=False, writable=False))
-
-db.compras.proveedor.requires=IS_IN_DB(db,db.proveedores.id,'%(empresa)s',zero=T('Seleccione proveedor'), error_message= 'Campo obligatorio')
-db.compras.producto.requires=IS_IN_DB(db,db.productos.id,'%(nombre)s',zero=T('Seleccione producto'), error_message= 'Campo obligatorio')
-db.compras.fecha_de_compra.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
-db.compras.condicion_de_pago.requires=IS_IN_SET(['Contado', 'Cuenta corriente'], zero=T('Seleccione '),error_message= 'Campo obligatorio')
-
-#############################################################################################
-
-db.define_table('stock',
-                 db.Field('fecha', 'date'),
-                 db.Field('detalle', db.productos),
-                 db.Field('cantidad_entrada','integer'),
-                 db.Field('costo_unitario_entrada','double'),
-                 db.Field('total_entrada', 'double'),
-                 db.Field('cantidad_salida', 'integer', 'string'),
-                 db.Field('costo_unitario_salida','double'),
-                 db.Field('total_salida', 'double'),
-                 db.Field('cantidad_existencia','integer'),
-                 db.Field('costo_unitario_existencia','double'),
-                 db.Field('total_existencia', 'double'))
-
-#############################################################################################
-
 #Creamos las tablas y campos usados para AFIP
 import datetime
 migrate = True
