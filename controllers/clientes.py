@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 # intente algo como
+
+import os, sys
+import json
+
+
 def index(): return dict(message="hello from clientes.py")
 
 def inicio():
@@ -225,10 +230,6 @@ def confimacionConsulta():
 def mapaCliente():
     return{}
 
-import os, sys
-import mercadopago
-import json
-
 
 def ingresarDni():
     dni_recibido=request.vars.dni
@@ -240,6 +241,9 @@ def ingresarDni():
 
 
 def realizarPago():
+
+    import mercadopago
+
     id_cliente = request.args[0]
 
     precio_plan = db((db.clientes.id == id_cliente)&(db.clientes.tipo_de_plan==db.planes.id)).select(db.planes.precio).first().precio
