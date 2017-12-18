@@ -180,13 +180,6 @@ def clientes_nombre_apellido():
     else:
         return dict(datos="None")
 
-def clientes_ip():
-    i=0
-    cliente =db().select(db.clientes.ALL)
-    for x in cliente:
-        i= i+1
-    return dict(datos=cliente, cantidad=i)
-
 def listadoClientes():
     datosClientes = db((db.clientes.localidad==db.localidades.id)&(db.clientes.tipo_de_plan==db.planes.id)&(db.clientes.numero_de_instalacion == db.instalaciones.id)&(db.instalaciones.panel == db.paneles.id)).select(db.clientes.ALL, db.localidades.localidad, db.paneles.ALL, db.planes.ALL)
     i=0

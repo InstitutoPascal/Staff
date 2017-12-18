@@ -335,21 +335,6 @@ db.soportes.costo_de_soporte.requires=IS_IN_DB(db,db.costos_soportes.id,'%(preci
 
 #############################################################################################
 
-db.define_table('mantenimientos',
-                 db.Field('tecnico_principal',db.auth_user),
-                 db.Field('tecnico_secundario',db.auth_user),
-                 db.Field('nodo',db.nodos),
-                 db.Field('fecha','date'),
-                 db.Field('descripcion','string'))
-
-db.mantenimientos.tecnico_principal.requires = IS_IN_DB(db((db.auth_group.role == 'Tecnicos') & (db.auth_group.id == db.auth_membership.group_id)), 'auth_membership.user_id', '%(nombre)s')
-db.mantenimientos.tecnico_secundario.requires = IS_IN_DB(db((db.auth_group.role == 'Tecnicos') & (db.auth_group.id == db.auth_membership.group_id)), 'auth_membership.user_id', '%(nombre)s')
-db.mantenimientos.nodo.requires=IS_IN_DB(db,db.nodos.id,'%(nombre)s',zero=T('Seleccione nodo'), error_message= 'Campo obligatorio')
-db.mantenimientos.fecha.requires=IS_NOT_EMPTY(error_message='Campo obligatorio'),IS_DATE('%d/%M/%Y')
-db.mantenimientos.descripcion.requires=IS_NOT_EMPTY(error_message= 'Campo obligatorio')
-
-#############################################################################################
-
 #Creamos las tablas y campos usados para AFIP
 import datetime
 migrate = True
