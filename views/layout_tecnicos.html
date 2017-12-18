@@ -47,11 +47,6 @@
                                <li><a href="{{=URL(c="tecnicos",f="busquedaSolicitudSoporte")}}"><span>Buscar solicitud</span></a></li>
                           </ul>
                        </li>
-                       <li><a href='#'><span>MANTENIMIENTOS</span></a>
-                           <ul>
-                               <li><a href="{{=URL(c="tecnicos",f="alta_mantenimientos")}}"><span>Nuevo</span></a></li>
-                               <li><a href="{{=URL(c="tecnicos",f="mantenimientosRealizados")}}"><span>Realizados</span></a></li>
-                           </ul>
                        </li>
                         {{tecnico_log = db(db.auth_user.id == auth.user_id).select().first()}}
                         {{nombre_tecnico = tecnico_log.first_name}}
